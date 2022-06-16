@@ -77,3 +77,44 @@ import Foundation
 //                        Spacer()
 //                    }
 //
+
+
+
+/*
+let topConstraint1 = imageView1.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: verticalOffset)
+topConstraint1.identifier = Constraint.top.rawValue
+topConstraint1.isActive = true
+
+let leadingConstraint1 = imageView1.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: horizontalOffset)
+leadingConstraint1.identifier = Constraint.leading.rawValue
+leadingConstraint1.isActive = true
+        
+
+let bottomConstraint = imageView1.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -verticalOffset)
+bottomConstraint.identifier = Constraint.bottom.rawValue
+bottomConstraint.isActive = true
+
+let trailingConstraint = imageView1.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -horizontalOffset)
+trailingConstraint.identifier = Constraint.trailing.rawValue
+trailingConstraint.isActive = true
+ */
+
+
+/*
+let topConstraint = imageView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: verticalOffset)
+topConstraint.identifier = Constraint.top.rawValue
+topConstraint.isActive = true
+
+let leadingConstraint = imageView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: horizontalOffset)
+leadingConstraint.identifier = Constraint.leading.rawValue
+leadingConstraint.isActive = true
+
+let bottomConstraint = imageView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -verticalOffset)
+bottomConstraint.identifier = Constraint.bottom.rawValue
+bottomConstraint.isActive = true
+
+
+let trailingConstraint = imageView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -horizontalOffset)
+trailingConstraint.identifier = Constraint.trailing.rawValue
+trailingConstraint.isActive = true
+ */

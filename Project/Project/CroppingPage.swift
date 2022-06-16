@@ -8,7 +8,7 @@
 import SwiftUI
 
 var croppedImage = UIImage()
-var finalImage = UIImage()
+var finalImageCropped = UIImage()
 var croppingWidth: CGFloat = 350
 var croppingHeight: CGFloat = 350
 var aspectRatioList: [[CGFloat]] = [[1,1], [4,5], [4,3], [3,2], [16, 9], [2, 1]]
@@ -22,9 +22,12 @@ struct CroppingPage: View {
     
     @State var viewState = CGSize.zero
     
+    @State var rotation : Float = 0.0
     
-    @State var frameWidth : CGFloat = UIScreen.main.bounds.size.width
-    @State var frameHeight : CGFloat = UIScreen.main.bounds.size.width
+    
+    
+    @State var frameWidth : CGFloat = min(UIScreen.main.bounds.size.width, UIScreen.main.bounds.size.height/2)
+    @State var frameHeight : CGFloat = min(UIScreen.main.bounds.size.width, UIScreen.main.bounds.size.height/2)
     @State var aspectRatio: CGFloat = 1
     @State var portrait: Bool = true
     
@@ -61,12 +64,15 @@ struct CroppingPage: View {
                         
                         
                         Button(action: {
-                            croppedImage = uiImage
+                            let CGrotation = CGFloat(rotation)
+                            let radians = CGrotation * Double.pi/180
+                            let newImage = uiImage.rotate(radians: Float(radians))
+                            croppedImage = newImage!
                             croppingWidth = frameWidth
                             croppingHeight = frameHeight
                             
-                            finalImage = ZoomableView.crop(uiImage: croppedImage, width: croppingWidth, height: croppingHeight)
-                            UIImageWriteToSavedPhotosAlbum(finalImage, nil, nil, nil)
+                            finalImageCropped = ZoomableView.crop(uiImage: croppedImage, width: croppingWidth, height: croppingHeight)
+                            UIImageWriteToSavedPhotosAlbum(finalImageCropped, nil, nil, nil)
                             
                         }) {
                             Text("Next")
@@ -86,28 +92,56 @@ struct CroppingPage: View {
                     Group{
                          ZStack {
                              GeometryReader { geometry in
-                                 ZoomableView(uiImage: $uiImage, viewSize: geometry.size, frameWidth: $frameWidth, frameHeight: $frameHeight)
+                                 ZoomableView(uiImage: $uiImage, viewSize: geometry.size, frameWidth: $frameWidth, frameHeight: $frameHeight, rotation: $rotation)
                              }
+                             .gesture(RotationGesture().onChanged{angle in
+                                 rotation += Float(angle.degrees)
+                             })
+//                             .rotationEffect(.degrees(rotation))
 //                             .frame(width: frameWidth, height: frameHeight)
 //                             .border(.white)
                              
                              
                              
-                             Rectangle()
-                                 .opacity(0.3)
-                                 .foregroundColor(.red)
-                                 .allowsHitTesting(false)
-                                 .frame(width: frameWidth, height: frameHeight)
-                                 .border(.white, width: 5)
-                             //                                 .offset(x: viewState.width, y: viewState.height)
-//                                 .gesture(DragGesture().onChanged({ value in
-//                                     viewState = value.translation
-//                                 }))
+                             ZStack {
+                                 Rectangle()
+                                     .opacity(0.01)
+                                     .allowsHitTesting(false)
+                                     .frame(width: frameWidth, height: frameHeight)
+                                 .border(.white, width: 3)
+                                 
+                                 Rectangle()
+                                     .allowsHitTesting(false)
+                                     .opacity(0.01)
+                                     .frame(width: frameWidth, height: frameHeight/3)
+                                     .border(.white, width: 0.75)
+                                 
+                                 Rectangle()
+                                     .allowsHitTesting(false)
+                                     .opacity(0.01)
+                                     .frame(width: frameWidth/3, height: frameHeight)
+                                     .border(.white, width: 0.75)
+                             }
                              
-                             
+//                             Image(systemName: "arrow.up.left.and.arrow.down.right")
+//                                 .font(.system(size: 20))
+//                                 .background(Circle().frame(width: 25, height: 25).foregroundColor(.white))
+//                                 .frame(width: frameWidth, height: frameHeight, alignment: .topLeading)
+//                                 .foregroundColor(.black)
+//                                 .offset(x: -5, y: -5)
+//                                 .gesture(DragGesture()
+//                                    .onChanged{drag in
+//                                        frameWidth -= drag.translation.width
+//                                        frameHeight -= drag.translation.height
+//
+//                                    })
                          }
-                         
+                        
+                        Slider(value: $rotation, in: 0...360)
+                        
                      }
+                    
+                    
                     
                     
                     Spacer()
@@ -118,17 +152,21 @@ struct CroppingPage: View {
                         
                         HStack {
                             Button(action: {
-                                if aspectRatio > 1 {
-                                    aspectRatio = 1 / aspectRatio
-                                    frameHeight = totalGeometry.size.width
-                                    frameWidth = frameHeight * aspectRatio
-                                    
-                                    verticalOffset = (totalGeometry.size.height - frameHeight)/2
-                                    
-                                    horizontalOffset = (totalGeometry.size.width - frameWidth)/2
-                                    
+                            
+                                withAnimation(.default){
+                                    if aspectRatio > 1 {
+                                        aspectRatio = 1 / aspectRatio
+                                        frameHeight = min(totalGeometry.size.width, totalGeometry.size.height/2)
+                                        frameWidth = frameHeight * aspectRatio
+                                        
+                                        verticalOffset = (totalGeometry.size.height - frameHeight)/2
+                                        
+                                        horizontalOffset = (totalGeometry.size.width - frameWidth)/2
+                                        
+                                    }
+                                    portrait = true
                                 }
-                                portrait = true
+                                
                             }) {
                                 Image(systemName: "rectangle.portrait")
                             }
@@ -136,17 +174,20 @@ struct CroppingPage: View {
                             .font(.title)
                             
                             Button(action: {
-                                if aspectRatio < 1{
-                                    aspectRatio = 1 / aspectRatio
-                                    frameWidth = totalGeometry.size.width
-                                    frameHeight = frameWidth/aspectRatio
-                                    
-                                    verticalOffset = (totalGeometry.size.height - frameHeight)/2
-                                    
-                                    horizontalOffset = (totalGeometry.size.width - frameWidth)/2
-                                    
+                                
+                                withAnimation(.default) {
+                                    if aspectRatio < 1{
+                                        aspectRatio = 1 / aspectRatio
+                                        frameWidth = totalGeometry.size.width
+                                        frameHeight = frameWidth/aspectRatio
+                                        
+                                        verticalOffset = (totalGeometry.size.height - frameHeight)/2
+                                        
+                                        horizontalOffset = (totalGeometry.size.width - frameWidth)/2
+                                        
+                                    }
+                                    portrait = false
                                 }
-                                portrait = false
                                 
                             }) {
                                 Image(systemName: "rectangle")
@@ -157,49 +198,66 @@ struct CroppingPage: View {
                         .padding(.bottom)
     //
                         
+                        
+                        
                         ScrollView(.horizontal){
                             HStack{
                                 ForEach(aspectRatioList, id:\.self){aspect in
-                                    
+                                        
                                     Button(action: {
-                                        aspectRatio = aspect[0]/aspect[1]
-                                        
-                                        if(aspectRatio >= 1){
-                                            frameWidth = totalGeometry.size.width
-                                            frameHeight = frameWidth/aspectRatio
-                                            portrait = false
-                                        }
-                                        else{
-                                            frameHeight = totalGeometry.size.width
-                                            frameWidth = frameHeight * aspectRatio
-                                            portrait = true
-                                        }
-                                        
-                                        verticalOffset = (totalGeometry.size.height - frameHeight)/2
-                                        
-                                        horizontalOffset = (totalGeometry.size.width - frameWidth)/2
-                                        
-                                        
+                                            
+                                    withAnimation(.default){
+                                            aspectRatio = aspect[0]/aspect[1]
+                                                
+                                            if(aspectRatio >= 1){
+                                                if(aspectRatio == 1){
+                                                        frameWidth =  min(totalGeometry.size.width, totalGeometry.size.height/2)
+                                            }
+                                                else{
+                                                    frameWidth = totalGeometry.size.width
+                                                    }
+                                                    frameHeight = frameWidth/aspectRatio
+                                                    portrait = false
+                                                }
+                                            else{
+                                                frameHeight = min(totalGeometry.size.width, totalGeometry.size.height/2)
+                                                frameWidth = frameHeight * aspectRatio
+                                                    portrait = true
+                                                }
+                                                
+                                            verticalOffset = (totalGeometry.size.height - frameHeight)/2
+                                                
+                                            horizontalOffset = (totalGeometry.size.width - frameWidth)/2
+                                            }
+                                            
                                     }) {
-                                        Text("\(Int(aspect[0])) : \(Int(aspect[1]))")
-                                            .foregroundColor(.white)
-                                            .fontWeight(.semibold)
-                                            .font(.title3)
-                                            .frame(width: 90, height: 60)
-                                            .background(Color(red: 0.105, green: 0.105, blue: 0.105, opacity: 1.0))
-                                            .cornerRadius(10)
+                                        VStack {
+                                            
+                                            ZStack {
+                                                Rectangle()
+                                                    .frame(width: 30, height: 30*aspect[1]/aspect[0])
+                                                    .opacity(0.6)
+                                                    .border(.white, width: 2)
+                                                    .padding(.bottom, 6)
+                                                .foregroundColor(.white)
+                                            }
+                                                
+//                                            Spacer()
+                                            
+                                            Text("\(Int(aspect[0])) : \(Int(aspect[1]))")
+                                                .foregroundColor(.white)
+                                                .fontWeight(.semibold)
+                                                .font(.title3)
+                                        }
+                                        .frame(width: 110, height: 100)
+                                        .background(Color(red: 0.105, green: 0.105, blue: 0.105, opacity: 1.0))
+                                        .cornerRadius(10)
                                     }
-    //                                .padding()
+    //                                    .padding()
                                 }
                             }
+                            .frame(minWidth: UIScreen.main.bounds.size.width)
                         }
-                        
-                        
-                        Text("Select Aspect Ratio")
-                            .foregroundColor(.white)
-                            .font(.title3)
-                            .padding(.top)
-                            
                     }
                     
                     

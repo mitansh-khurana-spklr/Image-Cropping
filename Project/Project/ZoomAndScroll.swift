@@ -13,8 +13,8 @@ import UIKit
 //var imageView = UIImageView()
 
 var scroll = UIScrollView()
-var horizontalOffset = CGFloat(0)
-var verticalOffset = CGFloat(0)
+var horizontalOffsetNew = CGFloat(0)
+var verticalOffsetNew = CGFloat(0)
 
 
 struct ZoomableView: UIViewRepresentable {
@@ -26,6 +26,12 @@ struct ZoomableView: UIViewRepresentable {
 //    @Binding var verticalOffset: CGFloat
     @Binding var frameWidth: CGFloat
     @Binding var frameHeight: CGFloat
+    
+    @Binding var rotation: Float
+    
+    
+//    @Binding var horizontalOffset: CGFloat
+//    @Binding var verticalOffset: CGFloat
 //    var croppedImage: UIImage
     
 //    var imageView : UIImageView
@@ -59,23 +65,29 @@ struct ZoomableView: UIViewRepresentable {
         scrollView.showsVerticalScrollIndicator = false
         
         
+        verticalOffsetNew = (viewSize.height - frameHeight)/2
+        horizontalOffsetNew = (viewSize.width - frameWidth)/2
+        
+        
         let imageView = UIImageView(image: uiImage)
+//        let imageView = UIImageView()
+//        imageView.image = uiImage.withAlignmentRectInsets(UIEdgeInsets(top: -verticalOffset, left: -horizontalOffset, bottom: -verticalOffset/2, right: -horizontalOffset/2))
+        
+        
+        
         scrollView.addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.contentInset = UIEdgeInsets(top: verticalOffsetNew, left: horizontalOffsetNew, bottom: verticalOffsetNew, right: horizontalOffsetNew)
+    
         
-        
-        verticalOffset = (viewSize.height - frameHeight)/2
-        horizontalOffset = (viewSize.width - frameWidth)/2
-        
-//        let topConstraint = imageView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: verticalOffset)
-//        topConstraint.identifier = Constraint.top.rawValue
-//        topConstraint.isActive = true
-//
-//        let leadingConstraint = imageView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: horizontalOffset)
-//        leadingConstraint.identifier = Constraint.leading.rawValue
-//        leadingConstraint.isActive = true
-        
-        
+        let topConstraint = imageView.topAnchor.constraint(equalTo: scrollView.topAnchor)
+        topConstraint.identifier = Constraint.top.rawValue
+        topConstraint.isActive = true
+
+        let leadingConstraint = imageView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor)
+        leadingConstraint.identifier = Constraint.leading.rawValue
+        leadingConstraint.isActive = true
+
         let bottomConstraint = imageView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
         bottomConstraint.identifier = Constraint.bottom.rawValue
         bottomConstraint.isActive = true
@@ -85,14 +97,12 @@ struct ZoomableView: UIViewRepresentable {
         trailingConstraint.identifier = Constraint.trailing.rawValue
         trailingConstraint.isActive = true
         
-    
 
-//        imageView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: horizontalOffset).isActive = true
-//        imageView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: verticalOffset).isActive = true
-
-
+//        imageView.transform = CGAffineTransform(rotationAngle: radians);
         
         scroll = scrollView
+        
+//        scrollView.transform = CGAffineTransform(rotationAngle: radians)
         
         return scrollView
     }
@@ -108,23 +118,33 @@ struct ZoomableView: UIViewRepresentable {
             subview.removeFromSuperview()
         }
         
-        let imageView1 = UIImageView(image: uiImage)
+        
+        verticalOffsetNew = (viewSize.height - frameHeight)/2
+        horizontalOffsetNew = (viewSize.width - frameWidth)/2
+        
+        let CGrotation = CGFloat(rotation)
+        let radians = CGrotation * Double.pi/180
+        
+        let newImage = uiImage.rotate(radians: Float(radians))
+        
+        let imageView1 = UIImageView(image: newImage)
+//        let imageView1 = UIImageView()
+//        imageView1.image = uiImage.withAlignmentRectInsets(UIEdgeInsets(top: -verticalOffset, left: -horizontalOffset, bottom: -verticalOffset/2, right: -horizontalOffset/2))
         scrollView.addSubview(imageView1)
         imageView1.translatesAutoresizingMaskIntoConstraints = false
         
+        scrollView.contentInset = UIEdgeInsets(top: verticalOffsetNew, left: horizontalOffsetNew, bottom: verticalOffsetNew, right: horizontalOffsetNew)
         
-        verticalOffset = (viewSize.height - frameHeight)/2
-        horizontalOffset = (viewSize.width - frameWidth)/2
         
-    
-//        let topConstraint1 = imageView1.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: verticalOffset)
-//        topConstraint1.identifier = Constraint.top.rawValue
-//        topConstraint1.isActive = true
-//
-//        let leadingConstraint1 = imageView1.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: horizontalOffset)
-//        leadingConstraint1.identifier = Constraint.leading.rawValue
-//        leadingConstraint1.isActive = true
-        
+        let topConstraint1 = imageView1.topAnchor.constraint(equalTo: scrollView.topAnchor)
+        topConstraint1.identifier = Constraint.top.rawValue
+        topConstraint1.isActive = true
+
+        let leadingConstraint1 = imageView1.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor)
+        leadingConstraint1.identifier = Constraint.leading.rawValue
+        leadingConstraint1.isActive = true
+
+
         let bottomConstraint = imageView1.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
         bottomConstraint.identifier = Constraint.bottom.rawValue
         bottomConstraint.isActive = true
@@ -134,13 +154,13 @@ struct ZoomableView: UIViewRepresentable {
         trailingConstraint.isActive = true
         
         
-    
-
-//        imageView1.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: horizontalOffset).isActive = true
-//        imageView1.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: verticalOffset).isActive = true
+//        imageView1.transform = CGAffineTransform(rotationAngle: radians);
+        
         
         scrollView.minimumZoomScale = minimumZoomScale
         scrollView.maximumZoomScale = minimumZoomScale * 10
+        
+
     
         
         
@@ -152,8 +172,8 @@ struct ZoomableView: UIViewRepresentable {
         context.coordinator.zoomableView = imageView
         context.coordinator.imageSize = uiImage.size
         context.coordinator.viewSize = viewSize
-        let topConstraint = scrollView.constraints.first { $0.identifier == Constraint.top.rawValue }
-        let leadingConstraint = scrollView.constraints.first { $0.identifier == Constraint.leading.rawValue }
+//        let topConstraint = scrollView.constraints.first { $0.identifier == Constraint.top.rawValue }
+//        let leadingConstraint = scrollView.constraints.first { $0.identifier == Constraint.leading.rawValue }
 //        context.coordinator.topConstraint = topConstraint1
 //        context.coordinator.leadingConstraint = leadingConstraint1
 //        context.coordinator.trailingConstraint = trailingConstraint
@@ -166,16 +186,22 @@ struct ZoomableView: UIViewRepresentable {
         // Set initial zoom scale
         scrollView.zoomScale = minimumZoomScale
         
+//        scrollView.transform = CGAffineTransform(rotationAngle: radians)
+        
         scroll = scrollView
     }
     
     
     static func crop(uiImage: UIImage, width: CGFloat, height: CGFloat) -> UIImage{
         let zoomScale = scroll.zoomScale
-        let xOffset = scroll.contentOffset.x / zoomScale
-        let yoffset = scroll.contentOffset.y / zoomScale
+        let xOffset = scroll.contentOffset.x / zoomScale + horizontalOffsetNew / zoomScale
+        let yoffset = scroll.contentOffset.y / zoomScale + verticalOffsetNew / zoomScale
         let cropWidth : CGFloat = width / zoomScale
         let cropHeight : CGFloat = height / zoomScale
+        
+        
+        
+        
         
         let rect = CGRect(x: xOffset, y: yoffset, width: cropWidth, height: cropHeight)
         let cgImage = uiImage.cgImage!
@@ -232,5 +258,32 @@ extension ZoomableView {
             print("xoffset = \(scrollView.contentOffset.x)")
             print("yoffset = \(scrollView.contentOffset.y)")
         }
+    }
+}
+
+
+
+
+extension UIImage {
+    func rotate(radians: Float) -> UIImage? {
+        var newSize = CGRect(origin: CGPoint.zero, size: self.size).applying(CGAffineTransform(rotationAngle: CGFloat(radians))).size
+        // Trim off the extremely small float value to prevent core graphics from rounding it up
+        newSize.width = floor(newSize.width)
+        newSize.height = floor(newSize.height)
+
+        UIGraphicsBeginImageContextWithOptions(newSize, false, self.scale)
+        let context = UIGraphicsGetCurrentContext()!
+
+        // Move origin to middle
+        context.translateBy(x: newSize.width/2, y: newSize.height/2)
+        // Rotate around middle
+        context.rotate(by: CGFloat(radians))
+        // Draw the image at its center
+        self.draw(in: CGRect(x: -self.size.width/2, y: -self.size.height/2, width: self.size.width, height: self.size.height))
+
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+
+        return newImage
     }
 }
