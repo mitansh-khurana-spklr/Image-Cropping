@@ -92,10 +92,13 @@ struct ZoomableView: UIViewRepresentable {
         bottomConstraint.identifier = Constraint.bottom.rawValue
         bottomConstraint.isActive = true
 
-
         let trailingConstraint = imageView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor)
         trailingConstraint.identifier = Constraint.trailing.rawValue
         trailingConstraint.isActive = true
+         
+        
+//        imageView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor).isActive = true
+//        imageView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
          
         
         
@@ -166,6 +169,9 @@ struct ZoomableView: UIViewRepresentable {
         trailingConstraint.identifier = Constraint.trailing.rawValue
         trailingConstraint.isActive = true
          
+         
+//        imageView1.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor).isActive = true
+//        imageView1.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
         
 //        imageView1.transform = CGAffineTransform(rotationAngle: radians);
         

@@ -189,6 +189,7 @@ struct CroppingPage: View {
                         VStack{
                             
                             HStack {
+                                /*
                                 Button(action: {
                                 
                                     withAnimation(.default){
@@ -233,7 +234,7 @@ struct CroppingPage: View {
                                 .foregroundColor(portrait ? .white: .yellow)
                                 .font(.title)
                                 
-                                
+                                */
                                 
                                 Button(action: {
                                     withAnimation(.default) {
@@ -263,164 +264,167 @@ struct CroppingPage: View {
                             
                             
                             
-                            ScrollView(.horizontal){
-                                HStack{
-                                    
-                                    if(alignment == "Horizontal"){
-                                        Button(action: {
-                                            alignment = "Vertical"
-                                            aspectRatioList = aspectRatioListVertical
-                                        }) {
-                                            VStack {
-                                                ZStack {
-                                                    Rectangle()
-                                                        .frame(width: 30, height: 20)
-                                                        .opacity(0.6)
-                                                        .border(.white, width: 2)
-                                                        .padding(.bottom, 6)
-                                                    .foregroundColor(.white)
-                                                }
-                                                    
-    //                                            Spacer()
-                                                
-                                                Text("Horizontal")
-                                                    .foregroundColor(.white)
-                                                    .fontWeight(.semibold)
-                                                    .font(.title3)
+                            HStack {
+                                
+                                if(alignment == "Horizontal"){
+                                    Button(action: {
+                                        alignment = "Vertical"
+                                        aspectRatioList = aspectRatioListVertical
+                                    }) {
+                                        VStack {
+                                            ZStack {
+                                                Rectangle()
+                                                    .frame(width: 30, height: 20)
+                                                    .opacity(0.6)
+                                                    .border(.white, width: 2)
+                                                    .padding(.bottom, 6)
+                                                .foregroundColor(.white)
                                             }
-                                            .frame(width: 110, height: 100)
-                                            .background(Color(red: 0.105, green: 0.105, blue: 0.105, opacity: 1.0))
-                                            .cornerRadius(10)
-                                        }
-                                    }
-                                    else{
-                                        Button(action: {
-                                            alignment = "Horizontal"
-                                            aspectRatioList = aspectRatioListHorizontal
-                                        }) {
-                                            VStack {
-                                                ZStack {
-                                                    Rectangle()
-                                                        .frame(width: 20, height: 30)
-                                                        .opacity(0.6)
-                                                        .border(.white, width: 2)
-                                                        .padding(.bottom, 6)
-                                                    .foregroundColor(.white)
-                                                }
-                                                    
-    //                                            Spacer()
                                                 
-                                                Text("Vertical")
-                                                    .foregroundColor(.white)
-                                                    .fontWeight(.semibold)
-                                                    .font(.title3)
-                                            }
-                                            .frame(width: 110, height: 100)
-                                            .background(Color(red: 0.105, green: 0.105, blue: 0.105, opacity: 1.0))
-                                            .cornerRadius(10)
+//                                            Spacer()
+                                            
+                                            Text("Horizontal")
+                                                .foregroundColor(.white)
+                                                .fontWeight(.semibold)
+                                                .font(.title3)
                                         }
+                                        .frame(width: 110, height: 100)
+                                        .background(Color(red: 15/255, green: 15/255, blue: 15/255, opacity: 1.0))
+                                        .cornerRadius(10)
                                     }
-                                    
-                                        
-                                    if(alignment == "Horizontal"){
-                                        ForEach(aspectRatioListHorizontal, id:\.self){aspect in
-                                                
-                                            Button(action: {
-                                                    
-                                            withAnimation(.default){
-                                                    aspectRatio = aspect[0]/aspect[1]
-                                                        
-                                                    
-                                                    if(aspectRatio == 1){
-                                                        frameWidth =  min(totalGeometry.size.width, totalGeometry.size.height/2)
-                                                    }
-                                                    else{
-                                                        frameWidth = totalGeometry.size.width
-                                                    }
-                                                    frameHeight = frameWidth/aspectRatio
-                                                    portrait = false
-                                                        
-                                                        
-                                                    verticalOffset = (totalGeometry.size.height - frameHeight)/2
-                                                        
-                                                    horizontalOffset = (totalGeometry.size.width - frameWidth)/2
-                                                    }
-                                                    
-                                            }) {
-                                                VStack {
-                                                    
-                                                    ZStack {
-                                                        Rectangle()
-                                                            .frame(width: 30, height: 30*aspect[1]/aspect[0])
-                                                            .opacity(0.6)
-                                                            .border(.white, width: 2)
-                                                            .padding(.bottom, 6)
-                                                        .foregroundColor(.white)
-                                                    }
-                                                        
-        //                                            Spacer()
-                                                    
-                                                    Text("\(Int(aspect[0])) : \(Int(aspect[1]))")
-                                                        .foregroundColor(.white)
-                                                        .fontWeight(.semibold)
-                                                        .font(.title3)
-                                                }
-                                                .frame(width: 110, height: 100)
-                                                .background(Color(red: 0.105, green: 0.105, blue: 0.105, opacity: 1.0))
-                                                .cornerRadius(10)
-                                            }
-            //                                    .padding()
-                                        }
-                                    }
-                                    else{
-                                        ForEach(aspectRatioListVertical, id:\.self){aspect in
-                                                
-                                            Button(action: {
-                                                    
-                                            withAnimation(.default){
-                                                    aspectRatio = aspect[0]/aspect[1]
-    
-                                                    frameHeight = min(totalGeometry.size.width, totalGeometry.size.height/2)
-                                                        frameWidth = frameHeight * aspectRatio
-                                                    portrait = true
-                                                    
-                                                    verticalOffset = (totalGeometry.size.height - frameHeight)/2
-                                                        
-                                                    horizontalOffset = (totalGeometry.size.width - frameWidth)/2
-                                                    }
-                                                    
-                                            }) {
-                                                VStack {
-                                                    
-                                                    ZStack {
-                                                        Rectangle()
-                                                            .frame(width: 30*aspect[0]/aspect[1], height: 30)
-                                                            .opacity(0.6)
-                                                            .border(.white, width: 2)
-                                                            .padding(.bottom, 6)
-                                                        .foregroundColor(.white)
-                                                    }
-                                                        
-        //                                            Spacer()
-                                                    
-                                                    Text("\(Int(aspect[0])) : \(Int(aspect[1]))")
-                                                        .foregroundColor(.white)
-                                                        .fontWeight(.semibold)
-                                                        .font(.title3)
-                                                }
-                                                .frame(width: 110, height: 100)
-                                                .background(Color(red: 0.105, green: 0.105, blue: 0.105, opacity: 1.0))
-                                                .cornerRadius(10)
-                                            }
-            //                                    .padding()
-                                        }
-                                    }
-                                    
                                 }
-                                .frame(minWidth: UIScreen.main.bounds.size.width)
+                                else{
+                                    Button(action: {
+                                        alignment = "Horizontal"
+                                        aspectRatioList = aspectRatioListHorizontal
+                                    }) {
+                                        VStack {
+                                            ZStack {
+                                                Rectangle()
+                                                    .frame(width: 20, height: 30)
+                                                    .opacity(0.6)
+                                                    .border(.white, width: 2)
+                                                    .padding(.bottom, 6)
+                                                .foregroundColor(.white)
+                                            }
+                                                
+//                                            Spacer()
+                                            
+                                            Text("Vertical")
+                                                .foregroundColor(.white)
+                                                .fontWeight(.semibold)
+                                                .font(.title3)
+                                        }
+                                        .frame(width: 110, height: 100)
+                                        .background(Color(red: 15/255, green: 15/255, blue: 15/255, opacity: 1.0))
+                                        .cornerRadius(10)
+                                    }
+                                }
+                                
+                                ScrollView(.horizontal){
+                                    HStack{
+                                        if(alignment == "Horizontal"){
+                                            ForEach(aspectRatioListHorizontal, id:\.self){aspect in
+                                                    
+                                                Button(action: {
+                                                        
+                                                withAnimation(.default){
+                                                        aspectRatio = aspect[0]/aspect[1]
+                                                            
+                                                        
+                                                        if(aspectRatio == 1){
+                                                            frameWidth =  min(totalGeometry.size.width, totalGeometry.size.height/2)
+                                                        }
+                                                        else{
+                                                            frameWidth = totalGeometry.size.width
+                                                        }
+                                                        frameHeight = frameWidth/aspectRatio
+                                                        portrait = false
+                                                            
+                                                            
+                                                        verticalOffset = (totalGeometry.size.height - frameHeight)/2
+                                                            
+                                                        horizontalOffset = (totalGeometry.size.width - frameWidth)/2
+                                                        }
+                                                        
+                                                }) {
+                                                    VStack {
+                                                        
+                                                        ZStack {
+                                                            Rectangle()
+                                                                .frame(width: 30, height: 30*aspect[1]/aspect[0])
+                                                                .opacity(0.6)
+                                                                .border(.white, width: 2)
+                                                                .padding(.bottom, 6)
+                                                            .foregroundColor(.white)
+                                                        }
+                                                            
+            //                                            Spacer()
+                                                        
+                                                        Text("\(Int(aspect[0])) : \(Int(aspect[1]))")
+                                                            .foregroundColor(.white)
+                                                            .fontWeight(.semibold)
+                                                            .font(.title3)
+                                                    }
+                                                    .frame(width: 110, height: 100)
+                                                    .background(Color(red: 15/255, green: 15/255, blue: 15/255, opacity: 1.0))
+                                                    .cornerRadius(10)
+                                                }
+                //                                    .padding()
+                                            }
+                                        }
+                                        else{
+                                            ForEach(aspectRatioListVertical, id:\.self){aspect in
+                                                    
+                                                Button(action: {
+                                                        
+                                                withAnimation(.default){
+                                                        aspectRatio = aspect[0]/aspect[1]
+        
+                                                        frameHeight = min(totalGeometry.size.width, totalGeometry.size.height/2)
+                                                            frameWidth = frameHeight * aspectRatio
+                                                        portrait = true
+                                                        
+                                                        verticalOffset = (totalGeometry.size.height - frameHeight)/2
+                                                            
+                                                        horizontalOffset = (totalGeometry.size.width - frameWidth)/2
+                                                        }
+                                                        
+                                                }) {
+                                                    VStack {
+                                                        
+                                                        ZStack {
+                                                            Rectangle()
+                                                                .frame(width: 30*aspect[0]/aspect[1], height: 30)
+                                                                .opacity(0.6)
+                                                                .border(.white, width: 2)
+                                                                .padding(.bottom, 6)
+                                                            .foregroundColor(.white)
+                                                        }
+                                                            
+            //                                            Spacer()
+                                                        
+                                                        Text("\(Int(aspect[0])) : \(Int(aspect[1]))")
+                                                            .foregroundColor(.white)
+                                                            .fontWeight(.semibold)
+                                                            .font(.title3)
+                                                    }
+                                                    .frame(width: 110, height: 100)
+                                                    .background(Color(red: 15/255, green: 15/255, blue: 15/255, opacity: 1.0))
+                                                    .cornerRadius(10)
+                                                }
+                //                                    .padding()
+                                            }
+                                        }
+                                        
+                                    }
+                                    .frame(minWidth: UIScreen.main.bounds.size.width)
+                                    .padding(.horizontal)
+                                }
                             }
-                            .padding(.vertical)
-                            .background(.white)
+                            .padding([.vertical, .horizontal])
+                            .background(Color(red: 30/255, green: 30/255, blue: 30/255, opacity: 1.0))
+                            .frame(height: 150)
                         }
                         
                     }
