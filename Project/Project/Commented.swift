@@ -118,3 +118,99 @@ let trailingConstraint = imageView.trailingAnchor.constraint(equalTo: scrollView
 trailingConstraint.identifier = Constraint.trailing.rawValue
 trailingConstraint.isActive = true
  */
+
+
+//        let imageView1 = UIImageView()
+//        imageView1.image = uiImage.withAlignmentRectInsets(UIEdgeInsets(top: -verticalOffset, left: -horizontalOffset, bottom: -verticalOffset/2, right: -horizontalOffset/2))
+
+
+//        let imageView = UIImageView()
+//        imageView.image = uiImage.withAlignmentRectInsets(UIEdgeInsets(top: -verticalOffset, left: -horizontalOffset, bottom: -verticalOffset/2, right: -horizontalOffset/2))
+
+
+
+//    @Binding var horizontalOffset: CGFloat
+//    @Binding var verticalOffset: CGFloat
+//    var croppedImage: UIImage
+    
+//    var imageView : UIImageView
+
+
+
+
+
+
+/*
+dummyContainer.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
+dummyContainer.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
+dummyContainer.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
+dummyContainer.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
+
+let topConstraint1 = imageView1.topAnchor.constraint(equalTo: dummyContainer.topAnchor)
+topConstraint1.identifier = Constraint.top.rawValue
+topConstraint1.isActive = true
+
+let leadingConstraint1 = imageView1.leadingAnchor.constraint(equalTo: dummyContainer.leadingAnchor)
+leadingConstraint1.identifier = Constraint.leading.rawValue
+leadingConstraint1.isActive = true
+
+
+let bottomConstraint = imageView1.bottomAnchor.constraint(equalTo: dummyContainer.bottomAnchor)
+bottomConstraint.identifier = Constraint.bottom.rawValue
+bottomConstraint.isActive = true
+
+let trailingConstraint = imageView1.trailingAnchor.constraint(equalTo: dummyContainer.trailingAnchor)
+trailingConstraint.identifier = Constraint.trailing.rawValue
+trailingConstraint.isActive = true
+ */
+
+
+
+/*
+dummyContainer.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
+dummyContainer.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
+dummyContainer.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
+dummyContainer.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
+
+
+
+let topConstraint = imageView.topAnchor.constraint(equalTo: dummyContainer.topAnchor)
+topConstraint.identifier = Constraint.top.rawValue
+topConstraint.isActive = true
+
+let leadingConstraint = imageView.leadingAnchor.constraint(equalTo: dummyContainer.leadingAnchor)
+leadingConstraint.identifier = Constraint.leading.rawValue
+leadingConstraint.isActive = true
+
+let bottomConstraint = imageView.bottomAnchor.constraint(equalTo: dummyContainer.bottomAnchor)
+bottomConstraint.identifier = Constraint.bottom.rawValue
+bottomConstraint.isActive = true
+
+
+let trailingConstraint = imageView.trailingAnchor.constraint(equalTo: dummyContainer.trailingAnchor)
+trailingConstraint.identifier = Constraint.trailing.rawValue
+trailingConstraint.isActive = true
+ */
+
+
+//        func scrollViewDidZoom(_ scrollView: UIScrollView) {
+//            let zoomScale = scrollView.zoomScale
+//            print("zoomScale = \(zoomScale)")
+//            print("xoffset = \(scrollView.contentOffset.x)")
+//            print("yoffset = \(scrollView.contentOffset.y)")
+//
+//            guard
+//                let topConstraint = topConstraint,
+//                let leadingConstraint = leadingConstraint,
+//                let trailingConstraint = trailingConstraint,
+//                let bottomConstraint = bottomConstraint,
+//                let imageSize = imageSize,
+//                let viewSize = viewSize
+//            else {
+//                return
+//            }
+//            topConstraint.constant = max((viewSize.height - (imageSize.height * zoomScale)) / 2.0, 0.0)
+//            leadingConstraint.constant = max((viewSize.width - (imageSize.width * zoomScale)) / 2.0, 0.0)
+//            bottomConstraint.constant = verticalOffset!
+//            trailingConstraint.constant = horizontalOffset!
+//        }

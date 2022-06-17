@@ -11,14 +11,14 @@ var croppedImage = UIImage()
 var finalImageCropped = UIImage()
 var croppingWidth: CGFloat = 350
 var croppingHeight: CGFloat = 350
-var aspectRatioList: [[CGFloat]] = [[1,1], [4,5], [4,3], [3,2], [16, 9], [2, 1]]
+var aspectRatioListHorizontal: [[CGFloat]] = [[1,1], [5,4], [4,3], [3,2], [16, 9], [2, 1]]
+var aspectRatioListVertical: [[CGFloat]] = [[1,1], [4,5], [3,4], [2,3], [9,16], [1,2]]
 
 //[[], 4/5, 4/3, 3/2, 16/9, 2/1]
 
 struct CroppingPage: View {
     
-    @State var uiImage = UIImage(named: "Landscape")!
-    @State private var isShowPhotoLibrary = false
+    @Binding var uiImage: UIImage
     
     @State var viewState = CGSize.zero
     
@@ -35,267 +35,404 @@ struct CroppingPage: View {
     @State var verticalOffset = CGFloat(0)
     
     
+    @EnvironmentObject var rotateHelper: RotateHelper
+    
+    @State var alignment: String = "Horiontal"
+    @State var aspectRatioList: [[CGFloat]] = [[1,1], [5,4], [4,3], [3,2], [16, 9], [2, 1]]
+    
+    
     var body: some View {
         
         GeometryReader{ totalGeometry in
             
-            ZStack {
-                Color.black
-                    .edgesIgnoringSafeArea(.vertical)
-                
-                VStack{
-                    HStack{
-                        Button(action: {}) {
-                            Image(systemName: "pencil.slash")
-                                .foregroundColor(.white)
-                                .font(.title)
-                            
-                        }
-                        .padding(.leading)
-                        
-                        Spacer()
-                        
-                        Text("Crop Image")
-                            .foregroundColor(.white)
-                            .font(.title3)
-                        
-                        Spacer()
-                        
-                        
-                        
-                        Button(action: {
-                            let CGrotation = CGFloat(rotation)
-                            let radians = CGrotation * Double.pi/180
-                            let newImage = uiImage.rotate(radians: Float(radians))
-                            croppedImage = newImage!
-                            croppingWidth = frameWidth
-                            croppingHeight = frameHeight
-                            
-                            finalImageCropped = ZoomableView.crop(uiImage: croppedImage, width: croppingWidth, height: croppingHeight)
-                            UIImageWriteToSavedPhotosAlbum(finalImageCropped, nil, nil, nil)
-                            
-                        }) {
-                            Text("Next")
-                                .foregroundColor(.blue)
-                                .fontWeight(.semibold)
-                                .font(.title3)
-                        }
-                    }
-                    .padding(.trailing)
-                    
-            
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                    
-                    Group{
-                         ZStack {
-                             GeometryReader { geometry in
-                                 ZoomableView(uiImage: $uiImage, viewSize: geometry.size, frameWidth: $frameWidth, frameHeight: $frameHeight, rotation: $rotation)
-                             }
-                             .gesture(RotationGesture().onChanged{angle in
-                                 rotation += Float(angle.degrees)
-                             })
-//                             .rotationEffect(.degrees(rotation))
-//                             .frame(width: frameWidth, height: frameHeight)
-//                             .border(.white)
-                             
-                             
-                             
-                             ZStack {
-                                 Rectangle()
-                                     .opacity(0.01)
-                                     .allowsHitTesting(false)
-                                     .frame(width: frameWidth, height: frameHeight)
-                                 .border(.white, width: 3)
-                                 
-                                 Rectangle()
-                                     .allowsHitTesting(false)
-                                     .opacity(0.01)
-                                     .frame(width: frameWidth, height: frameHeight/3)
-                                     .border(.white, width: 0.75)
-                                 
-                                 Rectangle()
-                                     .allowsHitTesting(false)
-                                     .opacity(0.01)
-                                     .frame(width: frameWidth/3, height: frameHeight)
-                                     .border(.white, width: 0.75)
-                             }
-                             
-//                             Image(systemName: "arrow.up.left.and.arrow.down.right")
-//                                 .font(.system(size: 20))
-//                                 .background(Circle().frame(width: 25, height: 25).foregroundColor(.white))
-//                                 .frame(width: frameWidth, height: frameHeight, alignment: .topLeading)
-//                                 .foregroundColor(.black)
-//                                 .offset(x: -5, y: -5)
-//                                 .gesture(DragGesture()
-//                                    .onChanged{drag in
-//                                        frameWidth -= drag.translation.width
-//                                        frameHeight -= drag.translation.height
-//
-//                                    })
-                         }
-                        
-                        Slider(value: $rotation, in: 0...360)
-                        
-                     }
-                    
-                    
-                    
-                    
-                    Spacer()
-                    Spacer()
-                    
+                ZStack {
+                    Color.black
+                        .edgesIgnoringSafeArea(.vertical)
                     
                     VStack{
+//                        HStack{
+//                            Button(action: {}) {
+//                                Image(systemName: "pencil.slash")
+//                                    .foregroundColor(.white)
+//                                    .font(.title)
+//
+//                            }
+//                            .padding(.leading)
+//
+//                            Spacer()
+//
+//                            Text("Crop Image")
+//                                .foregroundColor(.white)
+//                                .font(.title3)
+//
+//                            Spacer()
+//
+//
+//
+//                            Button(action: {
+//                                let CGrotation = CGFloat(rotateHelper.rotateByAngle)
+//                                let radians = CGrotation * Double.pi/180
+//                                let newImage = uiImage.rotate(radians: Float(radians))
+//                                croppedImage = newImage!
+//                                croppingWidth = frameWidth
+//                                croppingHeight = frameHeight
+//
+//                                finalImageCropped = ZoomableView.crop(uiImage: croppedImage, width: croppingWidth, height: croppingHeight)
+//                                UIImageWriteToSavedPhotosAlbum(finalImageCropped, nil, nil, nil)
+//
+//                            }) {
+//                                Text("Next")
+//                                    .foregroundColor(.blue)
+//                                    .fontWeight(.semibold)
+//                                    .font(.title3)
+//                            }
+//                        }
+//                        .padding(.trailing)
+//                        .navigationBarTitleDisplayMode(.inline)
+//                        .toolbar {
+//                            ToolbarItem(placement: .principal) {
+//                                HStack {
+//                                        Text("Crop Image")
+//                                            .font(.headline)
+//                                            .foregroundColor(.white)
+//
+//                                        }
+//                                    }
+//
+//                                }
                         
-                        HStack {
-                            Button(action: {
-                            
-                                withAnimation(.default){
-                                    if aspectRatio > 1 {
-                                        aspectRatio = 1 / aspectRatio
-                                        frameHeight = min(totalGeometry.size.width, totalGeometry.size.height/2)
-                                        frameWidth = frameHeight * aspectRatio
-                                        
-                                        verticalOffset = (totalGeometry.size.height - frameHeight)/2
-                                        
-                                        horizontalOffset = (totalGeometry.size.width - frameWidth)/2
-                                        
-                                    }
-                                    portrait = true
-                                }
-                                
-                            }) {
-                                Image(systemName: "rectangle.portrait")
-                            }
-                            .foregroundColor(portrait ? .yellow: .white)
-                            .font(.title)
-                            
-                            Button(action: {
-                                
-                                withAnimation(.default) {
-                                    if aspectRatio < 1{
-                                        aspectRatio = 1 / aspectRatio
-                                        frameWidth = totalGeometry.size.width
-                                        frameHeight = frameWidth/aspectRatio
-                                        
-                                        verticalOffset = (totalGeometry.size.height - frameHeight)/2
-                                        
-                                        horizontalOffset = (totalGeometry.size.width - frameWidth)/2
-                                        
-                                    }
-                                    portrait = false
-                                }
-                                
-                            }) {
-                                Image(systemName: "rectangle")
-                            }
-                            .foregroundColor(portrait ? .white: .yellow)
-                            .font(.title)
-                        }
-                        .padding(.bottom)
+                
+//                        Spacer()
+//                        Spacer()
+//                        Spacer()
+//                        Spacer()
+                        
+                        Group{
+                             ZStack {
+                                 GeometryReader { geometry in
+                                     ZoomableView(uiImage: $uiImage, viewSize: geometry.size, frameWidth: $frameWidth, frameHeight: $frameHeight, rotation: $rotation)
+                                 }
+    //                             .gesture(RotationGesture().onChanged{angle in
+    //                                 rotation += Float(angle.degrees)
+    //                             })
+    //                             .rotationEffect(.degrees(rotation))
+    //                             .frame(width: frameWidth, height: frameHeight)
+    //                             .border(.white)
+                                 
+                                 
+                                 
+                                 ZStack {
+                                     Rectangle()
+                                         .opacity(0.01)
+                                         .allowsHitTesting(false)
+                                         .frame(width: frameWidth, height: frameHeight)
+                                     .border(.white, width: 3)
+                                     
+                                     Rectangle()
+                                         .allowsHitTesting(false)
+                                         .opacity(0.01)
+                                         .frame(width: frameWidth, height: frameHeight/3)
+                                         .border(.white, width: 0.75)
+                                     
+                                     Rectangle()
+                                         .allowsHitTesting(false)
+                                         .opacity(0.01)
+                                         .frame(width: frameWidth/3, height: frameHeight)
+                                         .border(.white, width: 0.75)
+                                 }
+                                 
+    //                             Image(systemName: "arrow.up.left.and.arrow.down.right")
+    //                                 .font(.system(size: 20))
+    //                                 .background(Circle().frame(width: 25, height: 25).foregroundColor(.white))
+    //                                 .frame(width: frameWidth, height: frameHeight, alignment: .topLeading)
+    //                                 .foregroundColor(.black)
+    //                                 .offset(x: -5, y: -5)
+    //                                 .gesture(DragGesture()
+    //                                    .onChanged{drag in
+    //                                        frameWidth -= drag.translation.width
+    //                                        frameHeight -= drag.translation.height
     //
-                        
-                        
-                        
-                        ScrollView(.horizontal){
-                            HStack{
-                                ForEach(aspectRatioList, id:\.self){aspect in
-                                        
+    //                                    })
+                             }
+                             .navigationBarItems(
+                                trailing:
                                     Button(action: {
-                                            
+                                        let CGrotation = CGFloat(rotateHelper.rotateByAngle)
+                                        let radians = CGrotation * Double.pi/180
+                                        let newImage = uiImage.rotate(radians: Float(radians))
+                                        croppedImage = newImage!
+                                        croppingWidth = frameWidth
+                                        croppingHeight = frameHeight
+
+                                        finalImageCropped = ZoomableView.crop(uiImage: croppedImage, width: croppingWidth, height: croppingHeight)
+                                        UIImageWriteToSavedPhotosAlbum(finalImageCropped, nil, nil, nil)
+
+                                    }) {
+                                        Text("Next")
+                                            .foregroundColor(.blue)
+                                            .fontWeight(.semibold)
+                                            .font(.title3)
+                                    }
+                             )
+                            
+                            Slider(value: $rotateHelper.rotateByAngle, in: 0...360)
+                            
+                         }
+                        
+                        
+                        
+                        
+                        Spacer()
+                        Spacer()
+                        
+                        
+                        VStack{
+                            
+                            HStack {
+                                Button(action: {
+                                
                                     withAnimation(.default){
-                                            aspectRatio = aspect[0]/aspect[1]
+                                        if aspectRatio > 1 {
+                                            aspectRatio = 1 / aspectRatio
+                                            frameHeight = min(totalGeometry.size.width, totalGeometry.size.height/2)
+                                            frameWidth = frameHeight * aspectRatio
+                                            
+                                            verticalOffset = (totalGeometry.size.height - frameHeight)/2
+                                            
+                                            horizontalOffset = (totalGeometry.size.width - frameWidth)/2
+                                            
+                                        }
+                                        portrait = true
+                                    }
+                                    
+                                }) {
+                                    Image(systemName: "rectangle.portrait")
+                                }
+                                .foregroundColor(portrait ? .yellow: .white)
+                                .font(.title)
+                                
+                                Button(action: {
+                                    
+                                    withAnimation(.default) {
+                                        if aspectRatio < 1{
+                                            aspectRatio = 1 / aspectRatio
+                                            frameWidth = totalGeometry.size.width
+                                            frameHeight = frameWidth/aspectRatio
+                                            
+                                            verticalOffset = (totalGeometry.size.height - frameHeight)/2
+                                            
+                                            horizontalOffset = (totalGeometry.size.width - frameWidth)/2
+                                            
+                                        }
+                                        portrait = false
+                                    }
+                                    
+                                }) {
+                                    Image(systemName: "rectangle")
+                                }
+                                .foregroundColor(portrait ? .white: .yellow)
+                                .font(.title)
+                                
+                                
+                                
+                                Button(action: {
+                                    withAnimation(.default) {
+                                        if rotateHelper.rotateByAngle < 90{
+                                            rotateHelper.rotateByAngle = 90
+                                        }
+                                        else if rotateHelper.rotateByAngle < 180 {
+                                            rotateHelper.rotateByAngle = 180
+                                        }
+                                        else if rotateHelper.rotateByAngle < 270 {
+                                            rotateHelper.rotateByAngle = 270
+                                        }
+                                        else{
+                                            rotateHelper.rotateByAngle = 0
+                                        }
+                                    }
+                                    
+                                }) {
+                                    Image(systemName: "rotate.right")
+                                        .foregroundColor(.white)
+                                        .font(.title)
+                                        .offset(y: -5)
+                                }
+                            }
+                            .padding(.bottom)
+        //
+                            
+                            
+                            
+                            ScrollView(.horizontal){
+                                HStack{
+                                    
+                                    if(alignment == "Horizontal"){
+                                        Button(action: {
+                                            alignment = "Vertical"
+                                            aspectRatioList = aspectRatioListVertical
+                                        }) {
+                                            VStack {
+                                                ZStack {
+                                                    Rectangle()
+                                                        .frame(width: 30, height: 20)
+                                                        .opacity(0.6)
+                                                        .border(.white, width: 2)
+                                                        .padding(.bottom, 6)
+                                                    .foregroundColor(.white)
+                                                }
+                                                    
+    //                                            Spacer()
                                                 
-                                            if(aspectRatio >= 1){
-                                                if(aspectRatio == 1){
-                                                        frameWidth =  min(totalGeometry.size.width, totalGeometry.size.height/2)
+                                                Text("Horizontal")
+                                                    .foregroundColor(.white)
+                                                    .fontWeight(.semibold)
+                                                    .font(.title3)
                                             }
-                                                else{
-                                                    frameWidth = totalGeometry.size.width
+                                            .frame(width: 110, height: 100)
+                                            .background(Color(red: 0.105, green: 0.105, blue: 0.105, opacity: 1.0))
+                                            .cornerRadius(10)
+                                        }
+                                    }
+                                    else{
+                                        Button(action: {
+                                            alignment = "Horizontal"
+                                            aspectRatioList = aspectRatioListHorizontal
+                                        }) {
+                                            VStack {
+                                                ZStack {
+                                                    Rectangle()
+                                                        .frame(width: 20, height: 30)
+                                                        .opacity(0.6)
+                                                        .border(.white, width: 2)
+                                                        .padding(.bottom, 6)
+                                                    .foregroundColor(.white)
+                                                }
+                                                    
+    //                                            Spacer()
+                                                
+                                                Text("Vertical")
+                                                    .foregroundColor(.white)
+                                                    .fontWeight(.semibold)
+                                                    .font(.title3)
+                                            }
+                                            .frame(width: 110, height: 100)
+                                            .background(Color(red: 0.105, green: 0.105, blue: 0.105, opacity: 1.0))
+                                            .cornerRadius(10)
+                                        }
+                                    }
+                                    
+                                        
+                                    if(alignment == "Horizontal"){
+                                        ForEach(aspectRatioListHorizontal, id:\.self){aspect in
+                                                
+                                            Button(action: {
+                                                    
+                                            withAnimation(.default){
+                                                    aspectRatio = aspect[0]/aspect[1]
+                                                        
+                                                    
+                                                    if(aspectRatio == 1){
+                                                        frameWidth =  min(totalGeometry.size.width, totalGeometry.size.height/2)
+                                                    }
+                                                    else{
+                                                        frameWidth = totalGeometry.size.width
                                                     }
                                                     frameHeight = frameWidth/aspectRatio
                                                     portrait = false
+                                                        
+                                                        
+                                                    verticalOffset = (totalGeometry.size.height - frameHeight)/2
+                                                        
+                                                    horizontalOffset = (totalGeometry.size.width - frameWidth)/2
+                                                    }
+                                                    
+                                            }) {
+                                                VStack {
+                                                    
+                                                    ZStack {
+                                                        Rectangle()
+                                                            .frame(width: 30, height: 30*aspect[1]/aspect[0])
+                                                            .opacity(0.6)
+                                                            .border(.white, width: 2)
+                                                            .padding(.bottom, 6)
+                                                        .foregroundColor(.white)
+                                                    }
+                                                        
+        //                                            Spacer()
+                                                    
+                                                    Text("\(Int(aspect[0])) : \(Int(aspect[1]))")
+                                                        .foregroundColor(.white)
+                                                        .fontWeight(.semibold)
+                                                        .font(.title3)
                                                 }
-                                            else{
-                                                frameHeight = min(totalGeometry.size.width, totalGeometry.size.height/2)
-                                                frameWidth = frameHeight * aspectRatio
-                                                    portrait = true
-                                                }
-                                                
-                                            verticalOffset = (totalGeometry.size.height - frameHeight)/2
-                                                
-                                            horizontalOffset = (totalGeometry.size.width - frameWidth)/2
+                                                .frame(width: 110, height: 100)
+                                                .background(Color(red: 0.105, green: 0.105, blue: 0.105, opacity: 1.0))
+                                                .cornerRadius(10)
                                             }
-                                            
-                                    }) {
-                                        VStack {
-                                            
-                                            ZStack {
-                                                Rectangle()
-                                                    .frame(width: 30, height: 30*aspect[1]/aspect[0])
-                                                    .opacity(0.6)
-                                                    .border(.white, width: 2)
-                                                    .padding(.bottom, 6)
-                                                .foregroundColor(.white)
-                                            }
-                                                
-//                                            Spacer()
-                                            
-                                            Text("\(Int(aspect[0])) : \(Int(aspect[1]))")
-                                                .foregroundColor(.white)
-                                                .fontWeight(.semibold)
-                                                .font(.title3)
+            //                                    .padding()
                                         }
-                                        .frame(width: 110, height: 100)
-                                        .background(Color(red: 0.105, green: 0.105, blue: 0.105, opacity: 1.0))
-                                        .cornerRadius(10)
                                     }
-    //                                    .padding()
+                                    else{
+                                        ForEach(aspectRatioListVertical, id:\.self){aspect in
+                                                
+                                            Button(action: {
+                                                    
+                                            withAnimation(.default){
+                                                    aspectRatio = aspect[0]/aspect[1]
+    
+                                                    frameHeight = min(totalGeometry.size.width, totalGeometry.size.height/2)
+                                                        frameWidth = frameHeight * aspectRatio
+                                                    portrait = true
+                                                    
+                                                    verticalOffset = (totalGeometry.size.height - frameHeight)/2
+                                                        
+                                                    horizontalOffset = (totalGeometry.size.width - frameWidth)/2
+                                                    }
+                                                    
+                                            }) {
+                                                VStack {
+                                                    
+                                                    ZStack {
+                                                        Rectangle()
+                                                            .frame(width: 30*aspect[0]/aspect[1], height: 30)
+                                                            .opacity(0.6)
+                                                            .border(.white, width: 2)
+                                                            .padding(.bottom, 6)
+                                                        .foregroundColor(.white)
+                                                    }
+                                                        
+        //                                            Spacer()
+                                                    
+                                                    Text("\(Int(aspect[0])) : \(Int(aspect[1]))")
+                                                        .foregroundColor(.white)
+                                                        .fontWeight(.semibold)
+                                                        .font(.title3)
+                                                }
+                                                .frame(width: 110, height: 100)
+                                                .background(Color(red: 0.105, green: 0.105, blue: 0.105, opacity: 1.0))
+                                                .cornerRadius(10)
+                                            }
+            //                                    .padding()
+                                        }
+                                    }
+                                    
                                 }
+                                .frame(minWidth: UIScreen.main.bounds.size.width)
                             }
-                            .frame(minWidth: UIScreen.main.bounds.size.width)
+                            .padding(.vertical)
+                            .background(.white)
                         }
-                    }
-                    
-                    
-                    Group {
-                        Spacer()
-                            .frame(height: 40)
                         
-                        
-                        Button(action: {
-                            self.isShowPhotoLibrary = true
-                        }) {
-                            HStack {
-                                Image(systemName: "photo")
-                                    .font(.system(size: 20))
-
-                                Text("Select Image")
-                                    .font(.headline)
-                            }
-                            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 50)
-                            .background(Color.blue)
-                            .foregroundColor(.white)
-                            .cornerRadius(20)
-                            .padding(.horizontal)
-                        }
                     }
                 }
-            }
-            .sheet(isPresented: $isShowPhotoLibrary) {
-                ImagePicker(sourceType: .photoLibrary, selectedImage: $uiImage)
-            }
-            
+
         }
         
     }
 }
 
-struct CroppingPage_Previews: PreviewProvider {
-    static var previews: some View {
-        CroppingPage()
-    }
-}
+//struct CroppingPage_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CroppingPage(uiImage: .constant(UIImage(named: "Landscape")!))
+//    }
+//}

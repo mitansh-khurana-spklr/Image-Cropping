@@ -19,6 +19,7 @@
 		A423DFFA285847AC004D9C40 /* CroppingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A423DFF9285847AC004D9C40 /* CroppingPage.swift */; };
 		A423DFFC285847C5004D9C40 /* ZoomAndScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = A423DFFB285847C5004D9C40 /* ZoomAndScroll.swift */; };
 		A423DFFE285847D7004D9C40 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A423DFFD285847D7004D9C40 /* ImagePicker.swift */; };
+		A4E247B0285C85C00030942C /* SelectImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E247AF285C85BF0030942C /* SelectImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 		A423DFF9285847AC004D9C40 /* CroppingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CroppingPage.swift; sourceTree = "<group>"; };
 		A423DFFB285847C5004D9C40 /* ZoomAndScroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomAndScroll.swift; sourceTree = "<group>"; };
 		A423DFFD285847D7004D9C40 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		A4E247AF285C85BF0030942C /* SelectImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 			children = (
 				A423DFCF285846F8004D9C40 /* ProjectApp.swift */,
 				A423DFD1285846F8004D9C40 /* ContentView.swift */,
+				A4E247AF285C85BF0030942C /* SelectImageView.swift */,
 				A423DFF9285847AC004D9C40 /* CroppingPage.swift */,
 				A423DFFB285847C5004D9C40 /* ZoomAndScroll.swift */,
 				A40A7B75285857B900313F1F /* CroppedImage.swift */,
@@ -278,6 +281,7 @@
 				A423DFFE285847D7004D9C40 /* ImagePicker.swift in Sources */,
 				A40A7B76285857B900313F1F /* CroppedImage.swift in Sources */,
 				A423DFD2285846F8004D9C40 /* ContentView.swift in Sources */,
+				A4E247B0285C85C00030942C /* SelectImageView.swift in Sources */,
 				A423DFD0285846F8004D9C40 /* ProjectApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
