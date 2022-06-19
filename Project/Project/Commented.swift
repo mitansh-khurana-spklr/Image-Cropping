@@ -214,3 +214,13 @@ trailingConstraint.isActive = true
 //            bottomConstraint.constant = verticalOffset!
 //            trailingConstraint.constant = horizontalOffset!
 //        }
+
+
+
+
+
+//        let widthScale = frameWidth / fittingRect.width
+//        let heightScale = frameHeight / fittingRect.height
+//        if rotateHelper.rotateByAngle != 90 && rotateHelper.rotateByAngle != 180 && rotateHelper.rotateByAngle != 270 && rotateHelper.rotateByAngle != 0 {
+//            return max(widthScale, heightScale) * 3
+//        }
