@@ -15,6 +15,8 @@ struct InbuiltFilterView: View {
 //    @Binding var uiImage : UIImage
     @State var uiImageShow = finalImageCropped
     @State var filterIntensity: Float = 0
+    @State var currImage: UIImage = UIImage()
+    @State var showingSepia = true
     
     
     
@@ -36,39 +38,85 @@ struct InbuiltFilterView: View {
         applyProcessing()
     }
     
+    func imageWithImage(source: UIImage, rotatedByHue: CGFloat) -> UIImage {
+        // Create a Core Image version of the image.
+        let sourceCore = CIImage(image: source)
+        // Apply a CIHueAdjust filter
+        let hueAdjust = CIFilter(name: "CIHueAdjust")
+        hueAdjust!.setDefaults()
+        hueAdjust!.setValue(sourceCore, forKey: "inputImage")
+        hueAdjust!.setValue(CGFloat(rotatedByHue), forKey: "inputAngle")
+        let resultCore  = hueAdjust!.value(forKey: "outputImage") as! CIImage?
+        let context = CIContext(options: nil)
+        let resultRef = context.createCGImage(resultCore!, from: resultCore!.extent)
+        let result = UIImage(cgImage: resultRef!)
+        return result
+    }
+
+    
     var body: some View {
-        VStack {
-            Spacer()
-            Image(uiImage: uiImageShow)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .padding()
+        ZStack {
+            
+            Color.black
+                .edgesIgnoringSafeArea(.vertical)
+            
+            VStack {
+                Spacer()
+                if(showingSepia){
+                    Image(uiImage: uiImageShow)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .padding()
+                }
+                else{
+                    Image(uiImage: currImage)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .padding()
+                }
                 
-            Spacer()
-            
-        
-            Slider(value: $filterIntensity)
-                .onChange(of: filterIntensity) { newValue in
-                loadImage()
-                }
-                .padding()
-            
-            Spacer()
-            
-            
-                HStack{
-                    Button(action: {
-                        currentFilter = CIFilter.sepiaTone()
-                    }) {
-                        Text("Sepia")
-                    }
                     
-                }
-                .padding()
+                Spacer()
+                
             
-            
-            Spacer()
-            
+                Slider(value: $filterIntensity)
+                    .onChange(of: filterIntensity) { newValue in
+                        loadImage()
+                        currImage = imageWithImage(source: finalImageCropped, rotatedByHue: .pi)
+                    }
+                    .padding()
+                    .onAppear{
+                        uiImageShow = finalImageCropped
+                    }
+                
+                Spacer()
+                
+                
+                    HStack{
+                        Button(action: {
+                            currentFilter = CIFilter.sepiaTone()
+                            showingSepia = true
+                        }) {
+                            Text("Sepia")
+                                .foregroundColor(.white)
+                        }
+                        
+                        Button(action: {
+                            currImage = imageWithImage(source: finalImageCropped, rotatedByHue: .pi)
+                            showingSepia = false
+                            
+                        }) {
+                            Text("Hue")
+                                .foregroundColor(.white)
+                        }
+                        
+                    }
+                    .padding()
+                
+                
+                Spacer()
+                
+            }
         }
     }
 }

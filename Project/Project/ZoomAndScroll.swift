@@ -135,6 +135,7 @@ struct ZoomableView: UIViewRepresentable {
          */
     
         
+        
         let topConstraint = imageView.topAnchor.constraint(equalTo: scrollView.topAnchor)
         topConstraint.identifier = Constraint.top.rawValue
         topConstraint.isActive = true
@@ -151,6 +152,7 @@ struct ZoomableView: UIViewRepresentable {
         trailingConstraint.identifier = Constraint.trailing.rawValue
         trailingConstraint.isActive = true
          
+         
         
 //        imageView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor).isActive = true
 //        imageView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
@@ -158,6 +160,7 @@ struct ZoomableView: UIViewRepresentable {
         
         
 //        imageView.transform = CGAffineTransform(rotationAngle: radians);
+        
         
         scroll = scrollView
         
@@ -218,6 +221,7 @@ struct ZoomableView: UIViewRepresentable {
 //        scrollView.setContentOffset(CGPoint(x: 500, y: 500), animated: false)
         
         
+        
         let topConstraint1 = imageView1.topAnchor.constraint(equalTo: scrollView.topAnchor)
         topConstraint1.identifier = Constraint.top.rawValue
         topConstraint1.isActive = true
@@ -236,6 +240,7 @@ struct ZoomableView: UIViewRepresentable {
         trailingConstraint.isActive = true
          
          
+         
 //        imageView1.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor).isActive = true
 //        imageView1.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
         
@@ -244,10 +249,6 @@ struct ZoomableView: UIViewRepresentable {
         
         scrollView.minimumZoomScale = minimumZoomScale
         scrollView.maximumZoomScale = minimumZoomScale * 10
-        
-
-    
-        
         
 //        guard let imageView = scrollView.subviews.first as? UIImageView else {
 //            return
