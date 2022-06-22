@@ -778,3 +778,161 @@ Button(action: {
 .font(.title)
 
 */
+
+
+
+
+
+
+
+
+
+//                                 .gesture(RotationGesture().onChanged { value in
+//                                    let currRot = value.degrees
+//                                    let diff = currRot - prevRot
+//                                    rotateHelper.rotateByAngle += Float(diff)
+//                                     if rotateHelper.rotateByAngle >= 360{
+//                                         rotateHelper.rotateByAngle -= 360
+//                                     }
+//                                     if(rotateHelper.rotateByAngle < 0){
+//                                         rotateHelper.rotateByAngle += 360
+//                                     }
+//                                    prevRot = currRot
+//                                 }.onEnded({ value in
+//                                     prevRot = 0
+//                                 }))
+                                 
+                                 
+                                 
+                                 
+//                                 .rotationEffect(Angle(degrees: Double(self.rotateState)))
+//                                 .gesture(RotationGesture().onChanged { value in
+//                                        //if setStart{
+//                                        let currRot = value.degrees
+//                                        let diff = currRot - prevRot
+//                                     self.rotateState += Float(diff)
+//                                        prevRot = currRot
+//                                     rotateHelper.rotateByAngle += Float(diff)
+//                                        // setStart = false
+//                                        // }
+//                                        }.onEnded({ endValue in
+//                                        prevRot = 0
+//                                                                          })
+//                                                                                      )
+                                 
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+Button(action: {
+    
+withAnimation(.default){
+aspectRatio = aspect[0]/aspect[1]
+aspectRatioSize.width = aspect[0]
+aspectRatioSize.height = aspect[1]
+        
+    
+if(aspectRatio == 1){
+    frameWidth =  min(totalGeometry.size.width, totalGeometry.size.height/2)
+}
+else{
+    frameWidth = totalGeometry.size.width
+}
+frameHeight = frameWidth/aspectRatio
+portrait = false
+        
+        
+verticalOffset = (totalGeometry.size.height - frameHeight)/2
+        
+horizontalOffset = (totalGeometry.size.width - frameWidth)/2
+}
+    
+}) {
+VStack {
+    
+    
+    Rectangle()
+        .frame(width: 20, height: 20*aspect[1]/aspect[0])
+        .opacity(0.6)
+        .border(.white, width: 2)
+        .padding(.bottom, 6)
+        .foregroundColor(.white)
+    
+    
+    
+    Text("\(Int(aspect[0])) : \(Int(aspect[1]))")
+        .foregroundColor(.white)
+        .font(.headline)
+}
+.frame(width: 70, height: 70)
+.background(aspectRatio == aspect[0]/aspect[1] ? Color(red: 15/255, green: 15/255, blue: 15/255, opacity: 1.0) : nil)
+.cornerRadius(10)
+//                                                    .padding(.horizontal)
+//                                                    .overlay(aspectRatio == aspect[0]/aspect[1] ? RoundedRectangle(cornerRadius: 10).stroke(Color.blue, lineWidth: 2) : nil)
+}
+*/
+
+
+
+
+
+
+
+/*
+else{
+    ForEach(aspectRatioListVertical, id:\.self){aspect in
+            
+        Button(action: {
+                
+        withAnimation(.default){
+                aspectRatio = aspect[0]/aspect[1]
+            aspectRatioSize.width = aspect[0]
+            aspectRatioSize.height = aspect[1]
+                    
+
+                frameHeight = min(totalGeometry.size.width, totalGeometry.size.height/2)
+                    frameWidth = frameHeight * aspectRatio
+                portrait = true
+                
+                verticalOffset = (totalGeometry.size.height - frameHeight)/2
+                    
+                horizontalOffset = (totalGeometry.size.width - frameWidth)/2
+                }
+                
+        }) {
+            VStack {
+                
+                
+                Rectangle()
+                    .frame(width: 20*aspect[0]/aspect[1], height: 20)
+                    .opacity(0.6)
+                    .border(.white, width: 2)
+                    .padding(.bottom, 6)
+                    .foregroundColor(.white)
+
+                    
+                
+                Text("\(Int(aspect[0])) : \(Int(aspect[1]))")
+                    .foregroundColor(.white)
+                    .font(.headline)
+            }
+            .frame(width: 70, height: 70)
+            .background(aspectRatio == aspect[0]/aspect[1] ? Color(red: 15/255, green: 15/255, blue: 15/255, opacity: 1.0) : nil)
+            .cornerRadius(10)
+//                                                    .padding(.horizontal)
+//                                                    .overlay(aspectRatio == aspect[0]/aspect[1] ? RoundedRectangle(cornerRadius: 10).stroke(Color.blue, lineWidth: 2) : nil)
+        
+        }
+    }
+}
+*/

@@ -33,10 +33,14 @@ var aspectRatioListVertical: [[CGFloat]] = [[1,1], [4,5], [3,4], [2,3], [9,16], 
 struct CroppingPage: View {
     
     @Binding var uiImage: UIImage
+    @Binding var isCropped: Bool
+    @Binding var imageToShow: UIImage
     
     @State var viewState = CGSize.zero
     
     @State var rotation : Float = 0.0
+    
+    @State var rotateState: Float = 0
     
     
     
@@ -53,15 +57,14 @@ struct CroppingPage: View {
     @State var horizontalOffset = CGFloat(0)
     @State var verticalOffset = CGFloat(0)
     
-    @State var prevRot: CGFloat = 0
     
     
     @EnvironmentObject var rotateHelper: RotateHelper
     
     @State var alignment: String = "Horiontal"
-    @State var aspectRatioList: [[CGFloat]] = [[1,1], [5,4], [4,3], [3,2], [16, 9], [2, 1]]
+    @State var aspectRatioList: [[CGFloat]] = [[1,1, 0], [5,4, 0], [4,3, 0], [3,2, 0], [16,9, 0], [2,1, 0]]
     
-    @State var isShowingFilterView = false
+//    @State var isShowingFilterView = false
     
 //    @State var rotatedBoxWidth: CGFloat
 //    @State var rotatedBoxHeight: CGFloat
@@ -81,23 +84,7 @@ struct CroppingPage: View {
                                  GeometryReader { geometry in
                                      ZoomableView(uiImage: $uiImage, viewSize: geometry.size, frameWidth: $frameWidth, frameHeight: $frameHeight, rotation: $rotation, aspectRatioSize: $aspectRatioSize)
                                  }
-                                 .gesture(RotationGesture().onChanged { value in
-                                    let currRot = value.degrees
-                                    let diff = currRot - prevRot
-                                    rotateHelper.rotateByAngle += Float(diff)
-                                     if rotateHelper.rotateByAngle >= 360{
-                                         rotateHelper.rotateByAngle -= 360
-                                     }
-                                     if(rotateHelper.rotateByAngle < 0){
-                                         rotateHelper.rotateByAngle += 360 
-                                     }
-                                    prevRot = currRot
-                                 }.onEnded({ value in
-                                     prevRot = 0
-                                 }))
-                                 
-                                 
-                                 
+
                                  ZStack {
                                      Rectangle()
                                          .opacity(0.01)
@@ -151,248 +138,20 @@ struct CroppingPage: View {
 //                                            .font(.title3)
                                     }
                              )
-                            
-                            Slider(value: $rotateHelper.rotateByAngle, in: 0...360)
-                                .padding(.horizontal)
                          }
                         
                         
                         
-                        
-                        Spacer()
-                        Spacer()
-                        
-                        
-                        VStack{
+                        Group{
+                            Spacer()
+                            Spacer()
                             
-                            HStack {
-                                
-                                Button(action: {
-                                    withAnimation(.default) {
-                                        if rotateHelper.rotateByAngle < 90{
-                                            rotateHelper.rotateByAngle = 90
-                                        }
-                                        else if rotateHelper.rotateByAngle < 180 {
-                                            rotateHelper.rotateByAngle = 180
-                                        }
-                                        else if rotateHelper.rotateByAngle < 270 {
-                                            rotateHelper.rotateByAngle = 270
-                                        }
-                                        else{
-                                            rotateHelper.rotateByAngle = 0
-                                        }
-                                    }
-                                    
-                                }) {
-                                    Image(systemName: "rotate.right")
-                                        .foregroundColor(.white)
-                                        .font(.title)
-                                        .offset(y: -5)
-                                }
-                                
-                                
-                                Button(action: {
-                                    let CGrotation = CGFloat(rotateHelper.rotateByAngle)
-                                    let radians = CGrotation * Double.pi/180
-                                    let newImage = uiImage.rotate(radians: Float(radians))
-                                    croppedImage = newImage!
-                                    croppingWidth = frameWidth
-                                    croppingHeight = frameHeight
-
-                                    finalImageCropped = ZoomableView.crop(uiImage: croppedImage, width: croppingWidth, height: croppingHeight)
-                                    
-                                    
-                                    isShowingFilterView = true
-                                }) {
-                                    Image(systemName: "camera.filters")
-                                        .foregroundColor(.white)
-                                        .font(.title)
-                                }
-                            }
-                            .padding(.bottom)
-        //
-                            
-                            NavigationLink(destination: InbuiltFilterView(), isActive: $isShowingFilterView) {
-                                EmptyView()
-                                    
-                            }
-                            
-                            
-                            HStack {
-                                
-                                if(alignment == "Horizontal"){
-                                    Button(action: {
-                                        alignment = "Vertical"
-                                        aspectRatioList = aspectRatioListVertical
-                                    }) {
-                                        VStack {
-                                            ZStack {
-                                                Rectangle()
-                                                    .frame(width: 30, height: 20)
-                                                    .opacity(0.6)
-                                                    .border(.white, width: 2)
-                                                    .padding(.bottom, 6)
-                                                .foregroundColor(.white)
-                                            }
-                                                
-//                                            Spacer()
-                                            
-                                            Text("Horizontal")
-                                                .foregroundColor(.white)
-                                                .fontWeight(.semibold)
-                                                .font(.title3)
-                                        }
-                                        .frame(width: 110, height: 100)
-                                        .background(Color(red: 15/255, green: 15/255, blue: 15/255, opacity: 1.0))
-                                        .cornerRadius(10)
-                                    }
-                                }
-                                else{
-                                    Button(action: {
-                                        alignment = "Horizontal"
-                                        aspectRatioList = aspectRatioListHorizontal
-                                    }) {
-                                        VStack {
-                                            ZStack {
-                                                Rectangle()
-                                                    .frame(width: 20, height: 30)
-                                                    .opacity(0.6)
-                                                    .border(.white, width: 2)
-                                                    .padding(.bottom, 6)
-                                                .foregroundColor(.white)
-                                            }
-                                                
-//                                            Spacer()
-                                            
-                                            Text("Vertical")
-                                                .foregroundColor(.white)
-                                                .fontWeight(.semibold)
-                                                .font(.title3)
-                                        }
-                                        .frame(width: 110, height: 100)
-                                        .background(Color(red: 15/255, green: 15/255, blue: 15/255, opacity: 1.0))
-                                        .cornerRadius(10)
-                                        
-                                    }
-                                }
-                                
-                                ScrollView(.horizontal, showsIndicators: false){
-                                    HStack{
-                                        if(alignment == "Horizontal"){
-                                            ForEach(aspectRatioListHorizontal, id:\.self){aspect in
-                                                    
-                                                Button(action: {
-                                                        
-                                                withAnimation(.default){
-                                                        aspectRatio = aspect[0]/aspect[1]
-                                                    aspectRatioSize.width = aspect[0]
-                                                    aspectRatioSize.height = aspect[1]
-                                                            
-                                                        
-                                                        if(aspectRatio == 1){
-                                                            frameWidth =  min(totalGeometry.size.width, totalGeometry.size.height/2)
-                                                        }
-                                                        else{
-                                                            frameWidth = totalGeometry.size.width
-                                                        }
-                                                        frameHeight = frameWidth/aspectRatio
-                                                        portrait = false
-                                                            
-                                                            
-                                                        verticalOffset = (totalGeometry.size.height - frameHeight)/2
-                                                            
-                                                        horizontalOffset = (totalGeometry.size.width - frameWidth)/2
-                                                        }
-                                                        
-                                                }) {
-                                                    VStack {
-                                                        
-                                                        ZStack {
-                                                            Rectangle()
-                                                                .frame(width: 30, height: 30*aspect[1]/aspect[0])
-                                                                .opacity(0.6)
-                                                                .border(.white, width: 2)
-                                                                .padding(.bottom, 6)
-                                                            .foregroundColor(.white)
-                                                        }
-                                                            
-            //                                            Spacer()
-                                                        
-                                                        Text("\(Int(aspect[0])) : \(Int(aspect[1]))")
-                                                            .foregroundColor(.white)
-                                                            .fontWeight(.semibold)
-                                                            .font(.title3)
-                                                    }
-                                                    .frame(width: 110, height: 100)
-                                                    .background(Color(red: 15/255, green: 15/255, blue: 15/255, opacity: 1.0))
-                                                    .overlay(aspectRatio == aspect[0]/aspect[1] ? RoundedRectangle(cornerRadius: 10).stroke(Color.blue, lineWidth: 2) : nil)
-                                                    .cornerRadius(10)
-                                                }
-                //                                    .padding()
-                                            }
-                                        }
-                                        else{
-                                            ForEach(aspectRatioListVertical, id:\.self){aspect in
-                                                    
-                                                Button(action: {
-                                                        
-                                                withAnimation(.default){
-                                                        aspectRatio = aspect[0]/aspect[1]
-                                                    aspectRatioSize.width = aspect[0]
-                                                    aspectRatioSize.height = aspect[1]
-                                                            
-        
-                                                        frameHeight = min(totalGeometry.size.width, totalGeometry.size.height/2)
-                                                            frameWidth = frameHeight * aspectRatio
-                                                        portrait = true
-                                                        
-                                                        verticalOffset = (totalGeometry.size.height - frameHeight)/2
-                                                            
-                                                        horizontalOffset = (totalGeometry.size.width - frameWidth)/2
-                                                        }
-                                                        
-                                                }) {
-                                                    VStack {
-                                                        
-                                                        ZStack {
-                                                            Rectangle()
-                                                                .frame(width: 30*aspect[0]/aspect[1], height: 30)
-                                                                .opacity(0.6)
-                                                                .border(.white, width: 2)
-                                                                .padding(.bottom, 6)
-                                                            .foregroundColor(.white)
-                                                        }
-                                                            
-            //                                            Spacer()
-                                                        
-                                                        Text("\(Int(aspect[0])) : \(Int(aspect[1]))")
-                                                            .foregroundColor(.white)
-                                                            .fontWeight(.semibold)
-                                                            .font(.title3)
-                                                    }
-                                                    .frame(width: 110, height: 100)
-                                                    .background(Color(red: 15/255, green: 15/255, blue: 15/255, opacity: 1.0))
-                                                    .overlay(aspectRatio == aspect[0]/aspect[1] ? RoundedRectangle(cornerRadius: 10).stroke(Color.blue, lineWidth: 2) : nil)
-                                                    .cornerRadius(10)
-                                                }
-                //                                    .padding()
-                                            }
-                                        }
-                                        
-                                    }
-                                    .frame(minWidth: UIScreen.main.bounds.size.width)
-                                    .padding(.horizontal)
-                                }
-                                
-                            }
-                            .padding([.vertical, .horizontal])
-                            .background(Color(red: 30/255, green: 30/255, blue: 30/255, opacity: 1.0))
-                            .frame(height: 150)
                         }
+                        
+                        AspectRatioAndRotateView(aspectRatio: $aspectRatio, aspectRatioSize: $aspectRatioSize, portrait: $portrait, aspectRatioList: $aspectRatioList, alignment: $alignment, frameWidth: $frameWidth, frameHeight: $frameHeight, verticalOffset: $verticalOffset, horizontalOffset: $horizontalOffset, totalGeometry: totalGeometry)
                         
                     }
                 }
-
         }
         
     }

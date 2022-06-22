@@ -13,6 +13,9 @@ struct SelectImageView: View {
     @State var uiImage = UIImage()
     @State var isImageSelected = false
     @State var isShowingEditingView = false
+    @State var imageToShow = UIImage()
+    @State var isCropped = false
+    @State var isShowingFilterView = false
     
     var body: some View {
         NavigationView{
@@ -22,27 +25,26 @@ struct SelectImageView: View {
             
                 VStack {
                     
-                    NavigationLink(destination: CroppingPage(uiImage: $uiImage), isActive: $isShowingEditingView) {
-//                        Text("Begin")
-//                            .foregroundColor(.white)
-//                            .font(.title)
-//                            .frame(width: 100, height: 50)
-//                            .background(.green)
-//                            .cornerRadius(10)
+                    NavigationLink(destination: CroppingPage(uiImage: $uiImage, isCropped: $isCropped, imageToShow: $imageToShow), isActive: $isShowingEditingView) {
                         EmptyView()
                             
                     }
                     
-                    Button(action: {
-                        isShowingEditingView = true
-                    }, label: {
-                        Text("Begin")
-                        .foregroundColor(.white)
-                        .font(.title)
-                        .frame(width: 100, height: 50)
-                        .background(.green)
-                        .cornerRadius(10)
-                    })
+                    NavigationLink(destination: InbuiltFilterView(), isActive: $isShowingFilterView) {
+                        EmptyView()
+                            
+                    }
+                    
+//                    Button(action: {
+//                        isShowingEditingView = true
+//                    }, label: {
+//                        Text("Begin")
+//                        .foregroundColor(.white)
+//                        .font(.title)
+//                        .frame(width: 100, height: 50)
+//                        .background(.green)
+//                        .cornerRadius(10)
+//                    })
                     
                     .padding()
                     .frame(width: 100, height: 100, alignment: .top)
@@ -50,7 +52,7 @@ struct SelectImageView: View {
                     .toolbar {
                         ToolbarItem(placement: .principal) {
                             HStack {
-                                    Text("Choose Image")
+                                    Text("")
                                         .font(.headline)
                                         .foregroundColor(.white)
                                     }
@@ -77,13 +79,43 @@ struct SelectImageView: View {
                     }
                     
                     if(isImageSelected == true){
-                        Image(uiImage: uiImage)
+                        Image(uiImage: imageToShow)
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .padding([.horizontal])
-                            .border(.white)
+                            .frame(width: min(UIScreen.main.bounds.size.width, UIScreen.main.bounds.size.height/2), height: min(UIScreen.main.bounds.size.width, UIScreen.main.bounds.size.height/2))
                     }
                     
+                    
+                    Spacer()
+                    
+                    HStack{
+                        Button(action: {
+                            isShowingEditingView = true
+                        }) {
+                            Image(systemName: "crop")
+                                .foregroundColor(.white)
+                                .font(.title)
+                        }
+                        .padding()
+                        
+                        Button(action: {
+                            isShowingFilterView = true
+                        }) {
+                            Image(systemName: "camera.filters")
+                                .foregroundColor(.white)
+                                .font(.title)
+                        }
+                        .padding()
+                    }
+                    .onAppear{
+                        if isCropped{
+                            imageToShow = finalImageCropped
+                        }
+                        else{
+                            imageToShow = uiImage
+                        }
+                    }
                     
                     Spacer()
                     
@@ -113,7 +145,7 @@ struct SelectImageView: View {
             
         }
         .sheet(isPresented: $isShowPhotoLibrary) {
-            ImagePicker(sourceType: .photoLibrary, selectedImage: $uiImage)
+            ImagePicker(sourceType: .photoLibrary, selectedImage: $uiImage, imageToShow: $imageToShow)
         }
         
     }
