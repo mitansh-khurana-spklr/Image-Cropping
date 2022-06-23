@@ -20,6 +20,7 @@ var rotateAngle : Float = 0
 var newImage = UIImage()
 var flippedNewImage = UIImage()
 var prevFlipped = false
+var prevAspectRatio = CGFloat(1)
 
 struct ZoomableView: UIViewRepresentable {
     @Binding var uiImage: UIImage
@@ -33,6 +34,7 @@ struct ZoomableView: UIViewRepresentable {
     @Binding var aspectRatioSize: CGSize
     @Binding var isOriginal: Bool
     @Binding var currFlipped: Bool
+    @Binding var aspectRatio: CGFloat
     @EnvironmentObject var rotateHelper: RotateHelper
 
 
@@ -244,8 +246,12 @@ struct ZoomableView: UIViewRepresentable {
         let horizSet = (Float(frameHeight) * cos(angleUsed * .pi/180) * sin(angleUsed * .pi/180)) - Float(horizontalOffsetNew)
         
         
-        
-        scrollView.setContentOffset(CGPoint(x: Int(horizSet), y: Int(topSet)), animated: true)
+        if prevAspectRatio == aspectRatio {
+            scrollView.setContentOffset(CGPoint(x: Int(horizSet), y: Int(topSet)), animated: true)
+        }
+        else{
+            prevAspectRatio = aspectRatio
+        }
         
 //        let tr = CGAffineTransform.identity.rotated(by: radians)
 //        scrollView.subviews.first?.transform = tr

@@ -85,7 +85,7 @@ struct CroppingPage: View {
                         Group{
                              ZStack {
                                  GeometryReader { geometry in
-                                     ZoomableView(uiImage: $uiImage, viewSize: geometry.size, frameWidth: $frameWidth, frameHeight: $frameHeight, rotation: $rotation, aspectRatioSize: $aspectRatioSize, isOriginal: $isOriginal, currFlipped: $currFlipped)
+                                     ZoomableView(uiImage: $uiImage, viewSize: geometry.size, frameWidth: $frameWidth, frameHeight: $frameHeight, rotation: $rotation, aspectRatioSize: $aspectRatioSize, isOriginal: $isOriginal, currFlipped: $currFlipped, aspectRatio: $aspectRatio)
                                  }
 
                                  ZStack {
