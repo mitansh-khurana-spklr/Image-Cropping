@@ -223,7 +223,29 @@ struct ZoomableView: UIViewRepresentable {
         
         let xInitalOffset = ((uiImage.size.width * minimumZoomScale) - frameWidth)/2 - horizontalOffsetNew
         let yInitialOffset = ((uiImage.size.height * minimumZoomScale) - frameHeight)/2 - verticalOffsetNew
-//        scrollView.setContentOffset(CGPoint(x: xInitalOffset, y: yInitialOffset), animated: true)
+        
+        
+        var angleUsed = rotateHelper.rotateByAngle
+        if rotateHelper.rotateByAngle < 90 {
+            angleUsed = rotateHelper.rotateByAngle
+        }
+        else if rotateHelper.rotateByAngle < 180 {
+            angleUsed = rotateHelper.rotateByAngle - 90
+        }
+        else if rotateHelper.rotateByAngle < 270 {
+            angleUsed = rotateHelper.rotateByAngle - 180
+        }
+        else  {
+            angleUsed = rotateHelper.rotateByAngle - 270
+        }
+        
+        let topSet = (Float(frameWidth) * cos(angleUsed * .pi/180) * sin(angleUsed * .pi/180)) - Float(verticalOffsetNew)
+
+        let horizSet = (Float(frameHeight) * cos(angleUsed * .pi/180) * sin(angleUsed * .pi/180)) - Float(horizontalOffsetNew)
+        
+        
+        
+        scrollView.setContentOffset(CGPoint(x: Int(horizSet), y: Int(topSet)), animated: true)
         
 //        let tr = CGAffineTransform.identity.rotated(by: radians)
 //        scrollView.subviews.first?.transform = tr

@@ -9,65 +9,51 @@ import SwiftUI
 
 struct SliderView: View {
     
-    @State var sliderValue: Double = 0
+    
     
     var body: some View {
         
-        Text("Hi")
-//        FilterSlider(value: $sliderValue)
         
-//        ScrollView {
-//                ZStack {
-//                    LazyVStack {
-//                        ForEach(0...100, id: \.self) { index in
-//                            Text("Row \(index)")
-//                        }
-//                    }
-//                    GeometryReader { proxy in
-//                        let offset = proxy.frame(in: .named("scroll")).minY
-//                        Color.clear.preference(key: ScrollViewOffsetPreferenceKey.self, value: offset)
-//                    }
-//                }
-//            }
-//            .coordinateSpace(name: "scroll")
-//            .onPreferenceChange(ScrollViewOffsetPreferenceKey.self) { value in
-//                print(value)
-//            }
-        
-        /*
-        VStack{
-            HStack {
-                
-                Text("Hi")
-                    .padding()
-                
-                ZStack {
-                    ScrollView(.horizontal, showsIndicators: false){
-                        HStack {
-                            ForEach (0...20, id: \.self) { value in
-                                Text(".")
-                                    .font(.title)
-                                    
-                            }
-                            
-                        }
-        //                .frame(width: 100)
+        HStack {
+            
+            Text("Hi")
+                .padding()
+            
+            ScrollView(.horizontal, showsIndicators: false) {
+                ScrollViewReader {value in
+                    
+                    Button(action: {
+                        value.scrollTo(30)
+                    }) {
+                        Text("Scroll")
                     }
                     
-                    Text("Hi")
-                        .frame(width: 30, height: 30)
-                        .background(.white)
+                    HStack {
+                        ForEach(-70...70, id:\.self){index in
+                            if index >= -45 && index <= 45 {
+                                Text("\(index)")
+                            }
+                            else{
+                                Text("")
+                            }
+                        }
+                    }
+                    onAppear{
+//                        value.scrollTo(8)
+                    }
                 }
-                
-                Text("Hi")
-                    .padding()
             }
-        
+            
+            Text("Hi")
+                .padding()
         }
-        */
-        
     }
 }
+
+
+
+
+
 
 struct SliderView_Previews: PreviewProvider {
     static var previews: some View {
