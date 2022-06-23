@@ -9,11 +9,12 @@ import SwiftUI
 
 struct SliderView: View {
     
-    @State var sliderValue: Float = 0
+    @State var sliderValue: Double = 0
     
     var body: some View {
         
         Text("Hi")
+//        FilterSlider(value: $sliderValue)
         
 //        ScrollView {
 //                ZStack {

@@ -18,6 +18,8 @@ var horizontalOffsetNew = CGFloat(0)
 var verticalOffsetNew = CGFloat(0)
 var rotateAngle : Float = 0
 var newImage = UIImage()
+var flippedNewImage = UIImage()
+var prevFlipped = false
 
 struct ZoomableView: UIViewRepresentable {
     @Binding var uiImage: UIImage
@@ -29,6 +31,8 @@ struct ZoomableView: UIViewRepresentable {
     
     @Binding var rotation: Float
     @Binding var aspectRatioSize: CGSize
+    @Binding var isOriginal: Bool
+    @Binding var currFlipped: Bool
     @EnvironmentObject var rotateHelper: RotateHelper
 
 
@@ -49,6 +53,10 @@ struct ZoomableView: UIViewRepresentable {
 //
 //        let fittingRect = AVMakeRect(aspectRatio: aspectRatioSize, insideRect: newRect)
         
+        
+        if isOriginal {
+            return frameWidth/uiImage.size.width
+        }
         
         
         
@@ -192,7 +200,14 @@ struct ZoomableView: UIViewRepresentable {
         let CGrotation = CGFloat(rotateHelper.rotateByAngle)
         let radians = CGrotation * Double.pi/180
         
-        newImage = uiImage.rotate(radians: Float(radians))!
+        if currFlipped == true {
+            newImage = uiImage.flipHorizontally()!
+        }
+        else{
+            newImage = uiImage
+        }
+        
+        newImage = newImage.rotate(radians: Float(radians))!
 //        newImage = uiImage
         
         /*
@@ -205,6 +220,10 @@ struct ZoomableView: UIViewRepresentable {
         let imageView1 = UIImageView(image: newImage)
         scrollView.addSubview(imageView1)
         imageView1.translatesAutoresizingMaskIntoConstraints = false
+        
+        let xInitalOffset = ((uiImage.size.width * minimumZoomScale) - frameWidth)/2 - horizontalOffsetNew
+        let yInitialOffset = ((uiImage.size.height * minimumZoomScale) - frameHeight)/2 - verticalOffsetNew
+//        scrollView.setContentOffset(CGPoint(x: xInitalOffset, y: yInitialOffset), animated: true)
         
 //        let tr = CGAffineTransform.identity.rotated(by: radians)
 //        scrollView.subviews.first?.transform = tr
@@ -747,6 +766,23 @@ extension UIImage {
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
 
+        return newImage
+    }
+    
+    
+    func flipHorizontally() -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale)
+        let context = UIGraphicsGetCurrentContext()!
+            
+        context.translateBy(x: self.size.width/2, y: self.size.height/2)
+        context.scaleBy(x: -1.0, y: 1.0)
+        context.translateBy(x: -self.size.width/2, y: -self.size.height/2)
+            
+        self.draw(in: CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height))
+            
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            
         return newImage
     }
 }

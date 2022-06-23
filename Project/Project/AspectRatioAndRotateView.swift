@@ -20,14 +20,17 @@ struct AspectRatioAndRotateView: View {
     @Binding var frameHeight: CGFloat
     @Binding var verticalOffset: CGFloat
     @Binding var horizontalOffset: CGFloat
+    @Binding var isOriginal: Bool
+    @Binding var uiImage: UIImage
+    @Binding var currFlipped: Bool
     
     var totalGeometry: GeometryProxy
     
     
     @State var prevRot: CGFloat = 0
     @EnvironmentObject var rotateHelper: RotateHelper
-    @State var sliderValue: Float = 0
-    @State var prevSliderValue: Float = 0
+    @State var sliderValue: Double = 0
+    @State var prevSliderValue: Double = 0
     @State var displayFloat: Float = 0
     
     
@@ -36,31 +39,14 @@ struct AspectRatioAndRotateView: View {
             
             HStack {
                 
-                if(alignment == "Horizontal"){
-                    Button(action: {
-                        alignment = "Vertical"
-//                        aspectRatioList = aspectRatioListVertical
-                    }) {
-                        Image(systemName: "rectangle")
-                            .foregroundColor(.white)
-                                .font(.title)
-                    }
-                    .padding(.horizontal)
+                Button(action: {
+                    currFlipped = !currFlipped
+                }) {
+                    Image(systemName: "arrow.left.arrow.right.square")
+                        .foregroundColor(.white)
+                        .font(.title)
                 }
-                else{
-                    Button(action: {
-                        alignment = "Horizontal"
-//                        aspectRatioList = aspectRatioListHorizontal
-                    }) {
-                        VStack {
-                            
-                            Image(systemName: "rectangle.portrait")
-                                .foregroundColor(.white)
-                                .font(.title)
-                        }
-                    }
-                    .padding(.horizontal)
-                }
+                .padding(.horizontal)
                     
 
                 
@@ -82,10 +68,11 @@ struct AspectRatioAndRotateView: View {
 //                    Slider(value: $rotateHelper.rotateByAngle, in: 0...360)
 //                        .padding(.horizontal)
                     
-                    Slider(value: $sliderValue, in: -45...45)
+                    
+                    FilterSlider(value: $sliderValue, range: (-45, 45), lable: "", defaultValue: 0, rangeDisplay: (-45, 45), spacing: 1)
                         .onChange(of: sliderValue) { value in
                             let difference = value - prevSliderValue
-                            rotateHelper.rotateByAngle += difference
+                            rotateHelper.rotateByAngle += Float(difference)
                             if rotateHelper.rotateByAngle >= 360 {
                                 rotateHelper.rotateByAngle -= 360
                             }
@@ -97,24 +84,41 @@ struct AspectRatioAndRotateView: View {
                             displayFloat = rotateHelper.rotateByAngle
                             displayFloat = floor(displayFloat * 10)/10
                         }
+                    /*
+                    Slider(value: $sliderValue, in: -45...45)
+                        .onChange(of: sliderValue) { value in
+                            let difference = value - prevSliderValue
+                            rotateHelper.rotateByAngle += Float(difference)
+                            if rotateHelper.rotateByAngle >= 360 {
+                                rotateHelper.rotateByAngle -= 360
+                            }
+                            if rotateHelper.rotateByAngle < 0 {
+                                rotateHelper.rotateByAngle += 360
+                            }
+                            prevSliderValue = value
+                            
+                            displayFloat = rotateHelper.rotateByAngle
+                            displayFloat = floor(displayFloat * 10)/10
+                        }
+                     */
                 }
                     
                 
                 
                 
                 Button(action: {
-                    withAnimation(.default) {
-                        if rotateHelper.rotateByAngle < 90{
+                    withAnimation(nil) {
+                        if rotateHelper.rotateByAngle > 0 && rotateHelper.rotateByAngle <= 90{
+                            rotateHelper.rotateByAngle = 0
+                        }
+                        else if rotateHelper.rotateByAngle > 90 && rotateHelper.rotateByAngle <= 180 {
                             rotateHelper.rotateByAngle = 90
                         }
-                        else if rotateHelper.rotateByAngle < 180 {
+                        else if rotateHelper.rotateByAngle > 180 && rotateHelper.rotateByAngle <= 270 {
                             rotateHelper.rotateByAngle = 180
                         }
-                        else if rotateHelper.rotateByAngle < 270 {
-                            rotateHelper.rotateByAngle = 270
-                        }
                         else{
-                            rotateHelper.rotateByAngle = 0
+                            rotateHelper.rotateByAngle = 270
                         }
                         
                         sliderValue = 0
@@ -123,8 +127,8 @@ struct AspectRatioAndRotateView: View {
                         displayFloat = floor(displayFloat * 10)/10
                         
                         
-                        if alignment == "Horizontal" {
-                            alignment = "Vertical"
+                        if aspectRatio >= 1 {
+//                            alignment = "Vertical"
                             aspectRatio = 1 / aspectRatio
                             let temp = aspectRatioSize.width
                             aspectRatioSize.width = aspectRatioSize.height
@@ -138,9 +142,10 @@ struct AspectRatioAndRotateView: View {
                             
                             verticalOffset = (totalGeometry.size.height - frameHeight)/2
                             horizontalOffset = (totalGeometry.size.width - frameWidth)/2
+                            print("H V = \(frameWidth), \(frameHeight)")
                         }
                         else{
-                            alignment = "Horizontal"
+//                            alignment = "Horizontal"
                             aspectRatio = 1 / aspectRatio
                             let temp = aspectRatioSize.width
                             aspectRatioSize.width = aspectRatioSize.height
@@ -158,15 +163,16 @@ struct AspectRatioAndRotateView: View {
                                 
                             verticalOffset = (totalGeometry.size.height - frameHeight)/2
                             horizontalOffset = (totalGeometry.size.width - frameWidth)/2
+                            print("V H = \(frameWidth), \(frameHeight)")
                             
                         }
                     }
                     
                 }) {
-                    Image(systemName: "rotate.right")
+                    Image(systemName: "arrow.clockwise")
                         .foregroundColor(.white)
                         .font(.title)
-                        .offset(y: -5)
+                        .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
                 }
                 .padding(.horizontal)
                 
@@ -193,12 +199,13 @@ struct AspectRatioAndRotateView: View {
             }
             .padding(.vertical)
             
-            OldButtonView(aspectRatio: $aspectRatio, aspectRatioSize: $aspectRatioSize, portrait: $portrait, aspectRatioList: $aspectRatioList, alignment: $alignment, frameWidth: $frameWidth, frameHeight: $frameHeight, verticalOffset: $verticalOffset, horizontalOffset: $horizontalOffset, totalGeometry: totalGeometry)
+//            OldButtonView(aspectRatio: $aspectRatio, aspectRatioSize: $aspectRatioSize, portrait: $portrait, aspectRatioList: $aspectRatioList, alignment: $alignment, frameWidth: $frameWidth, frameHeight: $frameHeight, verticalOffset: $verticalOffset, horizontalOffset: $horizontalOffset, totalGeometry: totalGeometry)
             
+            AspectRatioButtonsView(aspectRatio: $aspectRatio, aspectRatioSize: $aspectRatioSize, portrait: $portrait, aspectRatioList: $aspectRatioList, alignment: $alignment, frameWidth: $frameWidth, frameHeight: $frameHeight, verticalOffset: $verticalOffset, horizontalOffset: $horizontalOffset, isOriginal: $isOriginal, uiImage: $uiImage, displayFloat: $displayFloat, sliderValue: $sliderValue, prevSliderValue: $prevSliderValue, currFlipped: $currFlipped, totalGeometry: totalGeometry)
+                .padding(.horizontal)
             
-//            AspectButtonsView(aspectRatio: $aspectRatio, aspectRatioSize: $aspectRatioSize, portrait: $portrait, aspectRatioList: $aspectRatioList, alignment: $alignment, frameWidth: $frameWidth, frameHeight: $frameHeight, verticalOffset: $verticalOffset, horizontalOffset: $horizontalOffset, totalGeometry: totalGeometry)
         }
-        .background(Color(red: 30/255, green: 30/255, blue: 30/255, opacity: 1.0))
+//        .background(Color(red: 30/255, green: 30/255, blue: 30/255, opacity: 1.0))
     }
 }
 

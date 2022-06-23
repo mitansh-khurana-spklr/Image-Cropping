@@ -64,6 +64,9 @@ struct CroppingPage: View {
     @State var alignment: String = "Horiontal"
     @State var aspectRatioList: [[CGFloat]] = [[1,1, 0], [5,4, 0], [4,3, 0], [3,2, 0], [16,9, 0], [2,1, 0]]
     
+    @State var isOriginal = false
+    @State var currFlipped = false
+    
 //    @State var isShowingFilterView = false
     
 //    @State var rotatedBoxWidth: CGFloat
@@ -82,7 +85,7 @@ struct CroppingPage: View {
                         Group{
                              ZStack {
                                  GeometryReader { geometry in
-                                     ZoomableView(uiImage: $uiImage, viewSize: geometry.size, frameWidth: $frameWidth, frameHeight: $frameHeight, rotation: $rotation, aspectRatioSize: $aspectRatioSize)
+                                     ZoomableView(uiImage: $uiImage, viewSize: geometry.size, frameWidth: $frameWidth, frameHeight: $frameHeight, rotation: $rotation, aspectRatioSize: $aspectRatioSize, isOriginal: $isOriginal, currFlipped: $currFlipped)
                                  }
 
                                  ZStack {
@@ -105,26 +108,36 @@ struct CroppingPage: View {
                                          .border(.white, width: 0.75)
                                  }
                                  
-    //                             Image(systemName: "arrow.up.left.and.arrow.down.right")
-    //                                 .font(.system(size: 20))
-    //                                 .background(Circle().frame(width: 25, height: 25).foregroundColor(.white))
-    //                                 .frame(width: frameWidth, height: frameHeight, alignment: .topLeading)
-    //                                 .foregroundColor(.black)
-    //                                 .offset(x: -5, y: -5)
-    //                                 .gesture(DragGesture()
-    //                                    .onChanged{drag in
-    //                                        frameWidth -= drag.translation.width
-    //                                        frameHeight -= drag.translation.height
-    //
-    //                                    })
+                                 /*
+                                 Image(systemName: "arrow.up.left.and.arrow.down.right")
+                                     .font(.system(size: 20))
+                                     .background(Circle().frame(width: 25, height: 25).foregroundColor(.white))
+                                     .frame(width: frameWidth, height: frameHeight, alignment: .topLeading)
+                                     .foregroundColor(.black)
+                                     .offset(x: -5, y: -5)
+                                     .gesture(DragGesture()
+                                        .onChanged{drag in
+                                            frameWidth -= drag.translation.width
+                                            frameHeight -= drag.translation.height
+    
+                                        })
+                                  
+                                  */
                              }
                              .navigationBarItems(
                                 trailing:
                                     Button(action: {
                                         let CGrotation = CGFloat(rotateHelper.rotateByAngle)
                                         let radians = CGrotation * Double.pi/180
-                                        let newImage = uiImage.rotate(radians: Float(radians))
-                                        croppedImage = newImage!
+                                        var newImage = UIImage()
+                                        if currFlipped == true {
+                                            newImage = uiImage.flipHorizontally()!
+                                        }
+                                        else{
+                                            newImage = uiImage
+                                        }
+                                        newImage = newImage.rotate(radians: Float(radians))!
+                                        croppedImage = newImage
                                         croppingWidth = frameWidth
                                         croppingHeight = frameHeight
 
@@ -148,8 +161,7 @@ struct CroppingPage: View {
                             
                         }
                         
-                        AspectRatioAndRotateView(aspectRatio: $aspectRatio, aspectRatioSize: $aspectRatioSize, portrait: $portrait, aspectRatioList: $aspectRatioList, alignment: $alignment, frameWidth: $frameWidth, frameHeight: $frameHeight, verticalOffset: $verticalOffset, horizontalOffset: $horizontalOffset, totalGeometry: totalGeometry)
-                        
+                        AspectRatioAndRotateView(aspectRatio: $aspectRatio, aspectRatioSize: $aspectRatioSize, portrait: $portrait, aspectRatioList: $aspectRatioList, alignment: $alignment, frameWidth: $frameWidth, frameHeight: $frameHeight, verticalOffset: $verticalOffset, horizontalOffset: $horizontalOffset, isOriginal: $isOriginal, uiImage: $uiImage, currFlipped: $currFlipped, totalGeometry: totalGeometry)
                     }
                 }
         }

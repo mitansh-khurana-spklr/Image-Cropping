@@ -20,12 +20,16 @@
 		A423DFFA285847AC004D9C40 /* CroppingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A423DFF9285847AC004D9C40 /* CroppingPage.swift */; };
 		A423DFFC285847C5004D9C40 /* ZoomAndScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = A423DFFB285847C5004D9C40 /* ZoomAndScroll.swift */; };
 		A423DFFE285847D7004D9C40 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A423DFFD285847D7004D9C40 /* ImagePicker.swift */; };
+		A47F0F952864590000B12C4C /* CustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47F0F942864590000B12C4C /* CustomSlider.swift */; };
+		A47F0F9728645B2900B12C4C /* TestSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47F0F9628645B2900B12C4C /* TestSliderView.swift */; };
 		A4D54522285E057D00C1A7FD /* InbuiltFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D54521285E057D00C1A7FD /* InbuiltFilterView.swift */; };
 		A4D5BCE3285E402900FBA9B0 /* OldCroppingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D5BCE2285E402900FBA9B0 /* OldCroppingPage.swift */; };
 		A4E10DA32862EE1600EC91FE /* SliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E10DA22862EE1600EC91FE /* SliderView.swift */; };
 		A4E10DAC28630A9600EC91FE /* DemoScrollViewOffsetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E10DAB28630A9600EC91FE /* DemoScrollViewOffsetView.swift */; };
 		A4E10DB028632DB000EC91FE /* AspectButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E10DAF28632DB000EC91FE /* AspectButtonsView.swift */; };
 		A4E10DB4286335C000EC91FE /* OldButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E10DB3286335C000EC91FE /* OldButtonView.swift */; };
+		A4E10DB628634DB900EC91FE /* AspectRatioButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E10DB528634DB900EC91FE /* AspectRatioButtonsView.swift */; };
+		A4E10DB828636AAF00EC91FE /* ScrollViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E10DB728636AAF00EC91FE /* ScrollViewWrapper.swift */; };
 		A4E247B0285C85C00030942C /* SelectImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E247AF285C85BF0030942C /* SelectImageView.swift */; };
 /* End PBXBuildFile section */
 
@@ -63,12 +67,16 @@
 		A423DFF9285847AC004D9C40 /* CroppingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CroppingPage.swift; sourceTree = "<group>"; };
 		A423DFFB285847C5004D9C40 /* ZoomAndScroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomAndScroll.swift; sourceTree = "<group>"; };
 		A423DFFD285847D7004D9C40 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		A47F0F942864590000B12C4C /* CustomSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSlider.swift; sourceTree = "<group>"; };
+		A47F0F9628645B2900B12C4C /* TestSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSliderView.swift; sourceTree = "<group>"; };
 		A4D54521285E057D00C1A7FD /* InbuiltFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InbuiltFilterView.swift; sourceTree = "<group>"; };
 		A4D5BCE2285E402900FBA9B0 /* OldCroppingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldCroppingPage.swift; sourceTree = "<group>"; };
 		A4E10DA22862EE1600EC91FE /* SliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderView.swift; sourceTree = "<group>"; };
 		A4E10DAB28630A9600EC91FE /* DemoScrollViewOffsetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoScrollViewOffsetView.swift; sourceTree = "<group>"; };
 		A4E10DAF28632DB000EC91FE /* AspectButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AspectButtonsView.swift; sourceTree = "<group>"; };
 		A4E10DB3286335C000EC91FE /* OldButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldButtonView.swift; sourceTree = "<group>"; };
+		A4E10DB528634DB900EC91FE /* AspectRatioButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AspectRatioButtonsView.swift; sourceTree = "<group>"; };
+		A4E10DB728636AAF00EC91FE /* ScrollViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewWrapper.swift; sourceTree = "<group>"; };
 		A4E247AF285C85BF0030942C /* SelectImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -125,16 +133,20 @@
 				A4E247AF285C85BF0030942C /* SelectImageView.swift */,
 				A423DFF9285847AC004D9C40 /* CroppingPage.swift */,
 				A40CAC4D28622302007858C1 /* AspectRatioAndRotateView.swift */,
-				A4E10DB3286335C000EC91FE /* OldButtonView.swift */,
-				A4E10DAF28632DB000EC91FE /* AspectButtonsView.swift */,
+				A4E10DB528634DB900EC91FE /* AspectRatioButtonsView.swift */,
 				A423DFFB285847C5004D9C40 /* ZoomAndScroll.swift */,
 				A40A7B75285857B900313F1F /* CroppedImage.swift */,
 				A40A7B772858731100313F1F /* Commented.swift */,
+				A47F0F9628645B2900B12C4C /* TestSliderView.swift */,
+				A47F0F942864590000B12C4C /* CustomSlider.swift */,
 				A4E10DA22862EE1600EC91FE /* SliderView.swift */,
+				A4E10DB728636AAF00EC91FE /* ScrollViewWrapper.swift */,
 				A4E10DAB28630A9600EC91FE /* DemoScrollViewOffsetView.swift */,
 				A4D5BCE2285E402900FBA9B0 /* OldCroppingPage.swift */,
 				A423DFFD285847D7004D9C40 /* ImagePicker.swift */,
 				A4D54521285E057D00C1A7FD /* InbuiltFilterView.swift */,
+				A4E10DB3286335C000EC91FE /* OldButtonView.swift */,
+				A4E10DAF28632DB000EC91FE /* AspectButtonsView.swift */,
 				A423DFD3285846FE004D9C40 /* Assets.xcassets */,
 				A423DFD5285846FE004D9C40 /* Preview Content */,
 			);
@@ -296,6 +308,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4E10DB628634DB900EC91FE /* AspectRatioButtonsView.swift in Sources */,
+				A47F0F952864590000B12C4C /* CustomSlider.swift in Sources */,
+				A4E10DB828636AAF00EC91FE /* ScrollViewWrapper.swift in Sources */,
+				A47F0F9728645B2900B12C4C /* TestSliderView.swift in Sources */,
 				A4E10DAC28630A9600EC91FE /* DemoScrollViewOffsetView.swift in Sources */,
 				A40A7B782858731100313F1F /* Commented.swift in Sources */,
 				A423DFFA285847AC004D9C40 /* CroppingPage.swift in Sources */,

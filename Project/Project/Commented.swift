@@ -936,3 +936,36 @@ else{
     }
 }
 */
+
+
+
+
+
+
+/*
+if(alignment == "Horizontal"){
+    Button(action: {
+        alignment = "Vertical"
+        aspectRatioList = aspectRatioListVertical
+    }) {
+        Image(systemName: "rectangle")
+            .foregroundColor(.white)
+                .font(.title)
+    }
+    .padding(.horizontal)
+}
+else{
+    Button(action: {
+        alignment = "Horizontal"
+        aspectRatioList = aspectRatioListHorizontal
+    }) {
+        VStack {
+            
+            Image(systemName: "rectangle.portrait")
+                .foregroundColor(.white)
+                .font(.title)
+        }
+    }
+    .padding(.horizontal)
+}
+*/
