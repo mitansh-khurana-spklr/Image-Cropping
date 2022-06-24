@@ -31,6 +31,7 @@
 		A4E10DB628634DB900EC91FE /* AspectRatioButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E10DB528634DB900EC91FE /* AspectRatioButtonsView.swift */; };
 		A4E10DB828636AAF00EC91FE /* ScrollViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E10DB728636AAF00EC91FE /* ScrollViewWrapper.swift */; };
 		A4E247B0285C85C00030942C /* SelectImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E247AF285C85BF0030942C /* SelectImageView.swift */; };
+		A4F0C751286577A0005CCED7 /* ScrollViewHoriz.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F0C750286577A0005CCED7 /* ScrollViewHoriz.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +79,7 @@
 		A4E10DB528634DB900EC91FE /* AspectRatioButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AspectRatioButtonsView.swift; sourceTree = "<group>"; };
 		A4E10DB728636AAF00EC91FE /* ScrollViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewWrapper.swift; sourceTree = "<group>"; };
 		A4E247AF285C85BF0030942C /* SelectImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectImageView.swift; sourceTree = "<group>"; };
+		A4F0C750286577A0005CCED7 /* ScrollViewHoriz.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewHoriz.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +137,7 @@
 				A40CAC4D28622302007858C1 /* AspectRatioAndRotateView.swift */,
 				A4E10DB528634DB900EC91FE /* AspectRatioButtonsView.swift */,
 				A423DFFB285847C5004D9C40 /* ZoomAndScroll.swift */,
+				A4F0C750286577A0005CCED7 /* ScrollViewHoriz.swift */,
 				A40A7B75285857B900313F1F /* CroppedImage.swift */,
 				A40A7B772858731100313F1F /* Commented.swift */,
 				A47F0F9628645B2900B12C4C /* TestSliderView.swift */,
@@ -314,6 +317,7 @@
 				A47F0F9728645B2900B12C4C /* TestSliderView.swift in Sources */,
 				A4E10DAC28630A9600EC91FE /* DemoScrollViewOffsetView.swift in Sources */,
 				A40A7B782858731100313F1F /* Commented.swift in Sources */,
+				A4F0C751286577A0005CCED7 /* ScrollViewHoriz.swift in Sources */,
 				A423DFFA285847AC004D9C40 /* CroppingPage.swift in Sources */,
 				A423DFFC285847C5004D9C40 /* ZoomAndScroll.swift in Sources */,
 				A423DFFE285847D7004D9C40 /* ImagePicker.swift in Sources */,

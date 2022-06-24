@@ -24,6 +24,7 @@ struct AspectRatioAndRotateView: View {
     @Binding var uiImage: UIImage
     @Binding var currFlipped: Bool
     
+    
     var totalGeometry: GeometryProxy
     
     
@@ -32,6 +33,9 @@ struct AspectRatioAndRotateView: View {
     @State var sliderValue: Double = 0
     @State var prevSliderValue: Double = 0
     @State var displayFloat: Float = 0
+    @State var offsetCheck: CGFloat = 0
+    @State var rotateOrReset: Bool = false
+    @State var offset: CGPoint = CGPoint(x: 1317/2, y: 0)
     
     
     var body: some View {
@@ -47,6 +51,7 @@ struct AspectRatioAndRotateView: View {
                         .font(.title)
                 }
                 .padding(.horizontal)
+                .offset(y: -2)
                     
 
                 
@@ -54,6 +59,7 @@ struct AspectRatioAndRotateView: View {
                     
 //                    floor(rotateHelper.rotateByAngle * 10) / 10.0
                     
+                    /*
                     HStack {
                         Text("\(Int(displayFloat))")
                             .font(.body)
@@ -64,11 +70,13 @@ struct AspectRatioAndRotateView: View {
                             .foregroundColor(.white)
                             .offset(x: -2, y: -5)
                     }
+                     */
+                     
                     
 //                    Slider(value: $rotateHelper.rotateByAngle, in: 0...360)
 //                        .padding(.horizontal)
                     
-                    
+                    /*
                     FilterSlider(value: $sliderValue, range: (-45, 45), lable: "", defaultValue: 0, rangeDisplay: (-45, 45), spacing: 1)
                         .onChange(of: sliderValue) { value in
                             let difference = value - prevSliderValue
@@ -83,7 +91,30 @@ struct AspectRatioAndRotateView: View {
                             
                             displayFloat = rotateHelper.rotateByAngle
                             displayFloat = floor(displayFloat * 10)/10
-                        }
+                        }*/
+                     
+                    
+                    
+                    
+                    
+                    
+                    ScrollViewHoriz(offsetCheck: $offsetCheck, offset: $offset)
+                        .onChange(of: offsetCheck) { newValue in
+                            let difference = ((newValue*45)/(1317/2)) - prevPrintValue
+                            rotateHelper.rotateByAngle += Float(difference)
+                            if rotateHelper.rotateByAngle >= 360 {
+                                rotateHelper.rotateByAngle -= 360
+                            }
+                            if rotateHelper.rotateByAngle < 0 {
+                                rotateHelper.rotateByAngle += 360
+                            }
+                            prevPrintValue = ((newValue*45)/(1317/2))
+                            
+                    }
+//                        .padding(.horizontal)
+                    
+                    
+                    
                     /*
                     Slider(value: $sliderValue, in: -45...45)
                         .onChange(of: sliderValue) { value in
@@ -125,6 +156,9 @@ struct AspectRatioAndRotateView: View {
                         prevSliderValue = 0
                         displayFloat = rotateHelper.rotateByAngle
                         displayFloat = floor(displayFloat * 10)/10
+                        offset = CGPoint(x: 1317/2, y: 0)
+                        offsetCheck = 0
+                        prevPrintValue = 0
                         
                         
                         if aspectRatio >= 1 {
@@ -175,6 +209,7 @@ struct AspectRatioAndRotateView: View {
                         .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
                 }
                 .padding(.horizontal)
+                .offset(y: -2)
                 
                 /*
                 Button(action: {
@@ -201,7 +236,7 @@ struct AspectRatioAndRotateView: View {
             
 //            OldButtonView(aspectRatio: $aspectRatio, aspectRatioSize: $aspectRatioSize, portrait: $portrait, aspectRatioList: $aspectRatioList, alignment: $alignment, frameWidth: $frameWidth, frameHeight: $frameHeight, verticalOffset: $verticalOffset, horizontalOffset: $horizontalOffset, totalGeometry: totalGeometry)
             
-            AspectRatioButtonsView(aspectRatio: $aspectRatio, aspectRatioSize: $aspectRatioSize, portrait: $portrait, aspectRatioList: $aspectRatioList, alignment: $alignment, frameWidth: $frameWidth, frameHeight: $frameHeight, verticalOffset: $verticalOffset, horizontalOffset: $horizontalOffset, isOriginal: $isOriginal, uiImage: $uiImage, displayFloat: $displayFloat, sliderValue: $sliderValue, prevSliderValue: $prevSliderValue, currFlipped: $currFlipped, totalGeometry: totalGeometry)
+            AspectRatioButtonsView(aspectRatio: $aspectRatio, aspectRatioSize: $aspectRatioSize, portrait: $portrait, aspectRatioList: $aspectRatioList, alignment: $alignment, frameWidth: $frameWidth, frameHeight: $frameHeight, verticalOffset: $verticalOffset, horizontalOffset: $horizontalOffset, isOriginal: $isOriginal, uiImage: $uiImage, displayFloat: $displayFloat, sliderValue: $sliderValue, prevSliderValue: $prevSliderValue, currFlipped: $currFlipped, offset: $offset, offsetCheck: $offsetCheck, totalGeometry: totalGeometry)
                 .padding(.horizontal)
             
         }

@@ -25,6 +25,8 @@ struct AspectRatioButtonsView: View {
     @Binding var sliderValue: Double
     @Binding var prevSliderValue: Double
     @Binding var currFlipped: Bool
+    @Binding var offset: CGPoint
+    @Binding var offsetCheck: CGFloat
     
     var totalGeometry: GeometryProxy
     @EnvironmentObject var rotateHelper: RotateHelper
@@ -42,6 +44,9 @@ struct AspectRatioButtonsView: View {
                         sliderValue = 0
                         prevSliderValue = 0
                         currFlipped = false
+                        offset = CGPoint(x: 1317/2, y: 0)
+                        offsetCheck = 0
+                        prevPrintValue = 0
                         
                         let imageAspectRatio = uiImage.size.width/uiImage.size.height
                         aspectRatio = imageAspectRatio
@@ -127,7 +132,7 @@ struct AspectRatioButtonsView: View {
                                 VStack {
                                     Rectangle()
                                         .frame(width: 20, height: 20*aspect[1]/aspect[0])
-                                        .opacity(0.01)
+                                        .opacity(0.5)
                                         .border(.white, width: 2)
                                         .padding(.bottom, 6)
                                         .foregroundColor(.white)
@@ -193,7 +198,7 @@ struct AspectRatioButtonsView: View {
                                     
                                     Rectangle()
                                         .frame(width: 20*aspect[1]/aspect[0], height: 20)
-                                        .opacity(0.01)
+                                        .opacity(0.5)
                                         .border(.white, width: 2)
                                         .padding(.bottom, 6)
                                         .foregroundColor(.white)
