@@ -23,6 +23,7 @@ struct AspectRatioAndRotateView: View {
     @Binding var isOriginal: Bool
     @Binding var uiImage: UIImage
     @Binding var currFlipped: Bool
+    @Binding var freeformSelected: Bool
     
     
     var totalGeometry: GeometryProxy
@@ -236,7 +237,7 @@ struct AspectRatioAndRotateView: View {
             
 //            OldButtonView(aspectRatio: $aspectRatio, aspectRatioSize: $aspectRatioSize, portrait: $portrait, aspectRatioList: $aspectRatioList, alignment: $alignment, frameWidth: $frameWidth, frameHeight: $frameHeight, verticalOffset: $verticalOffset, horizontalOffset: $horizontalOffset, totalGeometry: totalGeometry)
             
-            AspectRatioButtonsView(aspectRatio: $aspectRatio, aspectRatioSize: $aspectRatioSize, portrait: $portrait, aspectRatioList: $aspectRatioList, alignment: $alignment, frameWidth: $frameWidth, frameHeight: $frameHeight, verticalOffset: $verticalOffset, horizontalOffset: $horizontalOffset, isOriginal: $isOriginal, uiImage: $uiImage, displayFloat: $displayFloat, sliderValue: $sliderValue, prevSliderValue: $prevSliderValue, currFlipped: $currFlipped, offset: $offset, offsetCheck: $offsetCheck, totalGeometry: totalGeometry)
+            AspectRatioButtonsView(aspectRatio: $aspectRatio, aspectRatioSize: $aspectRatioSize, portrait: $portrait, aspectRatioList: $aspectRatioList, alignment: $alignment, frameWidth: $frameWidth, frameHeight: $frameHeight, verticalOffset: $verticalOffset, horizontalOffset: $horizontalOffset, isOriginal: $isOriginal, uiImage: $uiImage, displayFloat: $displayFloat, sliderValue: $sliderValue, prevSliderValue: $prevSliderValue, currFlipped: $currFlipped, offset: $offset, offsetCheck: $offsetCheck, freeformSelected: $freeformSelected, totalGeometry: totalGeometry)
                 .padding(.horizontal)
             
         }

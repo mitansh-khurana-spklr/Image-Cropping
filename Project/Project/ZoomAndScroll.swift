@@ -21,6 +21,10 @@ var newImage = UIImage()
 var flippedNewImage = UIImage()
 var prevFlipped = false
 var prevAspectRatio = CGFloat(1)
+var contentOffsetState = CGPoint(x: 0, y: 0)
+var zoomscaleState : CGFloat = 1
+var prevZoomscaleState: CGFloat = 1
+var firstLoad = true
 
 struct ZoomableView: UIViewRepresentable {
     @Binding var uiImage: UIImage
@@ -136,7 +140,7 @@ struct ZoomableView: UIViewRepresentable {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.contentInset = UIEdgeInsets(top: verticalOffsetNew, left: horizontalOffsetNew, bottom: verticalOffsetNew, right: horizontalOffsetNew)
         
-        scrollView.setContentOffset(CGPoint(x: 100, y: 100), animated: false)
+//        scrollView.setContentOffset(CGPoint(x: 100, y: 100), animated: false)
         
         /*
         let temp = RotateHelperWithFunc()
@@ -248,10 +252,17 @@ struct ZoomableView: UIViewRepresentable {
         
         if prevAspectRatio == aspectRatio {
             scrollView.setContentOffset(CGPoint(x: Int(horizSet), y: Int(topSet)), animated: true)
+            if scrollView.zoomScale == minimumZoomScale {
+                contentOffsetState = CGPoint(x: CGFloat(horizSet), y: CGFloat(topSet))
+            }
+            
         }
         else{
             prevAspectRatio = aspectRatio
         }
+        
+        
+        
         
 //        let tr = CGAffineTransform.identity.rotated(by: radians)
 //        scrollView.subviews.first?.transform = tr
@@ -340,7 +351,33 @@ struct ZoomableView: UIViewRepresentable {
 //            scrollView.zoomScale = minimumZoomScale
 //        }
         
-        scrollView.zoomScale = minimumZoomScale
+        if firstLoad || isOriginal {
+            scrollView.zoomScale = minimumZoomScale
+            zoomscaleState = minimumZoomScale
+            prevZoomscaleState = minimumZoomScale
+            contentOffsetState = CGPoint(x: xInitalOffset, y: yInitialOffset)
+            
+        }
+        else{
+            if zoomscaleState >= minimumZoomScale && zoomscaleState <= 10*minimumZoomScale{
+                scrollView.zoomScale = zoomscaleState
+            }
+            else{
+                scrollView.zoomScale = minimumZoomScale
+            }
+            
+        }
+        
+        if firstLoad {
+            firstLoad = false
+        }
+        else{
+//            contentOffsetState.x = contentOffsetState.x * zoomscaleState/prevZoomscaleState
+//            contentOffsetState.y = contentOffsetState.y * zoomscaleState/prevZoomscaleState
+//            prevZoomscaleState = zoomscaleState
+            scrollView.setContentOffset(contentOffsetState, animated: false)
+        }
+        
         
         
 //        scrollView.transform = CGAffineTransform(rotationAngle: radians)
@@ -395,9 +432,16 @@ extension ZoomableView {
         
         
         func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+            
+            /*
             let topSet = (Float(frameWidth!) * cos(angleRotation! * .pi/180) * sin(angleRotation! * .pi/180)) - Float(verticalOffset!)
                
             let horizSet = (Float(frameHeight!) * cos(angleRotation! * .pi/180) * sin(angleRotation! * .pi/180)) - Float(horizontalOffset!)
+             */
+            
+            
+            contentOffsetState.x = scrollView.contentOffset.x
+            contentOffsetState.y = scrollView.contentOffset.y
                
             /*
             let fullWidth = imageSize!.width * cos(CGFloat(angleRotation!) * .pi/180) + imageSize!.height * sin(CGFloat(angleRotation!) * .pi/180)
@@ -487,6 +531,7 @@ extension ZoomableView {
         
         
         func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+            
          
             var angleUsed = angleRotation!
             
@@ -617,7 +662,7 @@ extension ZoomableView {
             
             
             
-            
+            contentOffsetState = scrollView.contentOffset
             
             
 //            if Int(scrollView.contentOffset.y) < Int(topSet) {
@@ -640,6 +685,11 @@ extension ZoomableView {
         }
         
         func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
+            
+            
+            zoomscaleState = scrollView.zoomScale
+            
+            
             var angleUsed = angleRotation!
             
             var imageHeight = imageSize!.height

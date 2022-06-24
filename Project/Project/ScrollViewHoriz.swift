@@ -58,6 +58,7 @@ struct ScrollViewHoriz: View {
                             
                             Rectangle()
                                 .background(.black)
+                                .foregroundColor(.black)
                                 .frame(width: 50, height: 30)
                             
                             HStack {
@@ -110,6 +111,8 @@ class UIScrollViewViewController: UIViewController {
         let v = UIScrollView()
         v.isPagingEnabled = false
         v.alwaysBounceHorizontal = true
+        v.showsHorizontalScrollIndicator = false
+        v.showsVerticalScrollIndicator = false
 //        v.isDirectionalLockEnabled = true
         return v
     }()

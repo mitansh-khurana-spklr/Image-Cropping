@@ -16,6 +16,7 @@ struct SelectImageView: View {
     @State var imageToShow = UIImage()
     @State var isCropped = false
     @State var isShowingFilterView = false
+    @State var isShowingEditingSelection = false
     
     var body: some View {
         NavigationView{
@@ -27,13 +28,17 @@ struct SelectImageView: View {
                     
                     NavigationLink(destination: CroppingPage(uiImage: $uiImage, isCropped: $isCropped, imageToShow: $imageToShow), isActive: $isShowingEditingView) {
                         EmptyView()
-                            
                     }
                     
                     NavigationLink(destination: InbuiltFilterView(), isActive: $isShowingFilterView) {
-                        EmptyView()
-                            
+                        EmptyView()    
                     }
+                    
+                    NavigationLink(destination: EditingSelectionView(uiImage: $uiImage, imageToShow: $imageToShow, isCropped: $isCropped), isActive: $isShowingEditingSelection) {
+                        EmptyView()
+                    }
+                    
+                    
                     
 //                    Button(action: {
 //                        isShowingEditingView = true
@@ -140,6 +145,23 @@ struct SelectImageView: View {
             }
             .background(.black)
             .foregroundColor(.black)
+            .navigationBarItems(
+               trailing:
+                   Button(action: {
+                       isShowingEditingSelection = true
+                   }) {
+                       HStack {
+                           Text("Begin")
+                               .foregroundColor(.white)
+                               .font(.headline)
+                           
+                           Image(systemName: "chevron.right")
+                               .foregroundColor(.white)
+                               .font(.headline)
+        
+                       }
+                   }
+            )
             
             
             

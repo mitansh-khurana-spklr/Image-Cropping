@@ -27,6 +27,7 @@ struct AspectRatioButtonsView: View {
     @Binding var currFlipped: Bool
     @Binding var offset: CGPoint
     @Binding var offsetCheck: CGFloat
+    @Binding var freeformSelected: Bool
     
     var totalGeometry: GeometryProxy
     @EnvironmentObject var rotateHelper: RotateHelper
@@ -47,6 +48,7 @@ struct AspectRatioButtonsView: View {
                         offset = CGPoint(x: 1317/2, y: 0)
                         offsetCheck = 0
                         prevPrintValue = 0
+                        freeformSelected = false
                         
                         let imageAspectRatio = uiImage.size.width/uiImage.size.height
                         aspectRatio = imageAspectRatio
@@ -66,7 +68,6 @@ struct AspectRatioButtonsView: View {
                                 Image(systemName: "arrow.clockwise")
                                     .foregroundColor(.white)
                                     .font(.title2)
-//                                    .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
                                 
                                 Image(systemName: "circle.fill")
                                     .foregroundColor(.white)
@@ -85,11 +86,34 @@ struct AspectRatioButtonsView: View {
                     }
                     
                     
+                    Button(action: {
+                        freeformSelected = true
+                    }) {
+                        VStack {
+                            Rectangle()
+                                .strokeBorder(style: StrokeStyle(lineWidth: 2, dash: [2]))
+                                .frame(width: 25, height: 25)
+                                .padding(.bottom, 6)
+                                .foregroundColor(.white)
+                                .opacity(0.5)
+                                
+                            Text("Free")
+                                .foregroundColor(.white)
+                                .font(.headline)
+                        }
+                        .frame(width: 70, height: 70)
+                        .overlay(freeformSelected ? RoundedRectangle(cornerRadius: 10).stroke(Color.blue, lineWidth: 2) : nil)
+                        .cornerRadius(10)
+                    }
+                    
+                    
+                    
                     ForEach($aspectRatioList, id:\.self) { $aspect in
                         if aspect[2] == CGFloat(0) {
                             Button(action: {
                                 
                                 isOriginal = false
+                                freeformSelected = false
                                 
                                 if aspect[0]/aspect[1] == aspectRatio {
                                     aspect[2] = CGFloat(1)

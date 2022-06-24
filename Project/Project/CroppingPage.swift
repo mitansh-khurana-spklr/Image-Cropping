@@ -66,6 +66,7 @@ struct CroppingPage: View {
     
     @State var isOriginal = false
     @State var currFlipped = false
+    @State var freeformSelected = false
     
 //    @State var isShowingFilterView = false
     
@@ -108,21 +109,24 @@ struct CroppingPage: View {
                                          .border(.white, width: 0.75)
                                  }
                                  
-                                 /*
-                                 Image(systemName: "arrow.up.left.and.arrow.down.right")
-                                     .font(.system(size: 20))
-                                     .background(Circle().frame(width: 25, height: 25).foregroundColor(.white))
-                                     .frame(width: frameWidth, height: frameHeight, alignment: .topLeading)
-                                     .foregroundColor(.black)
-                                     .offset(x: -5, y: -5)
-                                     .gesture(DragGesture()
-                                        .onChanged{drag in
-                                            frameWidth -= drag.translation.width
-                                            frameHeight -= drag.translation.height
-    
-                                        })
+                                 
+                                 if freeformSelected {
+                                     Image(systemName: "arrow.up.left.and.arrow.down.right")
+                                         .font(.system(size: 20))
+                                         .background(Circle().frame(width: 25, height: 25).foregroundColor(.white))
+                                         .frame(width: frameWidth, height: frameHeight, alignment: .topLeading)
+                                         .foregroundColor(.black)
+                                         .offset(x: -5, y: -5)
+                                         .gesture(DragGesture()
+                                            .onChanged{drag in
+                                                frameWidth -= drag.translation.width
+                                                frameHeight -= drag.translation.height
+        
+                                            })
+                                 }
+                                 
                                   
-                                  */
+                                  
                              }
                              .navigationBarItems(
                                 trailing:
@@ -130,6 +134,7 @@ struct CroppingPage: View {
                                         let CGrotation = CGFloat(rotateHelper.rotateByAngle)
                                         let radians = CGrotation * Double.pi/180
                                         var newImage = UIImage()
+                                        isCropped = true
                                         if currFlipped == true {
                                             newImage = uiImage.flipHorizontally()!
                                         }
@@ -145,8 +150,8 @@ struct CroppingPage: View {
                                         UIImageWriteToSavedPhotosAlbum(finalImageCropped, nil, nil, nil)
 
                                     }) {
-                                        Text("Next")
-                                            .foregroundColor(.blue)
+                                        Text("Done")
+                                            .foregroundColor(.yellow)
 //                                            .fontWeight(.semibold)
 //                                            .font(.title3)
                                     }
@@ -161,7 +166,7 @@ struct CroppingPage: View {
                             
                         }
                         
-                        AspectRatioAndRotateView(aspectRatio: $aspectRatio, aspectRatioSize: $aspectRatioSize, portrait: $portrait, aspectRatioList: $aspectRatioList, alignment: $alignment, frameWidth: $frameWidth, frameHeight: $frameHeight, verticalOffset: $verticalOffset, horizontalOffset: $horizontalOffset, isOriginal: $isOriginal, uiImage: $uiImage, currFlipped: $currFlipped, totalGeometry: totalGeometry)
+                        AspectRatioAndRotateView(aspectRatio: $aspectRatio, aspectRatioSize: $aspectRatioSize, portrait: $portrait, aspectRatioList: $aspectRatioList, alignment: $alignment, frameWidth: $frameWidth, frameHeight: $frameHeight, verticalOffset: $verticalOffset, horizontalOffset: $horizontalOffset, isOriginal: $isOriginal, uiImage: $uiImage, currFlipped: $currFlipped, freeformSelected: $freeformSelected, totalGeometry: totalGeometry)
                     }
                 }
         }
