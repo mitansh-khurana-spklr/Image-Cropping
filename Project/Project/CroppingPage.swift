@@ -80,15 +80,44 @@ struct CroppingPage: View {
                         Group{
                              ZStack {
                                  GeometryReader { geometry in
-                                     ZoomableView(uiImage: $uiImage, viewSize: geometry.size, frameWidth: $frameWidth, frameHeight: $frameHeight, rotation: $rotation, aspectRatioSize: $aspectRatioSize, isOriginal: $isOriginal, currFlipped: $currFlipped, aspectRatio: $aspectRatio)
+                                     ZStack {
+                                         ZoomableView(uiImage: $uiImage, viewSize: geometry.size, frameWidth: $frameWidth, frameHeight: $frameHeight, rotation: $rotation, aspectRatioSize: $aspectRatioSize, isOriginal: $isOriginal, currFlipped: $currFlipped, aspectRatio: $aspectRatio)
+                                         
+                                         
+                                         Rectangle()
+                                             .opacity(0.5)
+                                             .foregroundColor(.black)
+                                             .allowsHitTesting(false)
+                                             .frame(width: geometry.size.width, height: (geometry.size.height - frameHeight)/2, alignment: .top)
+                                             .offset(y: -((geometry.size.height - frameHeight)/2 + (frameHeight - (geometry.size.height - frameHeight)/2)/2) )
+                                         
+                                         
+                                         Rectangle()
+                                             .opacity(0.5)
+                                             .foregroundColor(.black)
+                                             .allowsHitTesting(false)
+                                             .frame(width: geometry.size.width, height: (geometry.size.height - frameHeight)/2, alignment: .top)
+                                             .offset(y: ((geometry.size.height - frameHeight)/2 + (frameHeight - (geometry.size.height - frameHeight)/2)/2) )
+                                         
+                                         
+                                         Rectangle()
+                                             .opacity(0.5)
+                                             .foregroundColor(.black)
+                                             .allowsHitTesting(false)
+                                             .frame(width: (geometry.size.width - frameWidth)/2, height: frameHeight)
+                                             .offset(x: ((geometry.size.width - frameWidth)/2 + (frameWidth - (geometry.size.width - frameWidth)/2)/2) )
+                                         
+                                         Rectangle()
+                                             .opacity(0.5)
+                                             .foregroundColor(.black)
+                                             .allowsHitTesting(false)
+                                             .frame(width: (geometry.size.width - frameWidth)/2, height: frameHeight)
+                                             .offset(x: -((geometry.size.width - frameWidth)/2 + (frameWidth - (geometry.size.width - frameWidth)/2)/2) )
+                                     }
                                  }
                                  
                                  
-//                                 Rectangle()
-//                                     .opacity(0.2)
-//                                     .allowsHitTesting(false)
-//                                     .frame(width: <#T##CGFloat?#>, height: <#T##CGFloat?#>, alignment: <#T##Alignment#>)
-
+                                 
                                  ZStack {
                                      Rectangle()
                                          .opacity(0.01)
