@@ -12,10 +12,10 @@ struct SelectImageView: View {
     @State private var isShowPhotoLibrary = false
     @State var uiImage = UIImage()
     @State var isImageSelected = false
-    @State var isShowingEditingView = false
+//    @State var isShowingEditingView = false
     @State var imageToShow = UIImage()
     @State var isCropped = false
-    @State var isShowingFilterView = false
+//    @State var isShowingFilterView = false
     @State var isShowingEditingSelection = false
     
     var body: some View {
@@ -26,13 +26,13 @@ struct SelectImageView: View {
             
                 VStack {
                     
-                    NavigationLink(destination: CroppingPage(uiImage: $uiImage, isCropped: $isCropped, imageToShow: $imageToShow), isActive: $isShowingEditingView) {
-                        EmptyView()
-                    }
-                    
-                    NavigationLink(destination: InbuiltFilterView(), isActive: $isShowingFilterView) {
-                        EmptyView()    
-                    }
+//                    NavigationLink(destination: CroppingPage(uiImage: $uiImage, isCropped: $isCropped, imageToShow: $imageToShow), isActive: $isShowingEditingView) {
+//                        EmptyView()
+//                    }
+//
+//                    NavigationLink(destination: InbuiltFilterView(), isActive: $isShowingFilterView) {
+//                        EmptyView()
+//                    }
                     
                     NavigationLink(destination: EditingSelectionView(uiImage: $uiImage, imageToShow: $imageToShow, isCropped: $isCropped), isActive: $isShowingEditingSelection) {
                         EmptyView()
@@ -84,7 +84,7 @@ struct SelectImageView: View {
                     }
                     
                     if(isImageSelected == true){
-                        Image(uiImage: imageToShow)
+                        Image(uiImage: uiImage)
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .padding([.horizontal])
@@ -92,8 +92,9 @@ struct SelectImageView: View {
                     }
                     
                     
-                    Spacer()
+//                    Spacer()
                     
+                    /*
                     HStack{
                         Button(action: {
                             isShowingEditingView = true
@@ -121,6 +122,8 @@ struct SelectImageView: View {
                             imageToShow = uiImage
                         }
                     }
+                     
+                     */
                     
                     Spacer()
                     

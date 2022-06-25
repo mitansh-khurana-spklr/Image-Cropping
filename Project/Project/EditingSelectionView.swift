@@ -13,6 +13,9 @@ struct EditingSelectionView: View {
     @Binding var imageToShow: UIImage
     @Binding var isCropped: Bool
     
+    @State var isShowingCropView = false
+    @State var isShowingFilterView = false
+    
     
     var body: some View {
         ZStack {
@@ -35,11 +38,24 @@ struct EditingSelectionView: View {
                             imageToShow = uiImage
                         }
                     }
+                    .padding()
+                
+                
+                NavigationLink(destination: CroppingPage(uiImage: $uiImage, isCropped: $isCropped, imageToShow: $imageToShow), isActive: $isShowingCropView) {
+                    EmptyView()
+                }
+                
+                NavigationLink(destination: InbuiltFilterView(), isActive: $isShowingFilterView) {
+                    EmptyView()
+                }
+                
                 
                 Spacer()
                 
                 HStack {
-                    Button(action: {}) {
+                    Button(action: {
+                        isShowingCropView = true
+                    }) {
                         VStack {
                             Image(systemName: "crop.rotate")
                                 .foregroundColor(.white)
@@ -53,7 +69,9 @@ struct EditingSelectionView: View {
                         }
                     }
                     
-                    Button(action: {}) {
+                    Button(action: {
+                        isShowingFilterView = true
+                    }) {
                         VStack {
                             Image(systemName: "camera.filters")
                                 .foregroundColor(.white)

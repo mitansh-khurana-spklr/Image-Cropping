@@ -969,3 +969,195 @@ else{
     .padding(.horizontal)
 }
 */
+
+
+
+
+
+
+
+
+//                Text ("\(Int((printValue*45)/(1184/2)))")
+
+
+
+
+
+
+
+
+
+//                    floor(rotateHelper.rotateByAngle * 10) / 10.0
+                    
+                    /*
+                    HStack {
+                        Text("\(Int(displayFloat))")
+                            .font(.body)
+                        .foregroundColor(.white)
+                        
+                        Image(systemName: "circle")
+                            .font(.system(size: 7))
+                            .foregroundColor(.white)
+                            .offset(x: -2, y: -5)
+                    }
+                     */
+                     
+                    
+//                    Slider(value: $rotateHelper.rotateByAngle, in: 0...360)
+//                        .padding(.horizontal)
+                    
+                    /*
+                    FilterSlider(value: $sliderValue, range: (-45, 45), lable: "", defaultValue: 0, rangeDisplay: (-45, 45), spacing: 1)
+                        .onChange(of: sliderValue) { value in
+                            let difference = value - prevSliderValue
+                            rotateHelper.rotateByAngle += Float(difference)
+                            if rotateHelper.rotateByAngle >= 360 {
+                                rotateHelper.rotateByAngle -= 360
+                            }
+                            if rotateHelper.rotateByAngle < 0 {
+                                rotateHelper.rotateByAngle += 360
+                            }
+                            prevSliderValue = value
+                            
+                            displayFloat = rotateHelper.rotateByAngle
+                            displayFloat = floor(displayFloat * 10)/10
+                        }*/
+                     
+                    
+                    
+                    
+
+
+
+
+
+
+
+
+
+/*
+Slider(value: $sliderValue, in: -45...45)
+    .onChange(of: sliderValue) { value in
+        let difference = value - prevSliderValue
+        rotateHelper.rotateByAngle += Float(difference)
+        if rotateHelper.rotateByAngle >= 360 {
+            rotateHelper.rotateByAngle -= 360
+        }
+        if rotateHelper.rotateByAngle < 0 {
+            rotateHelper.rotateByAngle += 360
+        }
+        prevSliderValue = value
+        
+        displayFloat = rotateHelper.rotateByAngle
+        displayFloat = floor(displayFloat * 10)/10
+    }
+ */
+
+
+
+
+
+
+
+
+/*
+Button(action: {
+    let CGrotation = CGFloat(rotateHelper.rotateByAngle)
+    let radians = CGrotation * Double.pi/180
+    let newImage = uiImage.rotate(radians: Float(radians))
+    croppedImage = newImage!
+    croppingWidth = frameWidth
+    croppingHeight = frameHeight
+
+    finalImageCropped = ZoomableView.crop(uiImage: croppedImage, width: croppingWidth, height: croppingHeight)
+    
+    imageToShow = finalImageCropped
+    isCropped = true
+//                                    isShowingFilterView = true
+}) {
+    Image(systemName: "crop")
+        .foregroundColor(.white)
+        .font(.title)
+}
+ */
+
+
+
+
+
+
+
+
+
+
+//            OldButtonView(aspectRatio: $aspectRatio, aspectRatioSize: $aspectRatioSize, portrait: $portrait, aspectRatioList: $aspectRatioList, alignment: $alignment, frameWidth: $frameWidth, frameHeight: $frameHeight, verticalOffset: $verticalOffset, horizontalOffset: $horizontalOffset, totalGeometry: totalGeometry)
+
+
+
+
+
+
+
+
+
+//        .background(Color(red: 30/255, green: 30/255, blue: 30/255, opacity: 1.0))
+
+
+
+
+
+//                                .background(aspectRatio == aspect[0]/aspect[1] ? Color(red: 15/255, green: 15/255, blue: 15/255, opacity: 1.0) : nil)
+
+
+
+
+
+//                                .background(aspectRatio == aspect[1]/aspect[0] ? Color(red: 15/255, green: 15/255, blue: 15/255, opacity: 1.0) : nil)
+
+
+
+
+
+
+
+
+//        let imageView = UIImageView(image: uiImage)
+//        let dummyContainer = UIView()
+//        dummyContainer.addSubview(imageView)
+//        scrollView.addSubview(dummyContainer)
+
+
+
+
+
+
+//        scrollView.setContentOffset(CGPoint(x: 100, y: 100), animated: false)
+        
+        /*
+        let temp = RotateHelperWithFunc()
+        let rotateGesture = UIRotationGestureRecognizer(target: self, action:     #selector(temp.handleRotate(_:)))
+        scrollView.addGestureRecognizer(rotateGesture)
+         */
+    
+
+
+
+
+//        imageView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor).isActive = true
+//        imageView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
+         
+        
+        
+//        imageView.transform = CGAffineTransform(rotationAngle: radians);
+        
+//        scrollView.contentSize.height = frameHeight
+//        scrollView.frame.origin.y = -200
+
+
+
+
+//        scrollView.transform = CGAffineTransform(rotationAngle: radians)
+
+
+
+

@@ -36,8 +36,6 @@ struct AspectRatioButtonsView: View {
         HStack{
             ScrollView(.horizontal, showsIndicators: false){
                 HStack{
-                    
-                    
                     Button(action: {
                         isOriginal = true
                         rotateHelper.rotateByAngle = 0
@@ -67,12 +65,12 @@ struct AspectRatioButtonsView: View {
                             ZStack {
                                 Image(systemName: "arrow.clockwise")
                                     .foregroundColor(.white)
-                                    .font(.title2)
+                                    .font(.title)
                                 
                                 Image(systemName: "circle.fill")
                                     .foregroundColor(.white)
-                                    .font(.system(size: 3))
-                                    .offset(y: 2.3)
+                                    .font(.system(size: 4))
+                                    .offset(y: 2.5)
                             }
                             
                             Text("Original")
@@ -80,9 +78,9 @@ struct AspectRatioButtonsView: View {
                                 .font(.headline)
                             
                         }
-                        .frame(width: 70, height: 70)
-                        .overlay(isOriginal ? RoundedRectangle(cornerRadius: 10).stroke(Color.blue, lineWidth: 2) : nil)
-                        .cornerRadius(10)
+                        .frame(width: 70, height: 85)
+                        .overlay(isOriginal ? RoundedRectangle(cornerRadius: 0).stroke(Color.blue, lineWidth: 4) : nil)
+                        .cornerRadius(0)
                     }
                     
                     
@@ -92,7 +90,7 @@ struct AspectRatioButtonsView: View {
                         VStack {
                             Rectangle()
                                 .strokeBorder(style: StrokeStyle(lineWidth: 2, dash: [2]))
-                                .frame(width: 25, height: 25)
+                                .frame(width: 30, height: 30)
                                 .padding(.bottom, 6)
                                 .foregroundColor(.white)
                                 .opacity(0.5)
@@ -101,9 +99,9 @@ struct AspectRatioButtonsView: View {
                                 .foregroundColor(.white)
                                 .font(.headline)
                         }
-                        .frame(width: 70, height: 70)
-                        .overlay(freeformSelected ? RoundedRectangle(cornerRadius: 10).stroke(Color.blue, lineWidth: 2) : nil)
-                        .cornerRadius(10)
+                        .frame(width: 70, height: 85)
+                        .overlay(freeformSelected ? RoundedRectangle(cornerRadius: 0).stroke(Color.blue, lineWidth: 4) : nil)
+                        .cornerRadius(0)
                     }
                     
                     
@@ -155,8 +153,8 @@ struct AspectRatioButtonsView: View {
                             }) {
                                 VStack {
                                     Rectangle()
-                                        .frame(width: 20, height: 20*aspect[1]/aspect[0])
-                                        .opacity(0.5)
+                                        .frame(width: 30, height: 30*aspect[1]/aspect[0])
+                                        .opacity(0.3)
                                         .border(.white, width: 2)
                                         .padding(.bottom, 6)
                                         .foregroundColor(.white)
@@ -174,10 +172,9 @@ struct AspectRatioButtonsView: View {
                                     }
                                     
                                 }
-                                .frame(width: 70, height: 70)
-                                .overlay(aspectRatio == aspect[0]/aspect[1] ? RoundedRectangle(cornerRadius: 10).stroke(Color.blue, lineWidth: 2) : nil)
-                                .cornerRadius(10)
-//                                .background(aspectRatio == aspect[0]/aspect[1] ? Color(red: 15/255, green: 15/255, blue: 15/255, opacity: 1.0) : nil)
+                                .frame(width: 70, height: 85)
+                                .overlay(aspectRatio == aspect[0]/aspect[1] ? RoundedRectangle(cornerRadius: 0).stroke(Color.blue, lineWidth: 4) : nil)
+                                .cornerRadius(0)
                             }
                         }
                         else{
@@ -221,8 +218,8 @@ struct AspectRatioButtonsView: View {
                                 VStack {
                                     
                                     Rectangle()
-                                        .frame(width: 20*aspect[1]/aspect[0], height: 20)
-                                        .opacity(0.5)
+                                        .frame(width: 30*aspect[1]/aspect[0], height: 30)
+                                        .opacity(0.3)
                                         .border(.white, width: 2)
                                         .padding(.bottom, 6)
                                         .foregroundColor(.white)
@@ -239,10 +236,9 @@ struct AspectRatioButtonsView: View {
                                     }
                                      
                                 }
-                                .frame(width: 70, height: 70)
-                                .overlay(aspectRatio == aspect[1]/aspect[0] ? RoundedRectangle(cornerRadius: 10).stroke(Color.blue, lineWidth: 2) : nil)
-                                .cornerRadius(10)
-//                                .background(aspectRatio == aspect[1]/aspect[0] ? Color(red: 15/255, green: 15/255, blue: 15/255, opacity: 1.0) : nil)
+                                .frame(width: 70, height: 85)
+                                .overlay(aspectRatio == aspect[1]/aspect[0] ? RoundedRectangle(cornerRadius: 0).stroke(Color.blue, lineWidth: 4) : nil)
+                                .cornerRadius(0)
                             }
                         }
                     }

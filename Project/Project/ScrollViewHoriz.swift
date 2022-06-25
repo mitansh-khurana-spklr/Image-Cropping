@@ -15,23 +15,13 @@ var printValue: CGFloat = 0
 var prevPrintValue: CGFloat = 0
 
 struct ScrollViewHoriz: View {
-//    @Binding var offset: CGPoint 
+
     @Binding var offsetCheck: CGFloat
     @Binding var offset: CGPoint
-//    @Binding var printValue: CGFloat
     @EnvironmentObject var rotateHelper: RotateHelper
 
         var body: some View {
-//            Text("Hi")
             VStack {
-                
-                
-//                Text ("\(Int((printValue*45)/(1184/2)))")
-                
-                
-                
-                
-                
                 GeometryReader { geo in
                     ZStack {
                         UIScrollViewWrapper(offset: $offset, offsetCheck: $offsetCheck) { //
@@ -40,10 +30,7 @@ struct ScrollViewHoriz: View {
                                     if text >= -45 && text <= 45 {
                                         Text(".")
                                             .foregroundColor(.white)
-//                                            .fontWeight(.bold)
                                             .font(.title)
-//                                            .padding(.horizontal)
-      
                                     }
                                     else{
                                         Text("")
@@ -73,9 +60,6 @@ struct ScrollViewHoriz: View {
                                     .foregroundColor(.white)
                                     .offset(x: -3, y: -5)
                             }
-                            
-                            
-                            
                         }
                         .allowsHitTesting(false)
                     }
@@ -91,7 +75,6 @@ struct ScrollViewHoriz: View {
                
                  
             }
-//            .background(.black)
         }
 }
 
@@ -113,7 +96,6 @@ class UIScrollViewViewController: UIViewController {
         v.alwaysBounceHorizontal = true
         v.showsHorizontalScrollIndicator = false
         v.showsVerticalScrollIndicator = false
-//        v.isDirectionalLockEnabled = true
         return v
     }()
 
@@ -160,7 +142,6 @@ struct UIScrollViewWrapper<Content: View>: UIViewControllerRepresentable {
         vc.scrollView.contentInsetAdjustmentBehavior = .never
         vc.hostingController.rootView = AnyView(content())
         vc.view.layoutIfNeeded()
-//        vc.hostingController.rootView.width
         vc.scrollView.contentOffset = offset
         vc.scrollView.delegate = context.coordinator
         return vc
@@ -185,10 +166,3 @@ struct UIScrollViewWrapper<Content: View>: UIViewControllerRepresentable {
         }
     }
 }
-
-
-
-//class PrintValueHelper {
-//    @Published var printValue: CGFloat = 0
-//}
-

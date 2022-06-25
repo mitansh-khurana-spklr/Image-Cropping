@@ -36,22 +36,16 @@ struct CroppingPage: View {
     @Binding var isCropped: Bool
     @Binding var imageToShow: UIImage
     
+    
     @State var viewState = CGSize.zero
-    
     @State var rotation : Float = 0.0
-    
     @State var rotateState: Float = 0
-    
-    
-    
+
     @State var frameWidth : CGFloat = min(UIScreen.main.bounds.size.width, UIScreen.main.bounds.size.height/2)
     @State var frameHeight : CGFloat = min(UIScreen.main.bounds.size.width, UIScreen.main.bounds.size.height/2)
-    
-    
+
     @State var aspectRatio: CGFloat = 1
     @State var aspectRatioSize: CGSize = CGSize(width: 1, height: 1)
-    
-    
     @State var portrait: Bool = true
     
     @State var horizontalOffset = CGFloat(0)
@@ -88,6 +82,12 @@ struct CroppingPage: View {
                                  GeometryReader { geometry in
                                      ZoomableView(uiImage: $uiImage, viewSize: geometry.size, frameWidth: $frameWidth, frameHeight: $frameHeight, rotation: $rotation, aspectRatioSize: $aspectRatioSize, isOriginal: $isOriginal, currFlipped: $currFlipped, aspectRatio: $aspectRatio)
                                  }
+                                 
+                                 
+//                                 Rectangle()
+//                                     .opacity(0.2)
+//                                     .allowsHitTesting(false)
+//                                     .frame(width: <#T##CGFloat?#>, height: <#T##CGFloat?#>, alignment: <#T##Alignment#>)
 
                                  ZStack {
                                      Rectangle()
@@ -124,9 +124,7 @@ struct CroppingPage: View {
         
                                             })
                                  }
-                                 
-                                  
-                                  
+
                              }
                              .navigationBarItems(
                                 trailing:
@@ -152,18 +150,13 @@ struct CroppingPage: View {
                                     }) {
                                         Text("Done")
                                             .foregroundColor(.yellow)
-//                                            .fontWeight(.semibold)
-//                                            .font(.title3)
                                     }
                              )
                          }
                         
-                        
-                        
                         Group{
                             Spacer()
                             Spacer()
-                            
                         }
                         
                         AspectRatioAndRotateView(aspectRatio: $aspectRatio, aspectRatioSize: $aspectRatioSize, portrait: $portrait, aspectRatioList: $aspectRatioList, alignment: $alignment, frameWidth: $frameWidth, frameHeight: $frameHeight, verticalOffset: $verticalOffset, horizontalOffset: $horizontalOffset, isOriginal: $isOriginal, uiImage: $uiImage, currFlipped: $currFlipped, freeformSelected: $freeformSelected, totalGeometry: totalGeometry)
