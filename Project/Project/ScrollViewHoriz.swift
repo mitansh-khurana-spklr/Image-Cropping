@@ -29,7 +29,7 @@ struct ScrollViewHoriz: View {
                                 ForEach(-60...60, id: \.self) { text in
                                     if text >= -45 && text <= 45 {
                                         Text(".")
-                                            .foregroundColor(.white)
+                                            .foregroundColor(Color(red: 230/255, green: 230/255, blue: 230/255, opacity: 0.8))
                                             .font(.title)
                                     }
                                     else{

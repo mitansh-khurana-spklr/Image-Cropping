@@ -153,15 +153,18 @@ struct SelectImageView: View {
                    Button(action: {
                        isShowingEditingSelection = true
                    }) {
-                       HStack {
-                           Text("Begin")
-                               .foregroundColor(.white)
-                               .font(.headline)
-                           
-                           Image(systemName: "chevron.right")
-                               .foregroundColor(.white)
-                               .font(.headline)
-        
+                       
+                       if isImageSelected {
+                           HStack {
+                               Text("Begin")
+                                   .foregroundColor(.white)
+                                   .font(.headline)
+                               
+                               Image(systemName: "chevron.right")
+                                   .foregroundColor(.white)
+                                   .font(.headline)
+            
+                           }
                        }
                    }
             )

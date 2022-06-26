@@ -45,6 +45,7 @@ struct AspectRatioAndRotateView: View {
                 
                 Button(action: {
                     currFlipped = !currFlipped
+                    isFlipPressed = true
                 }) {
                     Image(systemName: "arrow.left.arrow.right.square")
                         .foregroundColor(.white)

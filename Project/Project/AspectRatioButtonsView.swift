@@ -75,7 +75,7 @@ struct AspectRatioButtonsView: View {
                             
                             Text("Original")
                                 .foregroundColor(.white)
-                                .font(.headline)
+                                .font(.footnote)
                             
                         }
                         .frame(width: 70, height: 85)
@@ -90,14 +90,14 @@ struct AspectRatioButtonsView: View {
                         VStack {
                             Rectangle()
                                 .strokeBorder(style: StrokeStyle(lineWidth: 2, dash: [2]))
-                                .frame(width: 30, height: 30)
+                                .frame(width: 40, height: 40)
                                 .padding(.bottom, 6)
                                 .foregroundColor(.white)
                                 .opacity(0.5)
                                 
                             Text("Free")
                                 .foregroundColor(.white)
-                                .font(.headline)
+                                .font(.footnote)
                         }
                         .frame(width: 70, height: 85)
                         .overlay(freeformSelected ? RoundedRectangle(cornerRadius: 0).stroke(Color.blue, lineWidth: 4) : nil)
@@ -153,9 +153,9 @@ struct AspectRatioButtonsView: View {
                             }) {
                                 VStack {
                                     Rectangle()
-                                        .frame(width: 30, height: 30*aspect[1]/aspect[0])
+                                        .frame(width: 40, height: 40*aspect[1]/aspect[0])
                                         .opacity(0.3)
-                                        .border(.white, width: 2)
+                                        .border(.white, width: 1)
                                         .padding(.bottom, 6)
                                         .foregroundColor(.white)
                                         
@@ -163,12 +163,12 @@ struct AspectRatioButtonsView: View {
                                     if aspect[0] == aspect[1] {
                                         Text("Square")
                                             .foregroundColor(.white)
-                                            .font(.headline)
+                                            .font(.footnote)
                                     }
                                     else {
-                                        Text("\(Int(aspect[0])) : \(Int(aspect[1]))")
+                                        Text("\(Int(aspect[0])):\(Int(aspect[1]))")
                                             .foregroundColor(.white)
-                                            .font(.headline)
+                                            .font(.footnote)
                                     }
                                     
                                 }
@@ -220,19 +220,19 @@ struct AspectRatioButtonsView: View {
                                     Rectangle()
                                         .frame(width: 30*aspect[1]/aspect[0], height: 30)
                                         .opacity(0.3)
-                                        .border(.white, width: 2)
+                                        .border(.white, width: 1)
                                         .padding(.bottom, 6)
                                         .foregroundColor(.white)
 
                                     if aspect[0] == aspect[1] {
                                         Text("Square")
                                             .foregroundColor(.white)
-                                            .font(.headline)
+                                            .font(.footnote)
                                     }
                                     else {
-                                        Text("\(Int(aspect[1])) : \(Int(aspect[0]))")
+                                        Text("\(Int(aspect[1])):\(Int(aspect[0]))")
                                             .foregroundColor(.white)
-                                            .font(.headline)
+                                            .font(.footnote)
                                     }
                                      
                                 }

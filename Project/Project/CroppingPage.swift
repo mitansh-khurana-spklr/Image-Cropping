@@ -113,11 +113,67 @@ struct CroppingPage: View {
                                              .allowsHitTesting(false)
                                              .frame(width: (geometry.size.width - frameWidth)/2, height: frameHeight)
                                              .offset(x: -((geometry.size.width - frameWidth)/2 + (frameWidth - (geometry.size.width - frameWidth)/2)/2) )
+                                         
+                                         
+                                         ZStack {
+                                             Rectangle()
+                                                 .opacity(0.01)
+                                                 .allowsHitTesting(false)
+                                                 .frame(width: frameWidth, height: frameHeight)
+                                             .border(.white, width: 3)
+                                             
+                                             Rectangle()
+                                                 .allowsHitTesting(false)
+                                                 .opacity(0.01)
+                                                 .frame(width: frameWidth, height: frameHeight/3)
+                                                 .border(.white, width: 0.75)
+                                             
+                                             Rectangle()
+                                                 .allowsHitTesting(false)
+                                                 .opacity(0.01)
+                                                 .frame(width: frameWidth/3, height: frameHeight)
+                                                 .border(.white, width: 0.75)
+                                         }
+                                         
+                                         if freeformSelected {
+                                             Image(systemName: "arrow.up.left.and.arrow.down.right")
+                                                 .font(.system(size: 20))
+                                                 .background(Circle().frame(width: 30, height: 30).foregroundColor(.white))
+                                                 .frame(width: frameWidth, height: frameHeight, alignment: .topLeading)
+                                                 .foregroundColor(.black)
+                                                 .offset(x: -5, y: -5)
+                                                 .gesture(DragGesture()
+                                                    .onChanged{drag in
+                                                        var tempFrameWidth = frameWidth
+                                                        var tempFrameHeight = frameHeight
+                                                        tempFrameWidth -= drag.translation.width
+                                                        tempFrameHeight -= drag.translation.height
+                                                        
+                                                        if tempFrameWidth < 60 {
+                                                            tempFrameWidth = 60
+                                                        }
+                                                        if tempFrameHeight < 60 {
+                                                            tempFrameHeight = 60
+                                                        }
+                                                        if tempFrameWidth > geometry.size.width {
+                                                            tempFrameWidth = geometry.size.width
+                                                        }
+                                                        if tempFrameHeight > geometry.size.height {
+                                                            tempFrameHeight = geometry.size.height
+                                                        }
+                                                        
+                                                        frameWidth = tempFrameWidth
+                                                        frameHeight = tempFrameHeight
+                                                        
+                                                        
+                                                    })
+                                         }
                                      }
+                                     
                                  }
                                  
                                  
-                                 
+                                 /*
                                  ZStack {
                                      Rectangle()
                                          .opacity(0.01)
@@ -137,12 +193,13 @@ struct CroppingPage: View {
                                          .frame(width: frameWidth/3, height: frameHeight)
                                          .border(.white, width: 0.75)
                                  }
+                                  */
                                  
-                                 
+                                 /*
                                  if freeformSelected {
                                      Image(systemName: "arrow.up.left.and.arrow.down.right")
                                          .font(.system(size: 20))
-                                         .background(Circle().frame(width: 25, height: 25).foregroundColor(.white))
+                                         .background(Circle().frame(width: 30, height: 30).foregroundColor(.white))
                                          .frame(width: frameWidth, height: frameHeight, alignment: .topLeading)
                                          .foregroundColor(.black)
                                          .offset(x: -5, y: -5)
@@ -150,9 +207,11 @@ struct CroppingPage: View {
                                             .onChanged{drag in
                                                 frameWidth -= drag.translation.width
                                                 frameHeight -= drag.translation.height
+                                                
         
                                             })
                                  }
+                                  */
 
                              }
                              .navigationBarItems(
@@ -162,13 +221,17 @@ struct CroppingPage: View {
                                         let radians = CGrotation * Double.pi/180
                                         var newImage = UIImage()
                                         isCropped = true
+//                                        if currFlipped == true {
+//                                            newImage = uiImage.flipHorizontally()!
+//                                        }
+//                                        else{
+//                                            newImage = uiImage
+//                                        }
+//                                        newImage = newImage.rotate(radians: Float(radians))!
+                                        newImage = uiImage.rotate(radians: Float(radians))!
                                         if currFlipped == true {
-                                            newImage = uiImage.flipHorizontally()!
+                                            newImage = newImage.flipHorizontally()!
                                         }
-                                        else{
-                                            newImage = uiImage
-                                        }
-                                        newImage = newImage.rotate(radians: Float(radians))!
                                         croppedImage = newImage
                                         croppingWidth = frameWidth
                                         croppingHeight = frameHeight
