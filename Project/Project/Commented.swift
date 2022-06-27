@@ -1345,3 +1345,42 @@ let horizSet = (Float(frameHeight!) * cos(angleRotation! * .pi/180) * sin(angleR
 
 
 
+/*
+if freeformSelected {
+    Image(name: "corner-png")
+//                                                 .font(.system(size: 20))
+//                                                 .background(Circle().frame(width: 30, height: 30).foregroundColor(.white))
+        .frame(width: frameWidth, height: frameHeight, alignment: .topLeading)
+        .foregroundColor(.black)
+//                                                 .offset(x: -5, y: -5)
+        .gesture(DragGesture()
+           .onChanged{drag in
+               var tempFrameWidth = frameWidth
+               var tempFrameHeight = frameHeight
+               tempFrameWidth -= drag.translation.width
+               tempFrameHeight -= drag.translation.height
+               
+               if tempFrameWidth < 60 {
+                   tempFrameWidth = 60
+               }
+               if tempFrameHeight < 60 {
+                   tempFrameHeight = 60
+               }
+               if tempFrameWidth > geometry.size.width {
+                   tempFrameWidth = geometry.size.width
+               }
+               if tempFrameHeight > geometry.size.height {
+                   tempFrameHeight = geometry.size.height
+               }
+               
+               frameWidth = tempFrameWidth
+               frameHeight = tempFrameHeight
+           })
+}
+ */
+
+
+
+
+
+

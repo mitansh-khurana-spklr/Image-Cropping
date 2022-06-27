@@ -28,6 +28,7 @@ var firstLoad = true
 var isRotated90 = false
 var rotateTo = 0
 var isFlipPressed = false
+var aspectState: CGFloat = 1
 
 struct ZoomableView: UIViewRepresentable {
     @Binding var uiImage: UIImage

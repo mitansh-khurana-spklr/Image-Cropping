@@ -50,6 +50,7 @@ struct AspectRatioButtonsView: View {
                         
                         let imageAspectRatio = uiImage.size.width/uiImage.size.height
                         aspectRatio = imageAspectRatio
+                        aspectState = aspectRatio
                         
                         if(aspectRatio >= 1){
                             frameWidth = UIScreen.main.bounds.size.width
@@ -119,6 +120,7 @@ struct AspectRatioButtonsView: View {
                                     aspectRatio = aspect[1]/aspect[0]
                                     aspectRatioSize.width = aspect[1]
                                     aspectRatioSize.height = aspect[0]
+                                    aspectState = aspectRatio
                                                 
 
                                     frameHeight = min(totalGeometry.size.width, totalGeometry.size.height/2)
@@ -134,6 +136,7 @@ struct AspectRatioButtonsView: View {
                                     aspectRatio = aspect[0]/aspect[1]
                                     aspectRatioSize.width = aspect[0]
                                     aspectRatioSize.height = aspect[1]
+                                    aspectState = aspectRatio
                                     
                                     
                                     if(aspectRatio == 1){
@@ -185,6 +188,7 @@ struct AspectRatioButtonsView: View {
                                     aspectRatio = aspect[0]/aspect[1]
                                     aspectRatioSize.width = aspect[0]
                                     aspectRatioSize.height = aspect[1]
+                                    aspectState = aspectRatio
                                     
                                     
                                     if(aspectRatio == 1){
@@ -203,6 +207,7 @@ struct AspectRatioButtonsView: View {
                                     aspectRatio = aspect[1]/aspect[0]
                                     aspectRatioSize.width = aspect[1]
                                     aspectRatioSize.height = aspect[0]
+                                    aspectState = aspectRatio
                                                 
 
                                     frameHeight = min(totalGeometry.size.width, totalGeometry.size.height/2)

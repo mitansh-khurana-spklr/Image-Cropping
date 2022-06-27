@@ -125,181 +125,22 @@ struct CroppingPage: View {
                                                  .border(.white, width: 0.75)
                                          }
                                          
-                                         /*
-                                         if freeformSelected {
-                                             Image(name: "corner-png")
-//                                                 .font(.system(size: 20))
-//                                                 .background(Circle().frame(width: 30, height: 30).foregroundColor(.white))
-                                                 .frame(width: frameWidth, height: frameHeight, alignment: .topLeading)
-                                                 .foregroundColor(.black)
-//                                                 .offset(x: -5, y: -5)
-                                                 .gesture(DragGesture()
-                                                    .onChanged{drag in
-                                                        var tempFrameWidth = frameWidth
-                                                        var tempFrameHeight = frameHeight
-                                                        tempFrameWidth -= drag.translation.width
-                                                        tempFrameHeight -= drag.translation.height
-                                                        
-                                                        if tempFrameWidth < 60 {
-                                                            tempFrameWidth = 60
-                                                        }
-                                                        if tempFrameHeight < 60 {
-                                                            tempFrameHeight = 60
-                                                        }
-                                                        if tempFrameWidth > geometry.size.width {
-                                                            tempFrameWidth = geometry.size.width
-                                                        }
-                                                        if tempFrameHeight > geometry.size.height {
-                                                            tempFrameHeight = geometry.size.height
-                                                        }
-                                                        
-                                                        frameWidth = tempFrameWidth
-                                                        frameHeight = tempFrameHeight
-                                                    })
-                                         }
-                                          */
                                          
                                          
                                          if freeformSelected {
-                                             Image(systemName: "arrow.up.left.and.arrow.down.right")
-                                                 .font(.system(size: 20))
-                                                 .background(Circle().frame(width: 30, height: 30).foregroundColor(.white))
-                                                 .frame(width: frameWidth, height: frameHeight, alignment: .topLeading)
-                                                 .foregroundColor(.black)
-                                                 .offset(x: -5, y: -5)
-                                                 .gesture(DragGesture()
-                                                    .onChanged{drag in
-                                                        var tempFrameWidth = frameWidth
-                                                        var tempFrameHeight = frameHeight
-                                                        tempFrameWidth -= drag.translation.width
-                                                        tempFrameHeight -= drag.translation.height
-                                                        
-                                                        if tempFrameWidth < 60 {
-                                                            tempFrameWidth = 60
-                                                        }
-                                                        if tempFrameHeight < 60 {
-                                                            tempFrameHeight = 60
-                                                        }
-                                                        if tempFrameWidth > geometry.size.width {
-                                                            tempFrameWidth = geometry.size.width
-                                                        }
-                                                        if tempFrameHeight > geometry.size.height {
-                                                            tempFrameHeight = geometry.size.height
-                                                        }
-                                                        
-                                                        frameWidth = tempFrameWidth
-                                                        frameHeight = tempFrameHeight
-                                                    })
-                                         }
-                                        
-                                         
-                                         if freeformSelected {
-                                             Image(systemName: "arrow.up.left.and.arrow.down.right")
-                                                 .font(.system(size: 20))
-                                                 .background(Circle().frame(width: 30, height: 30).foregroundColor(.white))
-                                                 .frame(width: frameWidth, height: frameHeight, alignment: .topTrailing)
-                                                 .foregroundColor(.black)
-                                                 .offset(x: 5, y: -5)
-                                                 .gesture(DragGesture()
-                                                    .onEnded{drag in
-                                                        var tempFrameWidth = frameWidth
-                                                        var tempFrameHeight = frameHeight
-                                                        tempFrameWidth += drag.translation.width
-                                                        tempFrameHeight -= drag.translation.height
-                                                        
-                                                        if tempFrameWidth < 60 {
-                                                            tempFrameWidth = 60
-                                                        }
-                                                        if tempFrameHeight < 60 {
-                                                            tempFrameHeight = 60
-                                                        }
-                                                        if tempFrameWidth > geometry.size.width {
-                                                            tempFrameWidth = geometry.size.width
-                                                        }
-                                                        if tempFrameHeight > geometry.size.height {
-                                                            tempFrameHeight = geometry.size.height
-                                                        }
-                                                        
-                                                        frameWidth = tempFrameWidth
-                                                        frameHeight = tempFrameHeight
-                                                    })
+                                             TopLeadingButtonView(frameWidth: $frameWidth, frameHeight: $frameHeight, geometry: geometry)
                                          }
                                          
                                          if freeformSelected {
-                                             Image(systemName: "arrow.up.left.and.arrow.down.right")
-                                                 .font(.system(size: 20))
-                                                 .background(Circle().frame(width: 30, height: 30).foregroundColor(.white))
-                                                 .frame(width: frameWidth, height: frameHeight, alignment: .bottomLeading)
-                                                 .foregroundColor(.black)
-                                                 .offset(x: -5, y: 5)
-                                                 .gesture(DragGesture()
-                                                    .onEnded{drag in
-                                                        var tempFrameWidth = frameWidth
-                                                        var tempFrameHeight = frameHeight
-                                                        tempFrameWidth -= drag.translation.width
-                                                        tempFrameHeight += drag.translation.height
-                                                        
-                                                        if tempFrameWidth < 60 {
-                                                            tempFrameWidth = 60
-                                                        }
-                                                        if tempFrameHeight < 60 {
-                                                            tempFrameHeight = 60
-                                                        }
-                                                        if tempFrameWidth > geometry.size.width {
-                                                            tempFrameWidth = geometry.size.width
-                                                        }
-                                                        if tempFrameHeight > geometry.size.height {
-                                                            tempFrameHeight = geometry.size.height
-                                                        }
-                                                        
-                                                        frameWidth = tempFrameWidth
-                                                        frameHeight = tempFrameHeight
-                                                    })
+                                             TopTrailingButtonView(frameWidth: $frameWidth, frameHeight: $frameHeight, geometry: geometry)
                                          }
                                          
                                          if freeformSelected {
-                                             Image(systemName: "arrow.up.left.and.arrow.down.right")
-                                                 .font(.system(size: 20))
-                                                 .background(Circle().frame(width: 30, height: 30).foregroundColor(.white))
-                                                 .frame(width: frameWidth, height: frameHeight, alignment: .bottomTrailing)
-                                                 .foregroundColor(.black)
-                                                 .offset(x: 5, y: 5)
-                                                 .gesture(DragGesture()
-                                                    .onChanged{drag in
-                                                        
-                                                    }
-                                                    .onEnded({ drag in
-                                                        var tempFrameWidth = frameWidth
-                                                        var tempFrameHeight = frameHeight
-                                                        let widthTranslation = drag.translation.width
-                                                        let heightTranslation = drag.translation.height
-                                                        tempFrameWidth += widthTranslation
-                                                        tempFrameHeight += heightTranslation
-                                                        
-                                                        print("drag width = \(drag.translation.width)")
-                                                        print("drag height =\(drag.translation.height)")
-                                                        print("width =\(widthTranslation)")
-                                                        print("height =\(heightTranslation)")
-                                                        print("frame width = \(tempFrameWidth)")
-                                                        print("frame height = \(tempFrameHeight)")
-                                                        
-                                                        
-                                                        if tempFrameWidth < 60 {
-                                                            tempFrameWidth = 60
-                                                        }
-                                                        if tempFrameHeight < 60 {
-                                                            tempFrameHeight = 60
-                                                        }
-                                                        if tempFrameWidth > geometry.size.width {
-                                                            tempFrameWidth = geometry.size.width
-                                                        }
-                                                        if tempFrameHeight > geometry.size.height {
-                                                            tempFrameHeight = geometry.size.height
-                                                        }
-                                                        
-                                                        frameWidth = tempFrameWidth
-                                                        frameHeight = tempFrameHeight
-                                                    }))
+                                             BottomLeadingButtonView(frameWidth: $frameWidth, frameHeight: $frameHeight, geometry: geometry)
+                                         }
+                                         
+                                         if freeformSelected {
+                                             BottomTrailingButtonView(frameWidth: $frameWidth, frameHeight: $frameHeight, geometry: geometry)
                                          }
                                      }
                                  }
@@ -349,7 +190,7 @@ struct CroppingPage: View {
                             isOriginal = true
                             let imageAspectRatio = uiImage.size.width/uiImage.size.height
                             aspectRatio = imageAspectRatio
-//                            isAspect = aspectRatio
+                            aspectState = aspectRatio
                             
                             if(aspectRatio >= 1){
                                 frameWidth = UIScreen.main.bounds.size.width
@@ -360,10 +201,41 @@ struct CroppingPage: View {
                                 frameWidth = frameHeight * aspectRatio
                             }
                         }
+                        else {
+                            aspectRatio = aspectState
+                            if aspectRatio >= 1 {
+                                if(aspectRatio == 1){
+                                    frameWidth =  min(totalGeometry.size.width, totalGeometry.size.height/2)
+                                }
+                                else{
+                                    frameWidth = totalGeometry.size.width
+                                }
+                                frameHeight = frameWidth/aspectRatio
+                                portrait = false
+                                            
+                                verticalOffset = (totalGeometry.size.height - frameHeight)/2
+                                horizontalOffset = (totalGeometry.size.width - frameWidth)/2
+                                    
+                                alignment = "Vertical"
+                            }
+                            else {
+                                frameHeight = min(totalGeometry.size.width, totalGeometry.size.height/2)
+                                frameWidth = frameHeight * aspectRatio
+                                portrait = true
+                                        
+                                verticalOffset = (totalGeometry.size.height - frameHeight)/2
+                                            
+                                horizontalOffset = (totalGeometry.size.width - frameWidth)/2
+                                    
+                                alignment = "Horizontal"
+                            }
+                        }
                         
                         if uiImage.size.width < uiImage.size.height {
                             aspectRatioList = aspectRatioListVertical
                         }
+                        
+                        
                     }
                 }
         }

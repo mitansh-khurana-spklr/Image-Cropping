@@ -113,6 +113,7 @@ struct AspectRatioAndRotateView: View {
                             let temp = aspectRatioSize.width
                             aspectRatioSize.width = aspectRatioSize.height
                             aspectRatioSize.height = temp
+                            aspectState = aspectRatio
                                     
                                 
                             frameHeight = min(totalGeometry.size.width, UIScreen.main.bounds.size.height/2)
@@ -130,6 +131,7 @@ struct AspectRatioAndRotateView: View {
                             let temp = aspectRatioSize.width
                             aspectRatioSize.width = aspectRatioSize.height
                             aspectRatioSize.height = temp
+                            aspectState = aspectRatio
                             
                             if(aspectRatio == 1){
                                 frameWidth =  min(UIScreen.main.bounds.size.width, UIScreen.main.bounds.size.height/2)
