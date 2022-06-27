@@ -27,6 +27,7 @@ struct EditingSelectionView: View {
                 
                 Spacer()
                 
+                // Current state of image
                 Image(uiImage: imageToShow)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -41,16 +42,20 @@ struct EditingSelectionView: View {
                     .padding()
                 
                 
+                // Navigation to croppping page
                 NavigationLink(destination: CroppingPage(uiImage: $uiImage, isCropped: $isCropped, imageToShow: $imageToShow), isActive: $isShowingCropView) {
                     EmptyView()
                 }
                 
+                // Navigation to filter page
                 NavigationLink(destination: InbuiltFilterView(), isActive: $isShowingFilterView) {
                     EmptyView()
                 }
                 
                 
                 Spacer()
+                
+                
                 
                 HStack {
                     Button(action: {
@@ -60,14 +65,16 @@ struct EditingSelectionView: View {
                             Image(systemName: "crop.rotate")
                                 .foregroundColor(.white)
                                 .font(.title2)
-                                .padding()
+                                .padding(.horizontal)
+                                .padding(.bottom, 2)
             
                             
                             Text("Crop")
                                 .foregroundColor(.white)
-                                .font(.title3)
+                                .font(.body)
                         }
                     }
+//                    .padding()
                     
                     Button(action: {
                         isShowingFilterView = true
@@ -76,63 +83,66 @@ struct EditingSelectionView: View {
                             Image(systemName: "camera.filters")
                                 .foregroundColor(.white)
                                 .font(.title2)
-                                .padding()
-                                .padding(.bottom, 9)
+                                .padding(.horizontal)
+                                .padding(.bottom, 5)
+                                .padding(.top, 1)
                             
                             
                             Text("Filters")
                                 .foregroundColor(.white)
-                                .font(.title3)
+                                .font(.body)
                         }
                     }
+//                    .padding()
                     
                     Button(action: {}) {
                         VStack {
                             Image(systemName: "slider.vertical.3")
                                 .foregroundColor(.white)
                                 .font(.title2)
-                                .padding()
-                                .padding(.bottom, 14)
+                                .padding(.horizontal)
+                                .padding(.bottom, 6)
+                                .padding(.top, 1)
                             
                             Text("Adjust")
                                 .foregroundColor(.white)
-                                .font(.title3)
+                                .font(.body)
                         }
                     }
+//                    .padding(.horizontal, 2)
                     
                     Button(action: {}) {
                         VStack {
                             Image(systemName: "drop")
                                 .foregroundColor(.white)
                                 .font(.title2)
-                                .padding()
-                                .padding(.bottom, 9)
+                                .padding(.horizontal)
+                                .padding(.bottom, 5)
+                                .padding(.top, 1)
                             
                             Text("Focus")
                                 .foregroundColor(.white)
-                                .font(.title3)
+                                .font(.body)
                         }
                     }
+//                    .padding()
                     
                     Button(action: {}) {
                         VStack {
                             Image(systemName: "camera.macro")
                                 .foregroundColor(.white)
                                 .font(.title2)
-                                .padding()
-                                .padding(.bottom, 9)
+                                .padding(.horizontal)
+                                .padding(.bottom, 5)
                             
                             
                             Text("Macro")
                                 .foregroundColor(.white)
-                                .font(.title3)
+                                .font(.body)
                             
                         }
                     }
-                    
-                    
-                    
-                    
+//                    .padding()
                 }
             }
             

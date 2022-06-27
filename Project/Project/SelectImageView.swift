@@ -12,10 +12,10 @@ struct SelectImageView: View {
     @State private var isShowPhotoLibrary = false
     @State var uiImage = UIImage()
     @State var isImageSelected = false
-//    @State var isShowingEditingView = false
+
     @State var imageToShow = UIImage()
     @State var isCropped = false
-//    @State var isShowingFilterView = false
+
     @State var isShowingEditingSelection = false
     
     var body: some View {
@@ -26,13 +26,7 @@ struct SelectImageView: View {
             
                 VStack {
                     
-//                    NavigationLink(destination: CroppingPage(uiImage: $uiImage, isCropped: $isCropped, imageToShow: $imageToShow), isActive: $isShowingEditingView) {
-//                        EmptyView()
-//                    }
-//
-//                    NavigationLink(destination: InbuiltFilterView(), isActive: $isShowingFilterView) {
-//                        EmptyView()
-//                    }
+
                     
                     NavigationLink(destination: EditingSelectionView(uiImage: $uiImage, imageToShow: $imageToShow, isCropped: $isCropped), isActive: $isShowingEditingSelection) {
                         EmptyView()
@@ -134,9 +128,16 @@ struct SelectImageView: View {
                         HStack {
                             Image(systemName: "photo")
                                 .font(.system(size: 20))
-
-                            Text("Select Image")
-                                .font(.headline)
+                            
+                            if isImageSelected {
+                                Text("Change Image")
+                                    .font(.headline)
+                            }
+                            else {
+                                Text("Select Image")
+                                    .font(.headline)
+                            }
+                            
                         }
                         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 50)
                         .background(Color.blue)
@@ -156,7 +157,7 @@ struct SelectImageView: View {
                        
                        if isImageSelected {
                            HStack {
-                               Text("Begin")
+                               Text("Edit")
                                    .foregroundColor(.white)
                                    .font(.headline)
                                

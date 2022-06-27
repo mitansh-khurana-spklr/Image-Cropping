@@ -589,24 +589,6 @@ extension ZoomableView {
             
             contentOffsetState = scrollView.contentOffset
             
-            
-//            if Int(scrollView.contentOffset.y) < Int(topSet) {
-//                let anim = UIViewPropertyAnimator(duration: 1, dampingRatio: 0.5) {
-//                    scrollView.isScrollEnabled = false
-//                    scrollView.setContentOffset(CGPoint(x: Int(scrollView.contentOffset.x), y: Int(topSet)), animated: false)
-//                        scrollView.isScrollEnabled = true
-//                }
-//                anim.startAnimation()
-//            }
-            
-//            if Int(scrollView.contentOffset.x) < Int(horizSet) {
-//                let anim = UIViewPropertyAnimator(duration: 1, dampingRatio: 0.5) {
-//                    scrollView.isScrollEnabled = false
-//                    scrollView.setContentOffset(CGPoint(x: Int(horizSet), y: Int(scrollView.contentOffset.y)), animated: false)
-//                        scrollView.isScrollEnabled = true
-//                }
-//                anim.startAnimation()
-//            }
         }
         
         func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {

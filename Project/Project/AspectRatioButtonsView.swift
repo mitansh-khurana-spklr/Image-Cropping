@@ -86,6 +86,7 @@ struct AspectRatioButtonsView: View {
                     
                     Button(action: {
                         freeformSelected = true
+                        isOriginal = false
                     }) {
                         VStack {
                             Rectangle()
@@ -173,7 +174,7 @@ struct AspectRatioButtonsView: View {
                                     
                                 }
                                 .frame(width: 70, height: 85)
-                                .overlay(aspectRatio == aspect[0]/aspect[1] ? RoundedRectangle(cornerRadius: 0).stroke(Color.blue, lineWidth: 4) : nil)
+                                .overlay(aspectRatio == aspect[0]/aspect[1] && !freeformSelected && !isOriginal ? RoundedRectangle(cornerRadius: 0).stroke(Color.blue, lineWidth: 4) : nil)
                                 .cornerRadius(0)
                             }
                         }
@@ -237,7 +238,7 @@ struct AspectRatioButtonsView: View {
                                      
                                 }
                                 .frame(width: 70, height: 85)
-                                .overlay(aspectRatio == aspect[1]/aspect[0] ? RoundedRectangle(cornerRadius: 0).stroke(Color.blue, lineWidth: 4) : nil)
+                                .overlay(aspectRatio == aspect[1]/aspect[0] && !freeformSelected && !isOriginal ? RoundedRectangle(cornerRadius: 0).stroke(Color.blue, lineWidth: 4) : nil)
                                 .cornerRadius(0)
                             }
                         }
