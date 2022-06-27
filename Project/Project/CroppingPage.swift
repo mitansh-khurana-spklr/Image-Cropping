@@ -110,7 +110,7 @@ struct CroppingPage: View {
                                                  .opacity(0.01)
                                                  .allowsHitTesting(false)
                                                  .frame(width: frameWidth, height: frameHeight)
-                                             .border(.white, width: 3)
+                                             .border(.white, width: 2)
                                              
                                              Rectangle()
                                                  .allowsHitTesting(false)

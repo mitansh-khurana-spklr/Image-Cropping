@@ -14,7 +14,7 @@ import SwiftUI
 var printValue: CGFloat = 0
 var prevPrintValue: CGFloat = 0
 
-struct ScrollViewHoriz: View {
+struct SliderSetup: View {
 
     @Binding var offsetCheck: CGFloat
     @Binding var offset: CGPoint
@@ -22,15 +22,37 @@ struct ScrollViewHoriz: View {
 
         var body: some View {
             VStack {
+    //            Image(systemName: lines.measurement.horizontal)
                 GeometryReader { geo in
                     ZStack {
                         UIScrollViewWrapper(offset: $offset, offsetCheck: $offsetCheck) { //
                             HStack {
                                 ForEach(-60...60, id: \.self) { text in
                                     if text >= -45 && text <= 45 {
-                                        Text(".")
-                                            .foregroundColor(Color(red: 230/255, green: 230/255, blue: 230/255, opacity: 0.8))
-                                            .font(.title)
+                                        if text == 0 {
+                                            Image(systemName: "minus")
+                                                .rotation3DEffect(.degrees(90), axis: (x: 0, y: 0, z: 1))
+                                                .foregroundColor(.white)
+                                                .font(.title2)
+                                                .offset(y: 15)
+                                                .opacity(0.9)
+                                        }
+                                        else if text % 5 == 0 {
+                                            Image(systemName: "minus")
+                                                .rotation3DEffect(.degrees(90), axis: (x: 0, y: 0, z: 1))
+                                                .foregroundColor(.white)
+                                                .font(.system(size: 12))
+                                                .offset(y: 15)
+                                                .opacity(1)
+                                        }
+                                        else {
+                                            Text(".")
+                                                .foregroundColor(.white)
+                                                .offset(y: 10)
+                                                .opacity(0.7)
+    //                                            .font(.title3)
+                                        }
+                                        
                                     }
                                     else{
                                         Text("")
@@ -72,15 +94,13 @@ struct ScrollViewHoriz: View {
                     Text(offset.debugDescription)
                 }
                 .frame(width: 0, height: 0)
-               
-                 
             }
         }
 }
 
 //struct ScrollViewHoriz_Previews: PreviewProvider {
 //    static var previews: some View {
-//        ScrollViewHoriz()
+//        ScrollViewHoriz(offsetCheck: .constant(CGFloat(0)), offset: .constant(CGPoint(x: 1317/2, y: 0)))
 //    }
 //}
 
@@ -160,9 +180,8 @@ struct UIScrollViewWrapper<Content: View>: UIViewControllerRepresentable {
 
         func scrollViewDidScroll(_ scrollView: UIScrollView) {
             parent.offset = scrollView.contentOffset
-            printValue = parent.offset.x - 1317/2
+            printValue = parent.offset.x - 1297/2
             parent.offsetCheck = printValue
-        
         }
     }
 }

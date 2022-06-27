@@ -35,7 +35,7 @@ struct AspectRatioAndRotateView: View {
     @State var displayFloat: Float = 0
     @State var offsetCheck: CGFloat = 0
     @State var rotateOrReset: Bool = false
-    @State var offset: CGPoint = CGPoint(x: 1317/2, y: 0)
+    @State var offset: CGPoint = CGPoint(x: 1297/2, y: 0)
     
     
     var body: some View {
@@ -57,9 +57,9 @@ struct AspectRatioAndRotateView: View {
 
                 
                 VStack {
-                    ScrollViewHoriz(offsetCheck: $offsetCheck, offset: $offset)
+                    SliderSetup(offsetCheck: $offsetCheck, offset: $offset)
                         .onChange(of: offsetCheck) { newValue in
-                            let difference = ((newValue*45)/(1317/2)) - prevPrintValue
+                            let difference = ((newValue*45)/(1297/2)) - prevPrintValue
                             rotateHelper.rotateByAngle += Float(difference)
                             if rotateHelper.rotateByAngle >= 360 {
                                 rotateHelper.rotateByAngle -= 360
@@ -67,7 +67,7 @@ struct AspectRatioAndRotateView: View {
                             if rotateHelper.rotateByAngle < 0 {
                                 rotateHelper.rotateByAngle += 360
                             }
-                            prevPrintValue = ((newValue*45)/(1317/2))
+                            prevPrintValue = ((newValue*45)/(1297/2))
                     }
 //                        .padding(.horizontal)
                     
@@ -102,7 +102,7 @@ struct AspectRatioAndRotateView: View {
                         prevSliderValue = 0
                         displayFloat = rotateHelper.rotateByAngle
                         displayFloat = floor(displayFloat * 10)/10
-                        offset = CGPoint(x: 1317/2, y: 0)
+                        offset = CGPoint(x: 1297/2, y: 0)
                         offsetCheck = 0
                         prevPrintValue = 0
                         

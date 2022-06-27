@@ -13,12 +13,12 @@ struct BottomTrailingButtonView: View {
     var geometry: GeometryProxy
     
     var body: some View {
-        Image(systemName: "arrow.up.left.and.arrow.down.right")
+        Image(systemName: "cross.fill")
             .font(.system(size: 20))
-            .background(Circle().frame(width: 30, height: 30).foregroundColor(.white))
+            .background(Circle().frame(width: 40, height: 40).foregroundColor(.white).opacity(0.01))
             .frame(width: frameWidth, height: frameHeight, alignment: .bottomTrailing)
-            .foregroundColor(.black)
-            .offset(x: 5, y: 5)
+            .foregroundColor(.white)
+            .offset(x: 10.5, y: 10)
             .gesture(DragGesture()
                .onChanged{drag in
                    

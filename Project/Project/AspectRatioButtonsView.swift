@@ -43,7 +43,7 @@ struct AspectRatioButtonsView: View {
                         sliderValue = 0
                         prevSliderValue = 0
                         currFlipped = false
-                        offset = CGPoint(x: 1317/2, y: 0)
+                        offset = CGPoint(x: 1297/2, y: 0)
                         offsetCheck = 0
                         prevPrintValue = 0
                         freeformSelected = false
@@ -95,7 +95,7 @@ struct AspectRatioButtonsView: View {
                                 .frame(width: 40, height: 40)
                                 .padding(.bottom, 6)
                                 .foregroundColor(.white)
-                                .opacity(0.5)
+                                .opacity(1)
                                 
                             Text("Free")
                                 .foregroundColor(.white)
