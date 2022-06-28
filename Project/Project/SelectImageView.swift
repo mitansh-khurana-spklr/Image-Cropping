@@ -12,7 +12,6 @@ struct SelectImageView: View {
     @State private var isShowPhotoLibrary = false
     @State var uiImage = UIImage()
     @State var isImageSelected = false
-
     @State var imageToShow = UIImage()
     @State var isCropped = false
 
@@ -27,7 +26,7 @@ struct SelectImageView: View {
                 VStack {
                     
 
-                    
+                    // Navigation to editing selection
                     NavigationLink(destination: EditingSelectionView(uiImage: $uiImage, imageToShow: $imageToShow, isCropped: $isCropped), isActive: $isShowingEditingSelection) {
                         EmptyView()
                     }
@@ -59,6 +58,7 @@ struct SelectImageView: View {
                             }
 
                     
+                    // Displaying box if image not selected
                     if(isImageSelected == false){
                         ZStack {
                             Rectangle()
@@ -77,6 +77,7 @@ struct SelectImageView: View {
                         .padding()
                     }
                     
+                    // Displaying image if selected
                     if(isImageSelected == true){
                         Image(uiImage: uiImage)
                             .resizable()
@@ -86,41 +87,16 @@ struct SelectImageView: View {
                     }
                     
                     
-//                    Spacer()
-                    
-                    /*
-                    HStack{
-                        Button(action: {
-                            isShowingEditingView = true
-                        }) {
-                            Image(systemName: "crop")
-                                .foregroundColor(.white)
-                                .font(.title)
-                        }
-                        .padding()
-                        
-                        Button(action: {
-                            isShowingFilterView = true
-                        }) {
-                            Image(systemName: "camera.filters")
-                                .foregroundColor(.white)
-                                .font(.title)
-                        }
-                        .padding()
-                    }
-                    .onAppear{
-                        if isCropped{
-                            imageToShow = finalImageCropped
-                        }
-                        else{
-                            imageToShow = uiImage
-                        }
-                    }
-                     
-                     */
                     
                     Spacer()
+                        .onAppear{
+                            firstLoad = true
+                            firstFullLoad = true
+                            isCropped = false
+                        }
                     
+                    
+                    // Button to open image gallery
                     Button(action: {
                         self.isShowPhotoLibrary = true
                         isImageSelected = true

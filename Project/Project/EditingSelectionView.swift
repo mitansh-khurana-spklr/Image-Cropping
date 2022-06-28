@@ -56,7 +56,7 @@ struct EditingSelectionView: View {
                 Spacer()
                 
                 
-                
+                // Buttons to select editing option
                 HStack {
                     Button(action: {
                         isShowingCropView = true
@@ -74,7 +74,6 @@ struct EditingSelectionView: View {
                                 .font(.body)
                         }
                     }
-//                    .padding()
                     
                     Button(action: {
                         isShowingFilterView = true
@@ -93,7 +92,6 @@ struct EditingSelectionView: View {
                                 .font(.body)
                         }
                     }
-//                    .padding()
                     
                     Button(action: {}) {
                         VStack {
@@ -109,7 +107,6 @@ struct EditingSelectionView: View {
                                 .font(.body)
                         }
                     }
-//                    .padding(.horizontal, 2)
                     
                     Button(action: {}) {
                         VStack {
@@ -125,7 +122,6 @@ struct EditingSelectionView: View {
                                 .font(.body)
                         }
                     }
-//                    .padding()
                     
                     Button(action: {}) {
                         VStack {
@@ -142,7 +138,6 @@ struct EditingSelectionView: View {
                             
                         }
                     }
-//                    .padding()
                 }
             }
             

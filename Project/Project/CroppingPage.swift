@@ -6,29 +6,21 @@
 //
 
 
-
-
-
-//  OldCroppingPage.swift
-//  Project
-//
-//  Created by Mitansh Khurana on 18/06/22.
-//
-
 import Foundation
 
-var firstFullLoad = true
+
 
 
 import SwiftUI
 
+var firstFullLoad = true
 var croppedImage = UIImage()
 var finalImageCropped = UIImage()
 var croppingWidth: CGFloat = 350
 var croppingHeight: CGFloat = 350
 var aspectRatioListHorizontal: [[CGFloat]] = [[1,1, 0], [5,4, 0], [4,3, 0], [3,2, 0], [16,9, 0], [2,1, 0]]
 var aspectRatioListVertical: [[CGFloat]] = [[1,1, 1], [5,4, 1], [4,3, 1], [3,2, 1], [16,9, 1], [2,1, 1]]
-//[[], 4/5, 4/3, 3/2, 16/9, 2/1]
+
 
 struct CroppingPage: View {
     
@@ -45,7 +37,7 @@ struct CroppingPage: View {
     @State var portrait: Bool = true
     @State var horizontalOffset = CGFloat(0)
     @State var verticalOffset = CGFloat(0)
-    @State var alignment: String = "Horiontal"
+    @State var alignment: String = "Horizontal"
     @State var isOriginal = false
     @State var currFlipped = false
     @State var freeformSelected = false
@@ -71,9 +63,11 @@ struct CroppingPage: View {
                              ZStack {
                                  GeometryReader { geometry in
                                      ZStack {
+                                         // UIScrollView
                                          ZoomableView(uiImage: $uiImage, viewSize: geometry.size, frameWidth: $frameWidth, frameHeight: $frameHeight, rotation: $rotation, aspectRatioSize: $aspectRatioSize, isOriginal: $isOriginal, currFlipped: $currFlipped, aspectRatio: $aspectRatio)
                                          
                                          
+                                         // Top translucent rectangle
                                          Rectangle()
                                              .opacity(0.5)
                                              .foregroundColor(.black)
@@ -82,6 +76,7 @@ struct CroppingPage: View {
                                              .offset(y: -((geometry.size.height - frameHeight)/2 + (frameHeight - (geometry.size.height - frameHeight)/2)/2) )
                                          
                                          
+                                         // Bottom translucent rectangle
                                          Rectangle()
                                              .opacity(0.5)
                                              .foregroundColor(.black)
@@ -90,6 +85,7 @@ struct CroppingPage: View {
                                              .offset(y: ((geometry.size.height - frameHeight)/2 + (frameHeight - (geometry.size.height - frameHeight)/2)/2) )
                                          
                                          
+                                         // Right translucent rectangle
                                          Rectangle()
                                              .opacity(0.5)
                                              .foregroundColor(.black)
@@ -97,6 +93,7 @@ struct CroppingPage: View {
                                              .frame(width: (geometry.size.width - frameWidth)/2, height: frameHeight)
                                              .offset(x: ((geometry.size.width - frameWidth)/2 + (frameWidth - (geometry.size.width - frameWidth)/2)/2) )
                                          
+                                         // Left translucent rectangle
                                          Rectangle()
                                              .opacity(0.5)
                                              .foregroundColor(.black)
@@ -105,6 +102,7 @@ struct CroppingPage: View {
                                              .offset(x: -((geometry.size.width - frameWidth)/2 + (frameWidth - (geometry.size.width - frameWidth)/2)/2) )
                                          
                                          
+                                         // Cropping frame
                                          ZStack {
                                              Rectangle()
                                                  .opacity(0.01)
@@ -126,7 +124,7 @@ struct CroppingPage: View {
                                          }
                                          
                                          
-                                         
+                                         // Freeform handlers
                                          if freeformSelected {
                                              TopLeadingButtonView(frameWidth: $frameWidth, frameHeight: $frameHeight, geometry: geometry)
                                          }

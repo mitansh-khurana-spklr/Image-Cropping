@@ -151,23 +151,14 @@
 				A4E10DB528634DB900EC91FE /* AspectRatioButtonsView.swift */,
 				A423DFFB285847C5004D9C40 /* ZoomAndScroll.swift */,
 				A4F0C750286577A0005CCED7 /* ScrollViewHoriz.swift */,
-				A4AAD8CD2869BDCD00536169 /* SliderCheck.swift */,
 				A4AAD8C32869B33900536169 /* TopLeadingButtonView.swift */,
 				A4AAD8C52869B35300536169 /* TopTrailingButtonView.swift */,
 				A4AAD8C72869B36300536169 /* BottomLeadingButtonView.swift */,
 				A4AAD8C92869B37A00536169 /* BottomTrailingButtonView.swift */,
 				A423DFFD285847D7004D9C40 /* ImagePicker.swift */,
-				A40A7B772858731100313F1F /* Commented.swift */,
-				A40A7B75285857B900313F1F /* CroppedImage.swift */,
-				A47F0F9628645B2900B12C4C /* TestSliderView.swift */,
-				A47F0F942864590000B12C4C /* CustomSlider.swift */,
-				A4E10DA22862EE1600EC91FE /* SliderView.swift */,
-				A4E10DB728636AAF00EC91FE /* ScrollViewWrapper.swift */,
-				A4E10DAB28630A9600EC91FE /* DemoScrollViewOffsetView.swift */,
-				A4D5BCE2285E402900FBA9B0 /* OldCroppingPage.swift */,
+				A4AAD8CD2869BDCD00536169 /* SliderCheck.swift */,
 				A4D54521285E057D00C1A7FD /* InbuiltFilterView.swift */,
-				A4E10DB3286335C000EC91FE /* OldButtonView.swift */,
-				A4E10DAF28632DB000EC91FE /* AspectButtonsView.swift */,
+				A4AAD8CF2869DC3100536169 /* Misc */,
 				A423DFD3285846FE004D9C40 /* Assets.xcassets */,
 				A423DFD5285846FE004D9C40 /* Preview Content */,
 			);
@@ -197,6 +188,23 @@
 				A423DFEC285846FE004D9C40 /* ProjectUITestsLaunchTests.swift */,
 			);
 			path = ProjectUITests;
+			sourceTree = "<group>";
+		};
+		A4AAD8CF2869DC3100536169 /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				A40A7B772858731100313F1F /* Commented.swift */,
+				A47F0F9628645B2900B12C4C /* TestSliderView.swift */,
+				A47F0F942864590000B12C4C /* CustomSlider.swift */,
+				A4E10DA22862EE1600EC91FE /* SliderView.swift */,
+				A4E10DB728636AAF00EC91FE /* ScrollViewWrapper.swift */,
+				A4E10DAB28630A9600EC91FE /* DemoScrollViewOffsetView.swift */,
+				A4D5BCE2285E402900FBA9B0 /* OldCroppingPage.swift */,
+				A4E10DB3286335C000EC91FE /* OldButtonView.swift */,
+				A4E10DAF28632DB000EC91FE /* AspectButtonsView.swift */,
+				A40A7B75285857B900313F1F /* CroppedImage.swift */,
+			);
+			path = Misc;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
