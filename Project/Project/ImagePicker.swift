@@ -17,6 +17,7 @@ struct ImagePicker: UIViewControllerRepresentable {
     
     @Binding var selectedImage: UIImage
     @Binding var imageToShow: UIImage
+    @Binding var isImageSelected: Bool
     
     @Environment(\.presentationMode) private var presentationMode
 
@@ -51,6 +52,8 @@ struct ImagePicker: UIViewControllerRepresentable {
             if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
                 parent.selectedImage = image
                 parent.imageToShow = image
+                parent.isImageSelected = true
+                finalImageCropped = image
                 
 //                parent.croppedImage = image
             }

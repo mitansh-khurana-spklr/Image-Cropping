@@ -14,8 +14,8 @@ struct SelectImageView: View {
     @State var isImageSelected = false
     @State var imageToShow = UIImage()
     @State var isCropped = false
-
     @State var isShowingEditingSelection = false
+    @EnvironmentObject var rotateHelper: RotateHelper
     
     var body: some View {
         NavigationView{
@@ -31,19 +31,7 @@ struct SelectImageView: View {
                         EmptyView()
                     }
                     
-                    
-                    
-//                    Button(action: {
-//                        isShowingEditingView = true
-//                    }, label: {
-//                        Text("Begin")
-//                        .foregroundColor(.white)
-//                        .font(.title)
-//                        .frame(width: 100, height: 50)
-//                        .background(.green)
-//                        .cornerRadius(10)
-//                    })
-                    
+
                     .padding()
                     .frame(width: 100, height: 100, alignment: .top)
                     .navigationBarTitleDisplayMode(.inline)
@@ -93,13 +81,15 @@ struct SelectImageView: View {
                             firstLoad = true
                             firstFullLoad = true
                             isCropped = false
+                            rotateHelper.rotateByAngle = 0
+                            prevPrintValue = 0
                         }
                     
                     
                     // Button to open image gallery
                     Button(action: {
                         self.isShowPhotoLibrary = true
-                        isImageSelected = true
+//                        isImageSelected = true
                     }) {
                         HStack {
                             Image(systemName: "photo")
@@ -150,7 +140,7 @@ struct SelectImageView: View {
             
         }
         .sheet(isPresented: $isShowPhotoLibrary) {
-            ImagePicker(sourceType: .photoLibrary, selectedImage: $uiImage, imageToShow: $imageToShow)
+            ImagePicker(sourceType: .photoLibrary, selectedImage: $uiImage, imageToShow: $imageToShow, isImageSelected: $isImageSelected)
         }
         
     }

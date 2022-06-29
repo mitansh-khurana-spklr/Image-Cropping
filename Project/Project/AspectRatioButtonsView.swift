@@ -47,6 +47,8 @@ struct AspectRatioButtonsView: View {
                         offsetCheck = 0
                         prevPrintValue = 0
                         freeformSelected = false
+                        freeFormState = false
+
                         
                         let imageAspectRatio = uiImage.size.width/uiImage.size.height
                         aspectRatio = imageAspectRatio
@@ -77,6 +79,7 @@ struct AspectRatioButtonsView: View {
                             Text("Original")
                                 .foregroundColor(.white)
                                 .font(.footnote)
+                                .opacity(isOriginal ? 1 : 0.8)
                             
                         }
                         .frame(width: 70, height: 85)
@@ -87,6 +90,7 @@ struct AspectRatioButtonsView: View {
                     
                     Button(action: {
                         freeformSelected = true
+                        freeFormState = true
                         isOriginal = false
                     }) {
                         VStack {
@@ -95,7 +99,7 @@ struct AspectRatioButtonsView: View {
                                 .frame(width: 40, height: 40)
                                 .padding(.bottom, 6)
                                 .foregroundColor(.white)
-                                .opacity(1)
+                                .opacity(freeformSelected ? 1 : 0.7)
                                 
                             Text("Free")
                                 .foregroundColor(.white)
@@ -114,6 +118,8 @@ struct AspectRatioButtonsView: View {
                                 
                                 isOriginal = false
                                 freeformSelected = false
+                                freeFormState = false
+
                                 
                                 if aspect[0]/aspect[1] == aspectRatio {
                                     aspect[2] = CGFloat(1)
@@ -159,7 +165,7 @@ struct AspectRatioButtonsView: View {
                                     Rectangle()
                                         .frame(width: 40, height: 40*aspect[1]/aspect[0])
                                         .opacity(0.3)
-                                        .border(.white, width: 1)
+                                        .border(.white, width: 1).opacity(aspectRatio == aspect[0]/aspect[1] && !freeformSelected && !isOriginal ? 1 : 0.7)
                                         .padding(.bottom, 6)
                                         .foregroundColor(.white)
                                         
@@ -168,11 +174,13 @@ struct AspectRatioButtonsView: View {
                                         Text("Square")
                                             .foregroundColor(.white)
                                             .font(.footnote)
+                                            .opacity(aspectRatio == aspect[0]/aspect[1] && !freeformSelected && !isOriginal ? 1 : 0.7)
                                     }
                                     else {
                                         Text("\(Int(aspect[0])):\(Int(aspect[1]))")
                                             .foregroundColor(.white)
                                             .font(.footnote)
+                                            .opacity(aspectRatio == aspect[0]/aspect[1] && !freeformSelected && !isOriginal ? 1 : 0.7)
                                     }
                                     
                                 }
@@ -182,7 +190,12 @@ struct AspectRatioButtonsView: View {
                             }
                         }
                         else{
+                            
                             Button(action: {
+                                isOriginal = false
+                                freeformSelected = false
+                                freeFormState = false
+                                
                                 if aspect[1]/aspect[0] == aspectRatio {
                                     aspect[2] = CGFloat(0)
                                     aspectRatio = aspect[0]/aspect[1]
@@ -226,7 +239,7 @@ struct AspectRatioButtonsView: View {
                                     Rectangle()
                                         .frame(width: 30*aspect[1]/aspect[0], height: 30)
                                         .opacity(0.3)
-                                        .border(.white, width: 1)
+                                        .border(.white, width: 1).opacity(aspectRatio == aspect[1]/aspect[0] && !freeformSelected && !isOriginal ? 1 : 0.7)
                                         .padding(.bottom, 6)
                                         .foregroundColor(.white)
 
@@ -234,11 +247,13 @@ struct AspectRatioButtonsView: View {
                                         Text("Square")
                                             .foregroundColor(.white)
                                             .font(.footnote)
+                                            .opacity(aspectRatio == aspect[1]/aspect[0] && !freeformSelected && !isOriginal ? 1 : 0.7)
                                     }
                                     else {
                                         Text("\(Int(aspect[1])):\(Int(aspect[0]))")
                                             .foregroundColor(.white)
                                             .font(.footnote)
+                                            .opacity(aspectRatio == aspect[1]/aspect[0] && !freeformSelected && !isOriginal ? 1 : 0.7)
                                     }
                                      
                                 }

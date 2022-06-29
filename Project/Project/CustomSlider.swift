@@ -34,10 +34,12 @@ struct FilterSlider : View {
             HStack{
                 if(lable.isEmpty == false){
                     Text(lable)
+                        .foregroundColor(.white)
                 }
                 Spacer()
                 Text(displayValue(self.value))
             }.font(.system(size: 11, weight: .regular))
+                .foregroundColor(.white)
             CustomSlider(value: $value, defaultValue: defaultValue ,range: range) { modifiers in
                 ZStack {
                     Color.gray.cornerRadius(1).frame(height: 1).modifier(modifiers.bar)
@@ -57,7 +59,7 @@ struct FilterSlider : View {
     }
     
     func displayValue(_ value:Double) -> String{
-        return String(format: "%.0f", value.convert(fromRange: range, toRange: rangeDisplay))
+        return String(format: "%.00f", value.convert(fromRange: range, toRange: rangeDisplay))
     }
 }
 

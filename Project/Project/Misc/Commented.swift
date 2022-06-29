@@ -1595,3 +1595,112 @@ struct UIScrollViewWrapper<Content: View>: UIViewControllerRepresentable {
 
 
 
+/*
+if rotateTo == 270 {
+    let topOffsetOld = (viewSize.height - frameWidth)/2
+    let leftOffsetOld = (viewSize.width - frameHeight)/2
+    let topOffsetNew = (viewSize.height - frameHeight)/2
+    let leftOffsetNew = (viewSize.width - frameWidth)/2
+    let xOffsetNew = contentOffsetState.y + topOffsetOld - leftOffsetNew
+    let yOffsetNew = (newImage.size.height * scrollView.zoomScale) - frameHeight - contentOffsetState.x - (leftOffsetOld) - topOffsetNew
+    contentOffsetState.x = xOffsetNew
+    contentOffsetState.y = yOffsetNew
+    scrollView.setContentOffset(contentOffsetState, animated: false)
+}
+else if rotateTo == 180 {
+    let topOffsetOld = (viewSize.height - frameWidth)/2
+    let leftOffsetOld = (viewSize.width - frameHeight)/2
+    let topOffsetNew = (viewSize.height - frameHeight)/2
+    let leftOffsetNew = (viewSize.width - frameWidth)/2
+    
+    let xOffsetNew = contentOffsetState.y + topOffsetOld - leftOffsetNew
+    let yOffsetNew = (newImage.size.height * scrollView.zoomScale) - frameHeight - contentOffsetState.x - leftOffsetOld - topOffsetNew
+    contentOffsetState.x = xOffsetNew
+    contentOffsetState.y = yOffsetNew
+    scrollView.setContentOffset(contentOffsetState, animated: false)
+}
+else if rotateTo == 90 {
+    let topOffsetOld = (viewSize.height - frameWidth)/2
+    let leftOffsetOld = (viewSize.width - frameHeight)/2
+    let topOffsetNew = (viewSize.height - frameHeight)/2
+    let leftOffsetNew = (viewSize.width - frameWidth)/2
+    
+    let xOffsetNew = contentOffsetState.y + topOffsetOld - leftOffsetNew
+    let yOffsetNew = (newImage.size.height * scrollView.zoomScale) - frameHeight - contentOffsetState.x - leftOffsetOld - topOffsetNew
+    contentOffsetState.x = xOffsetNew
+    contentOffsetState.y = yOffsetNew
+    scrollView.setContentOffset(contentOffsetState, animated: false)
+}
+else {
+    let topOffsetOld = (viewSize.height - frameWidth)/2
+    let leftOffsetOld = (viewSize.width - frameHeight)/2
+    let topOffsetNew = (viewSize.height - frameHeight)/2
+    let leftOffsetNew = (viewSize.width - frameWidth)/2
+    
+    let xOffsetNew = contentOffsetState.y + topOffsetOld - leftOffsetNew
+    let yOffsetNew = (newImage.size.height * scrollView.zoomScale) - frameHeight - contentOffsetState.x - leftOffsetOld - topOffsetNew
+    contentOffsetState.x = xOffsetNew
+    contentOffsetState.y = yOffsetNew
+    scrollView.setContentOffset(contentOffsetState, animated: false)
+}
+ */
+
+
+
+
+
+
+/*
+if checkValue2 < 0 {
+    var centerX = scrollView.subviews.first!.frame.size.width/2 - frameWidth!/2
+    var centerY = scrollView.subviews.first!.frame.size.height/2 - frameHeight!/2
+    
+    if scrollView.zoomScale == minimumZoomScale {
+        centerX = CGFloat(horizSet)
+        centerY = CGFloat(topSet)
+    }
+    
+    let anim = UIViewPropertyAnimator(duration: 1, dampingRatio: 0.5) {
+        scrollView.isScrollEnabled = false
+        scrollView.setContentOffset(CGPoint(x: Int(centerX), y: Int(centerY)), animated: false)
+            scrollView.isScrollEnabled = true
+    }
+    anim.startAnimation()
+}
+
+if checkValue3 > 0 {
+    var centerX = scrollView.subviews.first!.frame.size.width/2 - frameWidth!/2
+    var centerY = scrollView.subviews.first!.frame.size.height/2 - frameHeight!/2
+    
+    
+    if scrollView.zoomScale == minimumZoomScale {
+        centerX = CGFloat(horizSet)
+        centerY = CGFloat(topSet)
+    }
+    
+    let anim = UIViewPropertyAnimator(duration: 1, dampingRatio: 0.5) {
+        scrollView.isScrollEnabled = false
+        scrollView.setContentOffset(CGPoint(x: centerX, y: centerY), animated: false)
+            scrollView.isScrollEnabled = true
+    }
+    anim.startAnimation()
+}
+
+if checkValue4 > 0 {
+    var centerX = scrollView.subviews.first!.frame.size.width/2 - frameWidth!/2
+    var centerY = scrollView.subviews.first!.frame.size.height/2 - frameHeight!/2
+    
+    if scrollView.zoomScale == minimumZoomScale {
+        centerX = CGFloat(horizSet)
+        centerY = CGFloat(topSet)
+    }
+
+    let anim = UIViewPropertyAnimator(duration: 1, dampingRatio: 0.5) {
+        scrollView.isScrollEnabled = false
+        scrollView.setContentOffset(CGPoint(x: centerX, y: centerY), animated: false)
+            scrollView.isScrollEnabled = true
+    }
+    anim.startAnimation()
+}
+*/
+

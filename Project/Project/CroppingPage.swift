@@ -26,7 +26,7 @@ struct CroppingPage: View {
     
     @Binding var uiImage: UIImage
     @Binding var isCropped: Bool
-    @Binding var imageToShow: UIImage
+//    @Binding var imageToShow: UIImage
     
     
     @State var viewState = CGSize.zero
@@ -149,7 +149,8 @@ struct CroppingPage: View {
                                         let CGrotation = CGFloat(rotateHelper.rotateByAngle)
                                         let radians = CGrotation * Double.pi/180
                                         var newImage = UIImage()
-                                        isCropped = true
+//                                        isCropped = true
+                                        cropState = true
 //                                        if currFlipped == true {
 //                                            newImage = uiImage.flipHorizontally()!
 //                                        }
@@ -166,7 +167,8 @@ struct CroppingPage: View {
                                         croppingHeight = frameHeight
 
                                         finalImageCropped = ZoomableView.crop(uiImage: croppedImage, width: croppingWidth, height: croppingHeight)
-                                        UIImageWriteToSavedPhotosAlbum(finalImageCropped, nil, nil, nil)
+                                        
+//                                        UIImageWriteToSavedPhotosAlbum(finalImageCropped, nil, nil, nil)
 
                                     }) {
                                         Text("Done")
@@ -183,6 +185,9 @@ struct CroppingPage: View {
                         AspectRatioAndRotateView(aspectRatio: $aspectRatio, aspectRatioSize: $aspectRatioSize, portrait: $portrait, aspectRatioList: $aspectRatioList, alignment: $alignment, frameWidth: $frameWidth, frameHeight: $frameHeight, verticalOffset: $verticalOffset, horizontalOffset: $horizontalOffset, isOriginal: $isOriginal, uiImage: $uiImage, currFlipped: $currFlipped, freeformSelected: $freeformSelected, totalGeometry: totalGeometry)
                     }
                     .onAppear {
+                        showingEditingSelection = true
+                        rotationState = 0
+                        currFlipped = flipState
                         if firstFullLoad {
                             firstFullLoad = false
                             isOriginal = true

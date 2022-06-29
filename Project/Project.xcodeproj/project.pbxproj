@@ -29,6 +29,13 @@
 		A4AAD8CE2869BDCD00536169 /* SliderCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AAD8CD2869BDCD00536169 /* SliderCheck.swift */; };
 		A4D54522285E057D00C1A7FD /* InbuiltFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D54521285E057D00C1A7FD /* InbuiltFilterView.swift */; };
 		A4D5BCE3285E402900FBA9B0 /* OldCroppingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D5BCE2285E402900FBA9B0 /* OldCroppingPage.swift */; };
+		A4DE1D81286AD06D00360552 /* FilterPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DE1D80286AD06D00360552 /* FilterPage.swift */; };
+		A4DE1D83286ADA0900360552 /* AdjustPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DE1D82286ADA0900360552 /* AdjustPage.swift */; };
+		A4DE1D85286B139300360552 /* BrightnessFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DE1D84286B139300360552 /* BrightnessFilter.swift */; };
+		A4DE1D87286B16C800360552 /* ContrastFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DE1D86286B16C800360552 /* ContrastFilter.swift */; };
+		A4DE1D89286B19A400360552 /* SaturationFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DE1D88286B19A400360552 /* SaturationFilter.swift */; };
+		A4DE1D8B286B1D5100360552 /* ExposureFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DE1D8A286B1D5100360552 /* ExposureFilter.swift */; };
+		A4DE1D8D286B253000360552 /* HueFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DE1D8C286B253000360552 /* HueFilter.swift */; };
 		A4E10DA32862EE1600EC91FE /* SliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E10DA22862EE1600EC91FE /* SliderView.swift */; };
 		A4E10DAC28630A9600EC91FE /* DemoScrollViewOffsetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E10DAB28630A9600EC91FE /* DemoScrollViewOffsetView.swift */; };
 		A4E10DB028632DB000EC91FE /* AspectButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E10DAF28632DB000EC91FE /* AspectButtonsView.swift */; };
@@ -83,6 +90,13 @@
 		A4AAD8CD2869BDCD00536169 /* SliderCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderCheck.swift; sourceTree = "<group>"; };
 		A4D54521285E057D00C1A7FD /* InbuiltFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InbuiltFilterView.swift; sourceTree = "<group>"; };
 		A4D5BCE2285E402900FBA9B0 /* OldCroppingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldCroppingPage.swift; sourceTree = "<group>"; };
+		A4DE1D80286AD06D00360552 /* FilterPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterPage.swift; sourceTree = "<group>"; };
+		A4DE1D82286ADA0900360552 /* AdjustPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjustPage.swift; sourceTree = "<group>"; };
+		A4DE1D84286B139300360552 /* BrightnessFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrightnessFilter.swift; sourceTree = "<group>"; };
+		A4DE1D86286B16C800360552 /* ContrastFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContrastFilter.swift; sourceTree = "<group>"; };
+		A4DE1D88286B19A400360552 /* SaturationFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaturationFilter.swift; sourceTree = "<group>"; };
+		A4DE1D8A286B1D5100360552 /* ExposureFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExposureFilter.swift; sourceTree = "<group>"; };
+		A4DE1D8C286B253000360552 /* HueFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HueFilter.swift; sourceTree = "<group>"; };
 		A4E10DA22862EE1600EC91FE /* SliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderView.swift; sourceTree = "<group>"; };
 		A4E10DAB28630A9600EC91FE /* DemoScrollViewOffsetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoScrollViewOffsetView.swift; sourceTree = "<group>"; };
 		A4E10DAF28632DB000EC91FE /* AspectButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AspectButtonsView.swift; sourceTree = "<group>"; };
@@ -156,8 +170,15 @@
 				A4AAD8C72869B36300536169 /* BottomLeadingButtonView.swift */,
 				A4AAD8C92869B37A00536169 /* BottomTrailingButtonView.swift */,
 				A423DFFD285847D7004D9C40 /* ImagePicker.swift */,
-				A4AAD8CD2869BDCD00536169 /* SliderCheck.swift */,
+				A4DE1D84286B139300360552 /* BrightnessFilter.swift */,
+				A4DE1D88286B19A400360552 /* SaturationFilter.swift */,
+				A4DE1D86286B16C800360552 /* ContrastFilter.swift */,
+				A4DE1D8A286B1D5100360552 /* ExposureFilter.swift */,
+				A4DE1D8C286B253000360552 /* HueFilter.swift */,
+				A4DE1D82286ADA0900360552 /* AdjustPage.swift */,
 				A4D54521285E057D00C1A7FD /* InbuiltFilterView.swift */,
+				A4DE1D80286AD06D00360552 /* FilterPage.swift */,
+				A47F0F942864590000B12C4C /* CustomSlider.swift */,
 				A4AAD8CF2869DC3100536169 /* Misc */,
 				A423DFD3285846FE004D9C40 /* Assets.xcassets */,
 				A423DFD5285846FE004D9C40 /* Preview Content */,
@@ -194,8 +215,8 @@
 			isa = PBXGroup;
 			children = (
 				A40A7B772858731100313F1F /* Commented.swift */,
+				A4AAD8CD2869BDCD00536169 /* SliderCheck.swift */,
 				A47F0F9628645B2900B12C4C /* TestSliderView.swift */,
-				A47F0F942864590000B12C4C /* CustomSlider.swift */,
 				A4E10DA22862EE1600EC91FE /* SliderView.swift */,
 				A4E10DB728636AAF00EC91FE /* ScrollViewWrapper.swift */,
 				A4E10DAB28630A9600EC91FE /* DemoScrollViewOffsetView.swift */,
@@ -337,20 +358,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4DE1D81286AD06D00360552 /* FilterPage.swift in Sources */,
 				A4E10DB628634DB900EC91FE /* AspectRatioButtonsView.swift in Sources */,
 				A4AAD8C42869B33900536169 /* TopLeadingButtonView.swift in Sources */,
 				A47F0F952864590000B12C4C /* CustomSlider.swift in Sources */,
+				A4DE1D8D286B253000360552 /* HueFilter.swift in Sources */,
 				A4E10DB828636AAF00EC91FE /* ScrollViewWrapper.swift in Sources */,
 				A47F0F9728645B2900B12C4C /* TestSliderView.swift in Sources */,
+				A4DE1D89286B19A400360552 /* SaturationFilter.swift in Sources */,
 				A4E10DAC28630A9600EC91FE /* DemoScrollViewOffsetView.swift in Sources */,
+				A4DE1D83286ADA0900360552 /* AdjustPage.swift in Sources */,
+				A4DE1D85286B139300360552 /* BrightnessFilter.swift in Sources */,
 				A40A7B782858731100313F1F /* Commented.swift in Sources */,
 				A4AAD8C62869B35300536169 /* TopTrailingButtonView.swift in Sources */,
 				A4F0C751286577A0005CCED7 /* ScrollViewHoriz.swift in Sources */,
 				A423DFFA285847AC004D9C40 /* CroppingPage.swift in Sources */,
 				A423DFFC285847C5004D9C40 /* ZoomAndScroll.swift in Sources */,
 				A4F0C7532865DD3D005CCED7 /* EditingSelectionView.swift in Sources */,
+				A4DE1D8B286B1D5100360552 /* ExposureFilter.swift in Sources */,
 				A423DFFE285847D7004D9C40 /* ImagePicker.swift in Sources */,
 				A40A7B76285857B900313F1F /* CroppedImage.swift in Sources */,
+				A4DE1D87286B16C800360552 /* ContrastFilter.swift in Sources */,
 				A423DFD2285846F8004D9C40 /* ContentView.swift in Sources */,
 				A4AAD8CA2869B37A00536169 /* BottomTrailingButtonView.swift in Sources */,
 				A40CAC4E28622303007858C1 /* AspectRatioAndRotateView.swift in Sources */,

@@ -7,6 +7,9 @@
 
 import SwiftUI
 
+var showingEditingSelection = false
+var cropState = false
+
 struct EditingSelectionView: View {
     
     @Binding var uiImage: UIImage
@@ -15,6 +18,7 @@ struct EditingSelectionView: View {
     
     @State var isShowingCropView = false
     @State var isShowingFilterView = false
+    @State var isShowingAdjustView = false
     
     
     var body: some View {
@@ -32,18 +36,19 @@ struct EditingSelectionView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .onAppear{
-                        if isCropped {
+                        if cropState {
                             imageToShow = finalImageCropped
                         }
                         else {
                             imageToShow = uiImage
                         }
+                        
                     }
                     .padding()
                 
                 
                 // Navigation to croppping page
-                NavigationLink(destination: CroppingPage(uiImage: $uiImage, isCropped: $isCropped, imageToShow: $imageToShow), isActive: $isShowingCropView) {
+                NavigationLink(destination: CroppingPage(uiImage: $uiImage, isCropped: $isCropped), isActive: $isShowingCropView) {
                     EmptyView()
                 }
                 
@@ -51,6 +56,13 @@ struct EditingSelectionView: View {
                 NavigationLink(destination: InbuiltFilterView(), isActive: $isShowingFilterView) {
                     EmptyView()
                 }
+                
+                // Navigation to adjust page
+                NavigationLink(destination: AdjustPage(), isActive: $isShowingAdjustView) {
+                    EmptyView()
+                }
+                
+                
                 
                 
                 Spacer()
@@ -72,6 +84,7 @@ struct EditingSelectionView: View {
                             Text("Crop")
                                 .foregroundColor(.white)
                                 .font(.body)
+                                .opacity(0.8)
                         }
                     }
                     
@@ -90,10 +103,13 @@ struct EditingSelectionView: View {
                             Text("Filters")
                                 .foregroundColor(.white)
                                 .font(.body)
+                                .opacity(0.8)
                         }
                     }
                     
-                    Button(action: {}) {
+                    Button(action: {
+                        isShowingAdjustView = true
+                    }) {
                         VStack {
                             Image(systemName: "slider.vertical.3")
                                 .foregroundColor(.white)
@@ -105,6 +121,7 @@ struct EditingSelectionView: View {
                             Text("Adjust")
                                 .foregroundColor(.white)
                                 .font(.body)
+                                .opacity(0.8)
                         }
                     }
                     
@@ -120,6 +137,7 @@ struct EditingSelectionView: View {
                             Text("Focus")
                                 .foregroundColor(.white)
                                 .font(.body)
+                                .opacity(0.8)
                         }
                     }
                     
@@ -135,8 +153,13 @@ struct EditingSelectionView: View {
                             Text("Macro")
                                 .foregroundColor(.white)
                                 .font(.body)
+                                .opacity(0.8)
                             
                         }
+                    }
+                    .onAppear{
+                        rotationState = 0
+                        showingEditingSelection = true
                     }
                 }
             }

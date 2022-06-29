@@ -45,13 +45,14 @@ struct AspectRatioAndRotateView: View {
                 
                 Button(action: {
                     currFlipped = !currFlipped
+                    flipState = currFlipped
                     isFlipPressed = true
                 }) {
                     Image(systemName: "arrow.left.arrow.right.square")
                         .foregroundColor(.white)
                         .font(.title)
                 }
-                .padding(.horizontal)
+                .padding(.trailing)
                 .offset(y: -2)
                     
 
@@ -156,7 +157,7 @@ struct AspectRatioAndRotateView: View {
                         .font(.title)
                         .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
                 }
-                .padding(.horizontal)
+                .padding(.leading)
                 .offset(y: -2)
             }
             .padding(.vertical)
