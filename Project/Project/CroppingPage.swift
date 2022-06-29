@@ -168,10 +168,10 @@ struct CroppingPage: View {
 
                                         finalImageCropped = ZoomableView.crop(uiImage: croppedImage, width: croppingWidth, height: croppingHeight)
                                         
-//                                        UIImageWriteToSavedPhotosAlbum(finalImageCropped, nil, nil, nil)
+                                        UIImageWriteToSavedPhotosAlbum(finalImageCropped, nil, nil, nil)
 
                                     }) {
-                                        Text("Done")
+                                        Text("Apply")
                                             .foregroundColor(.yellow)
                                     }
                              )

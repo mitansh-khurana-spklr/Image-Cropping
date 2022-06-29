@@ -80,9 +80,10 @@ struct SelectImageView: View {
                         .onAppear{
                             firstLoad = true
                             firstFullLoad = true
-                            isCropped = false
+                            cropState = false
                             rotateHelper.rotateByAngle = 0
                             prevPrintValue = 0
+                            flipState = false
                         }
                     
                     

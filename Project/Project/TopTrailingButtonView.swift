@@ -48,7 +48,7 @@ struct TopTrailingButtonView: View {
         ZStack {
             Image(systemName: "minus")
                 .font(.system(size: 50))
-                .background(Rectangle().frame(width: 60, height: 60).foregroundColor(.white).opacity(0.01))
+                .background(Rectangle().frame(width: 60, height: 60).foregroundColor(.white).opacity(0.02))
                 .frame(width: frameWidth, height: frameHeight, alignment: .topTrailing)
                 .foregroundColor(.white)
                 .offset(x: 8, y: -5)
@@ -79,7 +79,7 @@ struct TopTrailingButtonView: View {
             Image(systemName: "minus")
                 .rotation3DEffect(.degrees(90), axis: (x: 0, y: 0, z: 1))
                 .font(.system(size: 50))
-                .background(Rectangle().frame(width: 60, height: 60).foregroundColor(.white).opacity(0.01))
+                .background(Rectangle().frame(width: 60, height: 60).foregroundColor(.white).opacity(0.02))
                 .frame(width: frameWidth, height: frameHeight, alignment: .topTrailing)
                 .foregroundColor(.white)
                 .offset(x: 25, y: 12)

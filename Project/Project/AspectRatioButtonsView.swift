@@ -48,6 +48,7 @@ struct AspectRatioButtonsView: View {
                         prevPrintValue = 0
                         freeformSelected = false
                         freeFormState = false
+                        flipState = false
 
                         
                         let imageAspectRatio = uiImage.size.width/uiImage.size.height
