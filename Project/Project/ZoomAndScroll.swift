@@ -11,8 +11,6 @@ import UIKit
 import AVFoundation
 
 
-
-
 var scroll = UIScrollView()
 var horizontalOffsetNew = CGFloat(0)
 var verticalOffsetNew = CGFloat(0)
@@ -57,10 +55,8 @@ struct ZoomableView: UIViewRepresentable {
         case trailing
     }
     
+    // Minimum zoom
     private var minimumZoomScale: CGFloat {        
-//        if isOriginal {
-//            return frameWidth/uiImage.size.width
-//        }
         
         let dx1 = frameWidth * cos(CGFloat(rotateHelper.rotateByAngle) * .pi/180) + frameHeight * sin(CGFloat(rotateHelper.rotateByAngle) * .pi/180)
         
@@ -68,7 +64,6 @@ struct ZoomableView: UIViewRepresentable {
         
         var dx = dx1
         var dy = dy1
-        
         
         if rotateHelper.rotateByAngle <= 90 {
             dx = frameWidth * cos(CGFloat(rotateHelper.rotateByAngle) * .pi/180) + frameHeight * sin(CGFloat(rotateHelper.rotateByAngle) * .pi/180)
@@ -102,15 +97,10 @@ struct ZoomableView: UIViewRepresentable {
             scale = uiImage.size.height / abs(dy)
         }
         
-        
         return 1/scale
-        
-        
-//        let widthScale = frameWidth / newImage.size.width
-//        let heightScale = frameHeight / newImage.size.height
-//        return max(widthScale, heightScale)
     }
     
+    // Make scrollview
     func makeUIView(context: Context) -> UIScrollView {
         let scrollView = UIScrollView()
         
@@ -131,7 +121,7 @@ struct ZoomableView: UIViewRepresentable {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.contentInset = UIEdgeInsets(top: verticalOffsetNew, left: horizontalOffsetNew, bottom: verticalOffsetNew, right: horizontalOffsetNew)
         
-        
+        // Autolayout constraints
         let topConstraint = imageView.topAnchor.constraint(equalTo: scrollView.topAnchor)
         topConstraint.identifier = Constraint.top.rawValue
         topConstraint.isActive = true
@@ -153,12 +143,12 @@ struct ZoomableView: UIViewRepresentable {
         let yInitialOffset = ((uiImage.size.height * minimumZoomScale) - frameHeight)/2 - verticalOffsetNew
         
         
+        // Zoomscale persistence
         if firstLoad || isOriginal {
             scrollView.zoomScale = minimumZoomScale
             zoomscaleState = minimumZoomScale
             prevZoomscaleState = minimumZoomScale
             contentOffsetState = CGPoint(x: xInitalOffset, y: yInitialOffset)
-            
         }
         else{
             if zoomscaleState >= minimumZoomScale && zoomscaleState <= 10*minimumZoomScale{
@@ -170,13 +160,11 @@ struct ZoomableView: UIViewRepresentable {
             
         }
         
+        // Offset persistence
         if firstLoad {
             firstLoad = false
         }
         else{
-//            contentOffsetState.x = contentOffsetState.x * zoomscaleState/prevZoomscaleState
-//            contentOffsetState.y = contentOffsetState.y * zoomscaleState/prevZoomscaleState
-//            prevZoomscaleState = zoomscaleState
             scrollView.setContentOffset(contentOffsetState, animated: false)
         }
         
@@ -189,9 +177,6 @@ struct ZoomableView: UIViewRepresentable {
     }
     
     func updateUIView(_ scrollView: UIScrollView, context: Context) {
-        // reintializing imageview to take into consideration new image
-        
-        
         if rotateHelper.rotateByAngle != rotationState || isFlipPressed || currFlipped || isOriginal || flipState {
             let subviews = scrollView.subviews
             for subview in subviews{
@@ -199,32 +184,17 @@ struct ZoomableView: UIViewRepresentable {
             }
         }
         
-        
         verticalOffsetNew = (viewSize.height - frameHeight)/2
         horizontalOffsetNew = (viewSize.width - frameWidth)/2
         
         let CGrotation = CGFloat(rotateHelper.rotateByAngle)
         let radians = CGrotation * Double.pi/180
         
-
-        
-        /*
-        if currFlipped == true {
-            newImage = uiImage.flipHorizontally()!
-        }
-        else{
-            newImage = uiImage
-        }
-
-        newImage = newImage.rotate(radians: Float(radians))!
-         */
-        
         if rotateHelper.rotateByAngle != rotationState || isFlipPressed || currFlipped || isOriginal || flipState {
             newImage = uiImage.rotate(radians: Float(radians))!
 
             if flipState == true || currFlipped == true {
                 newImage = newImage.flipHorizontally()!
-//                print("seen")
             }
             
             let imageView1 = UIImageView(image: newImage)
@@ -248,43 +218,9 @@ struct ZoomableView: UIViewRepresentable {
             trailingConstraint.isActive = true
         }
         
-       
         
         let xInitalOffset = ((uiImage.size.width * minimumZoomScale) - frameWidth)/2 - horizontalOffsetNew
         let yInitialOffset = ((uiImage.size.height * minimumZoomScale) - frameHeight)/2 - verticalOffsetNew
-        
-        
-        var angleUsed = rotateHelper.rotateByAngle
-        if rotateHelper.rotateByAngle < 90 {
-            angleUsed = rotateHelper.rotateByAngle
-        }
-        else if rotateHelper.rotateByAngle < 180 {
-            angleUsed = rotateHelper.rotateByAngle - 90
-        }
-        else if rotateHelper.rotateByAngle < 270 {
-            angleUsed = rotateHelper.rotateByAngle - 180
-        }
-        else  {
-            angleUsed = rotateHelper.rotateByAngle - 270
-        }
-        
-        let topSet = (Float(frameWidth) * cos(angleUsed * .pi/180) * sin(angleUsed * .pi/180)) - Float(verticalOffsetNew)
-
-        let horizSet = (Float(frameHeight) * cos(angleUsed * .pi/180) * sin(angleUsed * .pi/180)) - Float(horizontalOffsetNew)
-        
-        
-        /* remove
-        if prevAspectRatio == aspectRatio {
-            scrollView.setContentOffset(CGPoint(x: Int(horizSet), y: Int(topSet)), animated: true)
-            if scrollView.zoomScale == minimumZoomScale {
-                contentOffsetState = CGPoint(x: CGFloat(horizSet), y: CGFloat(topSet))
-            }
-            
-        }
-        else{
-            prevAspectRatio = aspectRatio
-        }
-         */
         
     
         scrollView.contentInset = UIEdgeInsets(top: verticalOffsetNew, left: horizontalOffsetNew, bottom: verticalOffsetNew, right: horizontalOffsetNew)
@@ -292,10 +228,6 @@ struct ZoomableView: UIViewRepresentable {
         
         scrollView.minimumZoomScale = minimumZoomScale
         scrollView.maximumZoomScale = minimumZoomScale * 10
-        
-//        guard let imageView = scrollView.subviews.first as? UIImageView else {
-//            return
-//        }
         
         guard let dummyView = scrollView.subviews.first else {
             return
@@ -308,13 +240,12 @@ struct ZoomableView: UIViewRepresentable {
         context.coordinator.frameWidth = frameWidth
         context.coordinator.frameHeight = frameHeight
         context.coordinator.angleRotation = rotateHelper.rotateByAngle
-//        context.coordinator.newImage = newImage
         context.coordinator.minimumZoomScale = minimumZoomScale
         context.coordinator.verticalOffset = verticalOffsetNew
         context.coordinator.horizontalOffset = horizontalOffsetNew
         
          
-        
+        // Zoom persistence
         if firstLoad || isOriginal  {
             scrollView.zoomScale = minimumZoomScale
             zoomscaleState = minimumZoomScale
@@ -338,6 +269,7 @@ struct ZoomableView: UIViewRepresentable {
             }
         }
         
+        // Offset persistence
         if firstLoad {
             firstLoad = false
         }
@@ -358,9 +290,9 @@ struct ZoomableView: UIViewRepresentable {
             }
         }
         
+        // Offset persistence on rotation
         if isRotated90 {
             isRotated90 = false
-            
             if isOriginal || (rotationState != 90 && rotationState != 180 && rotationState != 270 && rotationState != 0) {
                 let centerX = (newImage.size.width * scrollView.zoomScale)/2 - viewSize.width/2
                 let centerY = (newImage.size.height * scrollView.zoomScale)/2 - viewSize.height/2
@@ -383,22 +315,32 @@ struct ZoomableView: UIViewRepresentable {
             
         }
         
-        
+        // Offset persistence on flip
         if isFlipPressed {
             isFlipPressed = false
-            let leftOffset = (viewSize.width - frameWidth)/2
-            let xOffsetNew = (newImage.size.width * scrollView.zoomScale) - contentOffsetState.x - frameWidth - (2*leftOffset)
-            contentOffsetState.x = xOffsetNew
-            scrollView.setContentOffset(contentOffsetState, animated: false)
+            
+            if isOriginal {
+                let centerX = (newImage.size.width * scrollView.zoomScale)/2 - viewSize.width/2
+                let centerY = (newImage.size.height * scrollView.zoomScale)/2 - viewSize.height/2
+                scrollView.setContentOffset(CGPoint(x: Int(centerX), y: Int(centerY)), animated: false)
+                contentOffsetState.x = centerX
+                contentOffsetState.y = centerY
+            }
+            else {
+                let leftOffset = (viewSize.width - frameWidth)/2
+                let xOffsetNew = (newImage.size.width * scrollView.zoomScale) - contentOffsetState.x - frameWidth - (2*leftOffset)
+                contentOffsetState.x = xOffsetNew
+                scrollView.setContentOffset(contentOffsetState, animated: false)
+            }
+            
         }
         
         rotationState = rotateHelper.rotateByAngle
-
         scroll = scrollView
     }
     
     
-    
+    // Cropping function
     static func crop(uiImage: UIImage, width: CGFloat, height: CGFloat) -> UIImage{
         let zoomScale = scroll.zoomScale
         let xOffset = scroll.contentOffset.x / zoomScale + horizontalOffsetNew / zoomScale
@@ -430,32 +372,21 @@ extension ZoomableView {
         var frameWidth: CGFloat?
         var frameHeight: CGFloat?
         var angleRotation: Float?
-//        var newImage: UIImage?
         var minimumZoomScale: CGFloat?
-//        var croppedImage: UIImage?
 
+        // Specifying zoom view
         func viewForZooming(in scrollView: UIScrollView) -> UIView? {
             zoomableView
         }
         
-        
+        // Setting offset upon ending drag
         func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
             
             contentOffsetState.x = scrollView.contentOffset.x
             contentOffsetState.y = scrollView.contentOffset.y
-//            print("zoomScale = \(scrollView.zoomScale)")
-//            print("xoffset = \(scrollView.contentOffset.x)")
-//            print("yoffset = \(scrollView.contentOffset.y)")
-//            print("cv1 = \(checkValue1), cv2 = \(checkValue2), cv3 = \(checkValue3), cv4 = \(checkValue4)")
-            
-//            print("topSet = \(topSet)")
-//            print("horizSet = \(horizSet)")
         }
         
-        
         func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-            
-         
             var angleUsed = angleRotation!
             
             let imageHeight = imageSize!.height
@@ -474,12 +405,6 @@ extension ZoomableView {
                 angleUsed = angleRotation! - 270
             }
             
-            var topSet = (Float(frameWidth!) * cos(angleUsed * .pi/180) * sin(angleUsed * .pi/180)) - Float(verticalOffset!)
-
-            var horizSet = (Float(frameHeight!) * cos(angleUsed * .pi/180) * sin(angleUsed * .pi/180)) - Float(horizontalOffset!)
-            
-            
-            
             let zoomScale = scrollView.zoomScale
             let xOffset = scrollView.contentOffset.x / zoomScale + horizontalOffsetNew / zoomScale
             let yoffset = scrollView.contentOffset.y / zoomScale + verticalOffsetNew / zoomScale
@@ -488,10 +413,6 @@ extension ZoomableView {
             
             let fullHeight = imageHeight * cos(CGFloat(angleUsed) * .pi/180) + imageWidth * sin(CGFloat(angleUsed) * .pi/180)
                
-            
-            if angleRotation! > 90 && angleRotation! < 180 {
-                topSet = (Float(fullHeight) * Float(zoomScale)) - topSet
-            }
             
             let pt1 = CGPoint(x: 0, y: imageHeight  * cos(CGFloat(angleUsed) * .pi/180))
             let pt2 = CGPoint(x: imageHeight * sin(CGFloat(angleUsed) * .pi/180), y: 0)
@@ -529,8 +450,6 @@ extension ZoomableView {
         }
         
         func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
-            
-            
             zoomscaleState = scrollView.zoomScale
             contentOffsetState.x = scrollView.contentOffset.x
             contentOffsetState.y = scrollView.contentOffset.y
@@ -540,9 +459,8 @@ extension ZoomableView {
 }
 
 
-
-
 extension UIImage {
+    // rotate uiimage
     func rotate(radians: Float) -> UIImage? {
         var newSize = CGRect(origin: CGPoint.zero, size: self.size).applying(CGAffineTransform(rotationAngle: CGFloat(radians))).size
         // Trim off the extremely small float value to prevent core graphics from rounding it up
@@ -565,7 +483,7 @@ extension UIImage {
         return newImage
     }
     
-    
+    // flip uiimage
     func flipHorizontally() -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale)
         let context = UIGraphicsGetCurrentContext()!
@@ -587,19 +505,3 @@ extension UIImage {
 class RotateHelper: ObservableObject{
     @Published var rotateByAngle: Float = 0
 }
-
-/*
-class RotateHelperWithFunc: ObservableObject{
-    @EnvironmentObject var rotateHelper: RotateHelper
-//    init(rotateHelper: RotateHelper){
-//        self.rotateHelper = rotateHelper
-//        print("Rotate Helper with function Called")
-//    }
-    
-    @objc func handleRotate(_ gesture: UIRotationGestureRecognizer) {
-        rotateHelper.rotateByAngle += Float(gesture.rotation)
-        print(rotateHelper.rotateByAngle)
-    }
-}
- */
- 

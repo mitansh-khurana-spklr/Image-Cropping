@@ -10,7 +10,7 @@ import SwiftUI
 import UIKit
 
 
-
+// Picking image from gallery
 struct ImagePicker: UIViewControllerRepresentable {
     
     var sourceType: UIImagePickerController.SourceType = .photoLibrary
@@ -54,8 +54,6 @@ struct ImagePicker: UIViewControllerRepresentable {
                 parent.imageToShow = image
                 parent.isImageSelected = true
                 finalImageCropped = image
-                
-//                parent.croppedImage = image
             }
             
             parent.presentationMode.wrappedValue.dismiss()

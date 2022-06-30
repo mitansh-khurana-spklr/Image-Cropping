@@ -14,15 +14,15 @@ import SwiftUI
 var printValue: CGFloat = 0
 var prevPrintValue: CGFloat = 0
 
-struct SliderSetup: View {
 
+// Rotation slider
+struct SliderSetup: View {
     @Binding var offsetCheck: CGFloat
     @Binding var offset: CGPoint
     @EnvironmentObject var rotateHelper: RotateHelper
 
         var body: some View {
             VStack {
-    //            Image(systemName: lines.measurement.horizontal)
                 GeometryReader { geo in
                     ZStack {
                         UIScrollViewWrapper(offset: $offset, offsetCheck: $offsetCheck) { //
@@ -50,7 +50,6 @@ struct SliderSetup: View {
                                                 .foregroundColor(.white)
                                                 .offset(y: 10)
                                                 .opacity(0.7)
-    //                                            .font(.title3)
                                         }
                                         
                                     }
@@ -97,17 +96,6 @@ struct SliderSetup: View {
             }
         }
 }
-
-//struct ScrollViewHoriz_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ScrollViewHoriz(offsetCheck: .constant(CGFloat(0)), offset: .constant(CGPoint(x: 1317/2, y: 0)))
-//    }
-//}
-
-
-
-
-
 
 class UIScrollViewViewController: UIViewController {
     lazy var scrollView: UIScrollView = {

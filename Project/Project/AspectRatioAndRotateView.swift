@@ -43,6 +43,7 @@ struct AspectRatioAndRotateView: View {
             
             HStack {
                 
+                // Flipping Button
                 Button(action: {
                     currFlipped = !currFlipped
                     flipState = currFlipped
@@ -56,7 +57,7 @@ struct AspectRatioAndRotateView: View {
                 .offset(y: -2)
                     
 
-                
+                // Rotation Slider
                 VStack {
                     SliderSetup(offsetCheck: $offsetCheck, offset: $offset)
                         .onChange(of: offsetCheck) { newValue in
@@ -70,13 +71,9 @@ struct AspectRatioAndRotateView: View {
                             }
                             prevPrintValue = ((newValue*45)/(1297/2))
                     }
-//                        .padding(.horizontal)
-                    
                 }
                     
-                
-                
-                
+                // Rotate by 90 degrees
                 Button(action: {
                     withAnimation(nil) {
                         
@@ -109,7 +106,6 @@ struct AspectRatioAndRotateView: View {
                         
                         
                         if aspectRatio >= 1 {
-//                            alignment = "Vertical"
                             aspectRatio = 1 / aspectRatio
                             let temp = aspectRatioSize.width
                             aspectRatioSize.width = aspectRatioSize.height
@@ -118,16 +114,13 @@ struct AspectRatioAndRotateView: View {
                                     
                                 
                             frameHeight = min(totalGeometry.size.width, UIScreen.main.bounds.size.height/2)
-//                            frameHeight = totalGeometry.size.width
                             frameWidth = frameHeight * aspectRatio
                             portrait = true
                             
                             verticalOffset = (totalGeometry.size.height - frameHeight)/2
                             horizontalOffset = (totalGeometry.size.width - frameWidth)/2
-                            print("H V = \(frameWidth), \(frameHeight)")
                         }
                         else{
-//                            alignment = "Horizontal"
                             aspectRatio = 1 / aspectRatio
                             let temp = aspectRatioSize.width
                             aspectRatioSize.width = aspectRatioSize.height
@@ -143,11 +136,8 @@ struct AspectRatioAndRotateView: View {
                             frameHeight = frameWidth/aspectRatio
                             portrait = false
                                 
-                                
                             verticalOffset = (totalGeometry.size.height - frameHeight)/2
                             horizontalOffset = (totalGeometry.size.width - frameWidth)/2
-                            print("V H = \(frameWidth), \(frameHeight)")
-                            
                         }
                     }
                     
@@ -162,15 +152,10 @@ struct AspectRatioAndRotateView: View {
             }
             .padding(.vertical)
             
+            // Aspect ratio buttons
             AspectRatioButtonsView(aspectRatio: $aspectRatio, aspectRatioSize: $aspectRatioSize, portrait: $portrait, aspectRatioList: $aspectRatioList, alignment: $alignment, frameWidth: $frameWidth, frameHeight: $frameHeight, verticalOffset: $verticalOffset, horizontalOffset: $horizontalOffset, isOriginal: $isOriginal, uiImage: $uiImage, displayFloat: $displayFloat, sliderValue: $sliderValue, prevSliderValue: $prevSliderValue, currFlipped: $currFlipped, offset: $offset, offsetCheck: $offsetCheck, freeformSelected: $freeformSelected, totalGeometry: totalGeometry)
                 .padding(.horizontal)
             
         }
     }
 }
-
-//struct AspectRatioAndRotateView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        AspectRatioAndRotateView()
-//    }
-//}

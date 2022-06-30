@@ -26,8 +26,6 @@ struct CroppingPage: View {
     
     @Binding var uiImage: UIImage
     @Binding var isCropped: Bool
-//    @Binding var imageToShow: UIImage
-    
     
     @State var viewState = CGSize.zero
     @State var rotation : Float = 0.0
@@ -44,7 +42,6 @@ struct CroppingPage: View {
     
     @State var frameWidth : CGFloat = min(UIScreen.main.bounds.size.width, UIScreen.main.bounds.size.height/2)
     @State var frameHeight : CGFloat = min(UIScreen.main.bounds.size.width, UIScreen.main.bounds.size.height/2)
-    
     @State var aspectRatioList: [[CGFloat]] = [[1,1, 0], [5,4, 0], [4,3, 0], [3,2, 0], [16,9, 0], [2,1, 0]]
     
     @EnvironmentObject var rotateHelper: RotateHelper
@@ -146,18 +143,12 @@ struct CroppingPage: View {
                              .navigationBarItems(
                                 trailing:
                                     Button(action: {
+                                        
+                                        // Cropping Image
                                         let CGrotation = CGFloat(rotateHelper.rotateByAngle)
                                         let radians = CGrotation * Double.pi/180
                                         var newImage = UIImage()
-//                                        isCropped = true
                                         cropState = true
-//                                        if currFlipped == true {
-//                                            newImage = uiImage.flipHorizontally()!
-//                                        }
-//                                        else{
-//                                            newImage = uiImage
-//                                        }
-//                                        newImage = newImage.rotate(radians: Float(radians))!
                                         newImage = uiImage.rotate(radians: Float(radians))!
                                         if currFlipped == true {
                                             newImage = newImage.flipHorizontally()!
@@ -168,6 +159,7 @@ struct CroppingPage: View {
 
                                         finalImageCropped = ZoomableView.crop(uiImage: croppedImage, width: croppingWidth, height: croppingHeight)
                                         
+                                        // saving image to gallery
                                         UIImageWriteToSavedPhotosAlbum(finalImageCropped, nil, nil, nil)
 
                                     }) {
@@ -182,6 +174,7 @@ struct CroppingPage: View {
                             Spacer()
                         }
                         
+                        // View for rotation, flip and rotate UI
                         AspectRatioAndRotateView(aspectRatio: $aspectRatio, aspectRatioSize: $aspectRatioSize, portrait: $portrait, aspectRatioList: $aspectRatioList, alignment: $alignment, frameWidth: $frameWidth, frameHeight: $frameHeight, verticalOffset: $verticalOffset, horizontalOffset: $horizontalOffset, isOriginal: $isOriginal, uiImage: $uiImage, currFlipped: $currFlipped, freeformSelected: $freeformSelected, totalGeometry: totalGeometry)
                     }
                     .onAppear {
@@ -234,11 +227,10 @@ struct CroppingPage: View {
                             }
                         }
                         
+                        // displaying aspect ratios according to original image
                         if uiImage.size.width < uiImage.size.height {
                             aspectRatioList = aspectRatioListVertical
                         }
-                        
-                        
                     }
                 }
         }
@@ -246,11 +238,7 @@ struct CroppingPage: View {
     }
 }
 
-//struct CroppingPage_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CroppingPage(uiImage: .constant(UIImage(named: "Landscape")!))
-//    }
-//}
+
 
 
 

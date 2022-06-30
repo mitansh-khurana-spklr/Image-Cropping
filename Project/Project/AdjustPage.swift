@@ -17,7 +17,8 @@ var beginImage = finalImageCropped
 struct AdjustPage: View {
     
     @State var context = CIContext(options: nil)
-    @State var displayImage = UIImage(named: "photoss")!
+//    @State var displayImage = UIImage(named: "photoss")!
+    @State var displayImage = finalImageCropped
     @State var placeHolder: Double = 0
     @State var inputBrightness: Double = 0
     @State var inputContrast: Double = 1

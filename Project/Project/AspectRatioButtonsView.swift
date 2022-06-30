@@ -36,6 +36,7 @@ struct AspectRatioButtonsView: View {
         HStack{
             ScrollView(.horizontal, showsIndicators: false){
                 HStack{
+                    // Original button
                     Button(action: {
                         isOriginal = true
                         rotateHelper.rotateByAngle = 0
@@ -89,6 +90,7 @@ struct AspectRatioButtonsView: View {
                     }
                     
                     
+                    // Freeform button
                     Button(action: {
                         freeformSelected = true
                         freeFormState = true
@@ -112,7 +114,7 @@ struct AspectRatioButtonsView: View {
                     }
                     
                     
-                    
+                    // Predefined aspect ratios
                     ForEach($aspectRatioList, id:\.self) { $aspect in
                         if aspect[2] == CGFloat(0) {
                             Button(action: {
@@ -191,7 +193,6 @@ struct AspectRatioButtonsView: View {
                             }
                         }
                         else{
-                            
                             Button(action: {
                                 isOriginal = false
                                 freeformSelected = false
@@ -270,8 +271,3 @@ struct AspectRatioButtonsView: View {
     }
 }
 
-//struct AspectRatioButtonsView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        AspectRatioButtonsView()
-//    }
-//}

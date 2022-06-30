@@ -147,8 +147,8 @@ struct SelectImageView: View {
     }
 }
 
-struct SelectImageView_Previews: PreviewProvider {
-    static var previews: some View {
-        SelectImageView()
-    }
-}
+//struct SelectImageView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SelectImageView()
+//    }
+//}

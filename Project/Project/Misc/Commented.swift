@@ -1861,3 +1861,302 @@ if checkValue1 > 0 || checkValue2 < 0 || checkValue3 > 0 || checkValue4 > 0 {
     anim.startAnimation()
 }
 */
+
+
+
+
+
+
+//                                        if currFlipped == true {
+//                                            newImage = uiImage.flipHorizontally()!
+//                                        }
+//                                        else{
+//                                            newImage = uiImage
+//                                        }
+//                                        newImage = newImage.rotate(radians: Float(radians))!
+
+
+
+//struct AspectRatioButtonsView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        AspectRatioButtonsView()
+//    }
+//}
+
+
+
+
+
+
+//        if isOriginal {
+//            return frameWidth/uiImage.size.width
+//        }
+        
+
+
+//        let widthScale = frameWidth / newImage.size.width
+//        let heightScale = frameHeight / newImage.size.height
+//        return max(widthScale, heightScale)
+
+
+
+
+/*
+if currFlipped == true {
+    newImage = uiImage.flipHorizontally()!
+}
+else{
+    newImage = uiImage
+}
+
+newImage = newImage.rotate(radians: Float(radians))!
+ */
+
+
+
+
+/*
+var angleUsed = rotateHelper.rotateByAngle
+if rotateHelper.rotateByAngle < 90 {
+    angleUsed = rotateHelper.rotateByAngle
+}
+else if rotateHelper.rotateByAngle < 180 {
+    angleUsed = rotateHelper.rotateByAngle - 90
+}
+else if rotateHelper.rotateByAngle < 270 {
+    angleUsed = rotateHelper.rotateByAngle - 180
+}
+else  {
+    angleUsed = rotateHelper.rotateByAngle - 270
+}
+
+let topSet = (Float(frameWidth) * cos(angleUsed * .pi/180) * sin(angleUsed * .pi/180)) - Float(verticalOffsetNew)
+
+let horizSet = (Float(frameHeight) * cos(angleUsed * .pi/180) * sin(angleUsed * .pi/180)) - Float(horizontalOffsetNew)
+*/
+
+/* remove
+if prevAspectRatio == aspectRatio {
+    scrollView.setContentOffset(CGPoint(x: Int(horizSet), y: Int(topSet)), animated: true)
+    if scrollView.zoomScale == minimumZoomScale {
+        contentOffsetState = CGPoint(x: CGFloat(horizSet), y: CGFloat(topSet))
+    }
+    
+}
+else{
+    prevAspectRatio = aspectRatio
+}
+ */
+
+
+
+
+//        guard let imageView = scrollView.subviews.first as? UIImageView else {
+//            return
+//        }
+
+
+
+
+//            print("zoomScale = \(scrollView.zoomScale)")
+//            print("xoffset = \(scrollView.contentOffset.x)")
+//            print("yoffset = \(scrollView.contentOffset.y)")
+//            print("cv1 = \(checkValue1), cv2 = \(checkValue2), cv3 = \(checkValue3), cv4 = \(checkValue4)")
+            
+//            print("topSet = \(topSet)")
+//            print("horizSet = \(horizSet)")
+
+
+
+
+/*
+var topSet = (Float(frameWidth!) * cos(angleUsed * .pi/180) * sin(angleUsed * .pi/180)) - Float(verticalOffset!)
+
+var horizSet = (Float(frameHeight!) * cos(angleUsed * .pi/180) * sin(angleUsed * .pi/180)) - Float(horizontalOffset!)
+
+
+
+let zoomScale = scrollView.zoomScale
+let xOffset = scrollView.contentOffset.x / zoomScale + horizontalOffsetNew / zoomScale
+let yoffset = scrollView.contentOffset.y / zoomScale + verticalOffsetNew / zoomScale
+
+let fullWidth = imageWidth * cos(CGFloat(angleUsed) * .pi/180) + imageHeight * sin(CGFloat(angleUsed) * .pi/180)
+
+let fullHeight = imageHeight * cos(CGFloat(angleUsed) * .pi/180) + imageWidth * sin(CGFloat(angleUsed) * .pi/180)
+   
+
+if angleRotation! > 90 && angleRotation! < 180 {
+    topSet = (Float(fullHeight) * Float(zoomScale)) - topSet
+}
+ */
+
+
+
+
+/*
+class RotateHelperWithFunc: ObservableObject{
+    @EnvironmentObject var rotateHelper: RotateHelper
+//    init(rotateHelper: RotateHelper){
+//        self.rotateHelper = rotateHelper
+//        print("Rotate Helper with function Called")
+//    }
+    
+    @objc func handleRotate(_ gesture: UIRotationGestureRecognizer) {
+        rotateHelper.rotateByAngle += Float(gesture.rotation)
+        print(rotateHelper.rotateByAngle)
+    }
+}
+ */
+ 
+
+
+
+/*
+Image(systemName: "cross.fill")
+    .font(.system(size: 20))
+    .background(Rectangle().frame(width: 40, height: 40).foregroundColor(.white).opacity(0.01))
+    .frame(width: frameWidth, height: frameHeight, alignment: .topLeading)
+    .foregroundColor(.white)
+    .offset(x: -10, y: -10)
+    .gesture(DragGesture()
+       .onChanged{drag in
+           var tempFrameWidth = frameWidth
+           var tempFrameHeight = frameHeight
+           tempFrameWidth -= drag.translation.width
+           tempFrameHeight -= drag.translation.height
+           
+           if tempFrameWidth < 60 {
+               tempFrameWidth = 60
+           }
+           if tempFrameHeight < 60 {
+               tempFrameHeight = 60
+           }
+           if tempFrameWidth > (geometry.size.width - 30) {
+               tempFrameWidth = geometry.size.width - 30
+           }
+           if tempFrameHeight > (geometry.size.height - 30){
+               tempFrameHeight = geometry.size.height - 30
+           }
+           
+           frameWidth = tempFrameWidth
+           frameHeight = tempFrameHeight
+       })
+ */
+
+
+
+/*
+Image(systemName: "cross.fill")
+    .font(.system(size: 20))
+    .background(Rectangle().frame(width: 40, height: 40).foregroundColor(.white).opacity(0.01))
+    .frame(width: frameWidth, height: frameHeight, alignment: .topTrailing)
+    .foregroundColor(.white)
+    .offset(x: 10.5, y: -10)
+    .gesture(DragGesture()
+       .onEnded{drag in
+           var tempFrameWidth = frameWidth
+           var tempFrameHeight = frameHeight
+           tempFrameWidth += drag.translation.width
+           tempFrameHeight -= drag.translation.height
+           
+           if tempFrameWidth < 60 {
+               tempFrameWidth = 60
+           }
+           if tempFrameHeight < 60 {
+               tempFrameHeight = 60
+           }
+           if tempFrameWidth > (geometry.size.width - 30) {
+               tempFrameWidth = geometry.size.width - 30
+           }
+           if tempFrameHeight > (geometry.size.height - 30){
+               tempFrameHeight = geometry.size.height - 30
+           }
+           
+           frameWidth = tempFrameWidth
+           frameHeight = tempFrameHeight
+       })
+ */
+
+
+/*
+Image(systemName: "cross.fill")
+    .font(.system(size: 20))
+    .background(Rectangle().frame(width: 40, height: 40).foregroundColor(.white).opacity(0.01))
+    .frame(width: frameWidth, height: frameHeight, alignment: .bottomLeading)
+    .foregroundColor(.white)
+    .offset(x: -10.5, y: 10)
+    .gesture(DragGesture()
+       .onEnded{drag in
+           var tempFrameWidth = frameWidth
+           var tempFrameHeight = frameHeight
+           tempFrameWidth -= drag.translation.width
+           tempFrameHeight += drag.translation.height
+           
+           if tempFrameWidth < 60 {
+               tempFrameWidth = 60
+           }
+           if tempFrameHeight < 60 {
+               tempFrameHeight = 60
+           }
+           if tempFrameWidth > (geometry.size.width - 30) {
+               tempFrameWidth = geometry.size.width - 30
+           }
+           if tempFrameHeight > (geometry.size.height - 30){
+               tempFrameHeight = geometry.size.height - 30
+           }
+           
+           frameWidth = tempFrameWidth
+           frameHeight = tempFrameHeight
+       })
+ */
+
+
+
+/*
+Image(systemName: "cross.fill")
+    .font(.system(size: 20))
+    .background(Rectangle().frame(width: 40, height: 40).foregroundColor(.white).opacity(0.01))
+    .frame(width: frameWidth, height: frameHeight, alignment: .bottomTrailing)
+    .foregroundColor(.white)
+    .offset(x: 10.5, y: 10)
+    .gesture(DragGesture()
+       .onChanged{drag in
+           
+       }
+       .onEnded({ drag in
+           var tempFrameWidth = frameWidth
+           var tempFrameHeight = frameHeight
+           let widthTranslation = drag.translation.width
+           let heightTranslation = drag.translation.height
+           tempFrameWidth += widthTranslation
+           tempFrameHeight += heightTranslation
+           
+           print("drag width = \(drag.translation.width)")
+           print("drag height =\(drag.translation.height)")
+           print("width =\(widthTranslation)")
+           print("height =\(heightTranslation)")
+           print("frame width = \(tempFrameWidth)")
+           print("frame height = \(tempFrameHeight)")
+           
+           
+           if tempFrameWidth < 60 {
+               tempFrameWidth = 60
+           }
+           if tempFrameHeight < 60 {
+               tempFrameHeight = 60
+           }
+           if tempFrameWidth > (geometry.size.width - 30) {
+               tempFrameWidth = geometry.size.width - 30
+           }
+           if tempFrameHeight > (geometry.size.height - 30){
+               tempFrameHeight = geometry.size.height - 30
+           }
+           
+           frameWidth = tempFrameWidth
+           frameHeight = tempFrameHeight
+       }))
+ */
+
+
+
+

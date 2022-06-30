@@ -42,7 +42,6 @@ struct EditingSelectionView: View {
                         else {
                             imageToShow = uiImage
                         }
-                        
                     }
                     .padding()
                 
@@ -61,8 +60,6 @@ struct EditingSelectionView: View {
                 NavigationLink(destination: AdjustPage(), isActive: $isShowingAdjustView) {
                     EmptyView()
                 }
-                
-                
                 
                 
                 Spacer()
@@ -168,8 +165,4 @@ struct EditingSelectionView: View {
     }
 }
 
-//struct EditingSelectionView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        EditingSelectionView()
-//    }
-//}
+
